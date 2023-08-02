@@ -33,24 +33,18 @@
       <ul id="dropdown1" class="dropdown-content">
         {% if session.user %}
         <li>
-          <a href="{{ url_for('profile', username=session['user']) }}"
-            >Profile</a
-          >
+          <a href="#">Profile</a>
         </li>
 
         <li class="divider"></li>
         <li>
-          <a href="{{ url_for('logout') }}"
-            ><i class="fa-solid fa-right-from-bracket"></i
-          ></a>
+          <a href="#"><i class="fa-solid fa-right-from-bracket"></i></a>
         </li>
         {% else %}
-        <li><a href="{{ url_for('register') }}">Register</a></li>
+        <li><a href="#">Register</a></li>
         <li class="divider"></li>
         <li>
-          <a href="{{ url_for('login') }}"
-            ><i class="fa-solid fa-right-to-bracket"></i
-          ></a>
+          <a href="#"><i class="fa-solid fa-right-to-bracket"></i></a>
         </li>
         {% endif %}
       </ul>
@@ -63,9 +57,9 @@
           ></a>
           <ul class="right hide-on-med-and-down">
             <li><a href="{{ url_for('offers') }}">Offers</a></li>
-            <li><a href="{{ url_for('requets') }}">Requests</a></li>
+            <li><a href="#">Requests</a></li>
             {% if session.user %}
-            <li><a href="{{ url_for('create_offer') }}">Create Offer</a></li>
+            <li><a href="#">Create Offer</a></li>
             {% endif %}
             <!-- dropdown triger for user meniu -->
             <li>
@@ -83,22 +77,20 @@
           <h4 class="center-align light-blue-text text-darken 4">D4 Trading</h4>
         </li>
         <li><a href="{{ url_for('offers') }}">Offers</a></li>
-        <li><a href="{{ url_for('requets') }}">Requests</a></li>
+        <li><a href="#">Requests</a></li>
         {% if session.user %}
-        <li><a href="{{ url_for('create_offer') }}">Create Offer</a></li>
+        <li><a href="#">Create Offer</a></li>
         <li>
-          <a href="{{ url_for('profile', username=session['user']) }}"
-            >Profile</a
-          >
+          <a href="#">Profile</a>
         </li>
         <li>
-            <a href="{{ url_for('logout') }}"><i class="fa-solid fa-right-from-bracket"></i></a>
+          <a href="#"><i class="fa-solid fa-right-from-bracket"></i></a>
         </li>
         {% else %}
         <li>
-            <a href="{{ url_for('login') }}"><i class="fa-solid fa-right-to-bracket"></i></a>
+          <a href="#"><i class="fa-solid fa-right-to-bracket"></i></a>
         </li>
-        <li><a href="{{ url_for('register') }}">Register</a></li>
+        <li><a href="#">Register</a></li>
         {% endif %}
       </ul>
     </header>

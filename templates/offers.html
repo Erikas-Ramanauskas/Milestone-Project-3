@@ -1,20 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %} {% block content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Manager</title>
-</head>
+<div class="">
+  <h3 class="light-blue-text text-darken-4 center-align">Items Offered</h3>
+  <p class="">Search below for player item offers</p>
+</div>
 
-<body>
-    {% for task in tasks %}
-    {{ task.task_name }}<br>
-    {{ task.category_name }}<br>
-    {{ task.task_description }}<br>
-    {{ task.is_urgent }}<br>
-    {{ task.due_date }}<br>
-    {% endfor %}
-</body>
+<div class="row">
+  {% for offer in offers %}
+  <div class="col s12 m3">
+    <div class="card light-blue darken-4 text-shadow center-align">
+      <div class="card-content white-text">
+        <span class="card-title"
+          >{{ offer.item_type }} ({{ offer.item_quality}})</span
+        >
+        <p>
+          {% if offer.armour > 0 %} {{ offer.armour }} </br> {% endif %} {% if
+          offer.damage_per_second > 0 %} {{ offer.damage_per_second }} {% endif
+          %} {% if offer.suffix != "none" %} {{ offer.suffix }} {% endif %} {%
+          for key, value in offer.affixes.items() %} {{ key.replace("_", "
+          ").capitalize() }}: {{ value }}</br> {% endfor %} 
+        </p>
+      </div>
+      <div class="card-action">
+        <a href="#" class="btn green accent-4">Edit</a>
+        <a href="#" class="btn light-blue lighten-1">Delete</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
 
-</html>
+{% endblock %}
