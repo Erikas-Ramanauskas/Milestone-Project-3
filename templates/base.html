@@ -6,10 +6,10 @@
     <!-- Font awesome Link -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
-      integrity="sha512-xA6Hp6oezhjd6LiLZynuukm80f8BoZ3OpcEYaqKoCV3HKQDrYjDE1Gu8ocxgxoXmwmSzM4iqPvCsOkQNiu41GA=="
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
       crossorigin="anonymous"
-      type="text/css"
+      referrerpolicy="no-referrer"
     />
     <!-- Materialise link -->
     <link
@@ -41,7 +41,7 @@
           <a href="#"><i class="fa-solid fa-right-from-bracket"></i></a>
         </li>
         {% else %}
-        <li><a href="#">Register</a></li>
+        <li><a href="{{ url_for('register') }}">Register</a></li>
         <li class="divider"></li>
         <li>
           <a href="#"><i class="fa-solid fa-right-to-bracket"></i></a>
@@ -90,7 +90,7 @@
         <li>
           <a href="#"><i class="fa-solid fa-right-to-bracket"></i></a>
         </li>
-        <li><a href="#">Register</a></li>
+        <li><a href="{{ url_for('register') }}">Register</a></li>
         {% endif %}
       </ul>
     </header>
