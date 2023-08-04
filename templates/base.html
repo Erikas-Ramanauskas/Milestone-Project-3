@@ -33,18 +33,18 @@
       <ul id="dropdown1" class="dropdown-content">
         {% if session.user %}
         <li>
-          <a href="#">Profile</a>
+          <a href="{{ url_for('profile', username=session['user']) }}">Profile</a>
         </li>
 
         <li class="divider"></li>
         <li>
-          <a href="#"><i class="fa-solid fa-right-from-bracket"></i></a>
+          <a href="{{ url_for('logout') }}"><i class="fa-solid fa-right-from-bracket"></i></a>
         </li>
         {% else %}
         <li><a href="{{ url_for('register') }}">Register</a></li>
         <li class="divider"></li>
         <li>
-          <a href="#"><i class="fa-solid fa-right-to-bracket"></i></a>
+          <a href="{{ url_for('login') }}"><i class="fa-solid fa-right-to-bracket"></i></a>
         </li>
         {% endif %}
       </ul>
@@ -81,16 +81,16 @@
         {% if session.user %}
         <li><a href="#">Create Offer</a></li>
         <li>
-          <a href="#">Profile</a>
+          <a href="{{ url_for('profile', username=session['user']) }}">Profile</a>
         </li>
         <li>
-          <a href="#"><i class="fa-solid fa-right-from-bracket"></i></a>
+          <a href="{{ url_for('logout') }}"><i class="fa-solid fa-right-from-bracket"></i></a>
         </li>
         {% else %}
-        <li>
-          <a href="#"><i class="fa-solid fa-right-to-bracket"></i></a>
-        </li>
         <li><a href="{{ url_for('register') }}">Register</a></li>
+        <li>
+          <a href="{{ url_for('login') }}"><i class="fa-solid fa-right-to-bracket"></i></a>
+        </li>
         {% endif %}
       </ul>
     </header>
