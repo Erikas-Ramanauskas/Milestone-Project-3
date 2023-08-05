@@ -1,0 +1,139 @@
+{% extends "base.html" %} {% block content %}
+
+<h3 class="light-blue-text text-darken-4 center-align">Edit profile</h3>
+<h2 class="light-blue-text text-darken-4 center-align">{{ user.username }}</h2>
+
+<div class="row card-panel grey darken-3">
+  <form
+    class="col s12"
+    method="POST"
+    action="{{ url_for('edit_profile', username=session['user']) }}"
+  >
+    <!-- battle net id -->
+    <div class="row">
+      <div class="input-field col s12">
+        <i class="fa-brands fa-battle-net prefix teal-text text-accent-3"></i>
+        <!-- battle net ID is always 5-12 letter characters fallowed by # and 4-5 number code -->
+        <input
+          id="b_net_id"
+          name="b_net_id"
+          minlength="5"
+          maxlength="50"
+          pattern="^[A-Za-z0-9]{5,12}#[0-9]{4,5}$"
+          value="{{ user.b_net_id }}"
+          type="text"
+          class="validate"
+        />
+        <label for="b_net_id" class="teal-text text-accent-3"
+          >BattleNet Id</label
+        >
+      </div>
+    </div>
+    <!-- Discord id check -->
+    <div class="row">
+      <div class="input-field col s12">
+        <i class="fa-brands fa-discord prefix teal-text text-accent-3"></i>
+        <!-- battle net ID is always 5-12 letter characters fallowed by # and 4-5 number code -->
+        <input
+          id="discord_id"
+          name="discord_id"
+          minlength="5"
+          maxlength="50"
+          pattern="^[\w.]{5,16}#[0-9]{4,5}$"
+          value="{{ user.discord_id }}"
+          type="text"
+          class="validate"
+        />
+        <label for="discord_id" class="teal-text text-accent-3"
+          >Discord Id</label
+        >
+      </div>
+    </div>
+    <!-- Class picker -->
+
+    <div class="row">
+      <div class="center-align col s12">
+        {% for class in p_class %} {% if class == user.class_preference %}
+        <label class="waves-effect waves-light btn grey darken-3">
+          <input
+            type="radio"
+            class="radio-buttons with-gap"
+            id="class_preference"
+            name="class_preference"
+            value="{{ class }}"
+            checked
+          />
+          <span class="teal-text text-accent-3">{{ class }}</span>
+        </label>
+        {% else %}
+        <label class="waves-effect waves-light btn grey darken-3">
+          <input
+            type="radio"
+            id="class_preference"
+            class="radio-buttons with-gap"
+            name="class_preference"
+            value="{{ class }}"
+          />
+          <span>{{ class }}</span>
+        </label>
+        {% endif %} {% endfor %}
+      </div>
+    </div>
+    <!-- is hardcore toogle -->
+    <div class="row">
+      <div class="input-field col s12">
+        <div class="switch">
+          <i class="fa-solid fa-skull prefix teal-text text-accent-3"></i>
+          <label for="is_hardcore" class="teal-text text-accent-3">
+            Softcore {% if user.is_hardcore == "on" %}
+            <input
+              type="checkbox"
+              id="is_hardcore"
+              name="is_hardcore"
+              checked
+            />
+            {% else %}
+            <input type="checkbox" id="is_hardcore" name="is_hardcore" />
+            {% endif %}
+            <span class="lever"></span>
+            Hardcore
+          </label>
+        </div>
+      </div>
+    </div>
+    <!-- is seasson toogle -->
+    <div class="row">
+      <div class="input-field col s12">
+        <div class="switch">
+          <i class="fa-brands fa-envira prefix teal-text text-accent-3"></i>
+          <label for="is_seasson" class="teal-text text-accent-3">
+            Non-seasson {% if user.is_seasson == "on" %}
+            <input type="checkbox" id="is_seasson" name="is_seasson" checked />
+            {% else %}
+            <input type="checkbox" id="is_seasson" name="is_seasson" />
+            {% endif %}
+            <span class="lever"></span>
+            Season
+          </label>
+        </div>
+      </div>
+    </div>
+    <!-- submit button -->
+    <div class="row">
+      <div class="col s12 center-align">
+        <!-- cancel button -->
+        <a
+          href="{{ url_for('profile', username=session['user']) }}"
+          class="btn-large red text-shadow"
+        >
+          Cancel <i class="fas fa-times-circle right"></i>
+        </a>
+        <button type="submit" class="btn-large light-blue darken-1 text-shadow">
+          Edit profile <i class="fas fa-edit right"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

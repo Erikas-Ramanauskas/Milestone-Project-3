@@ -18,6 +18,11 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+# page specific variables
+# these are stable and does nto require its own database
+p_class = ["None", "Barbarian", "Druid",
+           "Necromancer", "Rogue", "Sorcerer"]
+
 
 @app.route("/")
 @app.route("/offers")
@@ -55,10 +60,15 @@ def register():
 
         hashed_password = generate_password_hash(password)
 
-        # Saving user to database
+        # Saving user to database and filling with default values
         register = {
             "username": username,
-            "password": hashed_password
+            "password": hashed_password,
+            "b_net_id": "",
+            "discord_id": "",
+            "class_preference": "None",
+            "is_hardcore": "off",
+            "is_ladder": "off"
         }
 
         mongo.db.users.insert_one(register)
@@ -82,11 +92,11 @@ def login():
             # ensure hashed password matches user input
             if check_password_hash(
                     existing_user["password"], request.form.get("password")):
-                        session["user"] = request.form.get("username").lower()
-                        flash("Welcome, {}".format(
-                            request.form.get("username")))
-                        return redirect(url_for(
-                            "profile", username=session["user"]))
+                session["user"] = request.form.get("username").lower()
+                flash("Welcome, {}".format(
+                    request.form.get("username")))
+                return redirect(url_for(
+                    "profile", username=session["user"]))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
@@ -103,27 +113,43 @@ def login():
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     # grab the session user's username from db
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
+    user = mongo.db.users.find_one(
+        {"username": session["user"]})
 
     if session["user"]:
-        return render_template("profile.html", username=username)
+        return render_template("profile.html", user=user)
 
     return redirect(url_for("login"))
 
 
-# @app.route("/edit_profile/<username>", methods=["GET", "POST"])
-# def edit_profile(username):
-#     # grab the session user's username from db
-#     username = mongo.db.users.find_one(
-#         {"username": session["user"]})["username"]
+@app.route("/edit_profile/<username>", methods=["GET", "POST"])
+def edit_profile(username):
+    # grab the session user's user from db
+    user = mongo.db.users.find_one(
+        {"username": session["user"]})
 
-#     # Eddit user details
+    # if user is being eddited
+    if request.method == "POST" and session["user"]:
+        is_hardcore = "on" if request.form.get("is_hardcore") else "off"
+        is_seasson = "on" if request.form.get("is_seasson") else "off"
+        submit = {
+            "username": user["username"],
+            "password": user["password"],
+            "b_net_id": request.form.get("b_net_id"),
+            "discord_id": request.form.get("discord_id"),
+            "class_preference": request.form.get("class_preference"),
+            "is_hardcore": is_hardcore,
+            "is_seasson": is_seasson
+        }
+        mongo.db.users.replace_one({"_id": ObjectId(user["_id"])}, submit)
+        user2 = mongo.db.users.find_one({"_id": ObjectId(user["_id"])})
+        flash("Task Successfully Updated")
+        return render_template("profile.html", user=user2)
 
-#     if session["user"]:
-#         return render_template("profile.html", username=username)
+    if session["user"]:
+        return render_template("edit_profile.html", user=user, p_class=p_class)
 
-#     return redirect(url_for("login"))   
+    return redirect(url_for("register"))
 
 
 @app.route("/logout")
@@ -132,6 +158,7 @@ def logout():
     flash("You have been logged out")
     session.pop("user")
     return redirect(url_for("login"))
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
