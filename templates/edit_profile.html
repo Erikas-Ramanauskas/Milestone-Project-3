@@ -80,12 +80,12 @@
       </div>
     </div>
     <!-- is hardcore toogle -->
-    <div class="row">
-      <div class="input-field col s12">
+    <div class="row center-align">
+      <div class="input-field col m6 s12">
         <div class="switch">
           <i class="fa-solid fa-skull prefix teal-text text-accent-3"></i>
           <label for="is_hardcore" class="teal-text text-accent-3">
-            Softcore {% if user.is_hardcore == "on" %}
+            {% if user.is_hardcore == "on" %}
             <input
               type="checkbox"
               id="is_hardcore"
@@ -100,14 +100,14 @@
           </label>
         </div>
       </div>
-    </div>
-    <!-- is seasson toogle -->
-    <div class="row">
-      <div class="input-field col s12">
+
+      <!-- is seasson toogle -->
+
+      <div class="input-field col m6 s12">
         <div class="switch">
           <i class="fa-brands fa-envira prefix teal-text text-accent-3"></i>
           <label for="is_seasson" class="teal-text text-accent-3">
-            Non-seasson {% if user.is_seasson == "on" %}
+            {% if user.is_seasson == "on" %}
             <input type="checkbox" id="is_seasson" name="is_seasson" checked />
             {% else %}
             <input type="checkbox" id="is_seasson" name="is_seasson" />

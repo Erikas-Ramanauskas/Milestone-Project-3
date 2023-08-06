@@ -1,4 +1,5 @@
 import os
+import json
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
@@ -18,10 +19,26 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+# ------------------------------------------------------------------------------
+# turning json data in to item data
+# file_path = 'item_data.json'
+# with open(file_path, 'r') as json_file:
+#     json_data = json_file.read()
+
+# parsed_data = json.loads(json_data)
+
+# print(parsed_data["Helm"]["affixes"]["all_classes"][2])
+# -----------------------------------------------------------------------------
+
 # page specific variables
-# these are stable and does nto require its own database
-p_class = ["None", "Barbarian", "Druid",
+# these are stable and does not require its own database
+p_class = ["All Classes", "Barbarian", "Druid",
            "Necromancer", "Rogue", "Sorcerer"]
+
+item_types = ["Helm", "Chest Armor", "Gloves", "Pants", "Boots", "Amulet",
+              "Ring", "1h Sword", "1h Axe", "1h Mace", "Dagger", "1h Scythe", "Wand",
+              "2h Sword", "2h Axe", "2h Mace", "Polearm", "Bow", "Crossbow",
+              "2h Scythe", "Staff", "Offhand", "Shield"]
 
 
 @app.route("/")
@@ -35,6 +52,14 @@ def offers():
 # def requests():
 #     requests = list(mongo.db.requests.find())
 #     return render_template("requests.html", requests=requests)
+
+
+@app.route("/add_offer", methods=["GET", "POST"])
+def add_offer():
+    user = mongo.db.users.find_one(
+        {"username": session["user"]})
+    return render_template("add_offer.html", user=user, p_class=p_class,
+                           item_types=item_types)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -143,7 +168,7 @@ def edit_profile(username):
         }
         mongo.db.users.replace_one({"_id": ObjectId(user["_id"])}, submit)
         user2 = mongo.db.users.find_one({"_id": ObjectId(user["_id"])})
-        flash("Task Successfully Updated")
+        flash("Profile Successfully Updated")
         return render_template("profile.html", user=user2)
 
     if session["user"]:
