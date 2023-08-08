@@ -1,5 +1,5 @@
 {
-    "Helm": {
+    "helm": {
         "armor": "true",
         "damage": "false",
         "suffix": [],
@@ -270,7 +270,7 @@
             ]
         }
     },
-    "Chest Armor": {
+    "chest_armor": {
         "armor": "true",
         "damage": "false",
         "suffix": [],
@@ -793,7 +793,7 @@
             ]
         }
     },
-    "Gloves": {
+    "gloves": {
         "armor": "true",
         "damage": "false",
         "suffix": [],
@@ -1124,7 +1124,7 @@
             ]
         }
     },
-    "Pants": {
+    "pants": {
         "armor": "true",
         "damage": "false",
         "suffix": [
@@ -1465,7 +1465,7 @@
             ]
         }
     },
-    "Boots": {
+    "boots": {
         "armor": "true",
         "damage": "false",
         "suffix": [
@@ -1678,7 +1678,7 @@
             ],
             "sorcerer": [
                 {
-                    "affix": "Ranks of Flame Shield",
+                    "affix": "Ranks of Flame shield",
                     "procentage": "false",
                     "minimum": "2",
                     "maximum": "3"
@@ -1716,7 +1716,7 @@
             ]
         }
     },
-    "Amulet": {
+    "amulet": {
         "armor": "false",
         "damage": "false",
         "suffix": [
@@ -2547,7 +2547,7 @@
             ]
         }
     },
-    "Ring": {
+    "ring": {
         "armor": "false",
         "damage": "false",
         "suffix": [
@@ -2955,7 +2955,7 @@
             ]
         }
     },
-    "1h_Sword": {
+    "1h_sword": {
         "armor": "false",
         "damage": "true",
         "suffix": [
@@ -3216,7 +3216,7 @@
             ]
         }
     },
-    "1h_Axe": {
+    "1h_axe": {
         "armor": "false",
         "damage": "true",
         "suffix": [
@@ -3477,7 +3477,7 @@
             ]
         }
     },
-    "1h_Mace": {
+    "1h_mace": {
         "armor": "false",
         "damage": "true",
         "suffix": [
@@ -3738,7 +3738,7 @@
             ]
         }
     },
-    "Dagger": {
+    "dagger": {
         "armor": "false",
         "damage": "true",
         "suffix": [
@@ -3999,7 +3999,7 @@
             ]
         }
     },
-    "1h_Scythe": {
+    "1h_scythe": {
         "armor": "false",
         "damage": "true",
         "suffix": [
@@ -4260,7 +4260,7 @@
             ]
         }
     },
-    "Wand": {
+    "wand": {
         "armor": "false",
         "damage": "true",
         "suffix": [
@@ -4521,7 +4521,7 @@
             ]
         }
     },
-    "2h_Sword": {
+    "2h_sword": {
         "armor": "false",
         "damage": "true",
         "suffix": [
@@ -4782,7 +4782,7 @@
             ]
         }
     },
-    "2h_Axe": {
+    "2h_axe": {
         "armor": "false",
         "damage": "true",
         "suffix": [
@@ -5043,7 +5043,7 @@
             ]
         }
     },
-    "2h_Mace": {
+    "2h_mace": {
         "armor": "false",
         "damage": "true",
         "suffix": [
@@ -5304,7 +5304,7 @@
             ]
         }
     },
-    "Polearm": {
+    "polearm": {
         "armor": "false",
         "damage": "true",
         "suffix": [
@@ -5565,7 +5565,7 @@
             ]
         }
     },
-    "Bow": {
+    "bow": {
         "armor": "false",
         "damage": "true",
         "suffix": [
@@ -5826,7 +5826,7 @@
             ]
         }
     },
-    "Crossbow": {
+    "crossbow": {
         "armor": "false",
         "damage": "true",
         "suffix": [
@@ -6087,7 +6087,7 @@
             ]
         }
     },
-    "2h_Scythe": {
+    "2h_scythe": {
         "armor": "false",
         "damage": "true",
         "suffix": [
@@ -6348,7 +6348,7 @@
             ]
         }
     },
-    "Staff": {
+    "staff": {
         "armor": "false",
         "damage": "true",
         "suffix": [
@@ -6609,7 +6609,7 @@
             ]
         }
     },
-    "Offhand": {
+    "offhand": {
         "armor": "false",
         "damage": "true",
         "suffix": [
@@ -6824,7 +6824,7 @@
             ]
         }
     },
-    "Shield": {
+    "shield": {
         "armor": "false",
         "damage": "false",
         "suffix": [

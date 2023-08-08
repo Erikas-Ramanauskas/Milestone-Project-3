@@ -36,9 +36,9 @@ p_class = ["All Classes", "Barbarian", "Druid",
            "Necromancer", "Rogue", "Sorcerer"]
 
 item_types = ["Helm", "Chest Armor", "Gloves", "Pants", "Boots", "Amulet",
-              "Ring", "1h Sword", "1h Axe", "1h Mace", "Dagger", "1h Scythe", "Wand",
-              "2h Sword", "2h Axe", "2h Mace", "Polearm", "Bow", "Crossbow",
-              "2h Scythe", "Staff", "Offhand", "Shield"]
+              "Ring", "1h Sword", "1h Axe", "1h Mace", "Dagger", "1h Scythe",
+              "Wand", "2h Sword", "2h Axe", "2h Mace", "Polearm", "Bow",
+              "Crossbow", "2h Scythe", "Staff", "Offhand", "Shield"]
 
 
 @app.route("/")

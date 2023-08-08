@@ -1,0 +1,5 @@
+.offer-class-button.active,
+.offer-item-button.active {
+    color: #1de9b6;
+    /* Add your desired style for the active state */
+}
