@@ -9,6 +9,14 @@ $(document).ready(function () {
 });
 
 
+fetch('/static/json/item_data.json')
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+
+
+
+
+
 const offerClassButtons = document.querySelectorAll('.offer-class-button');
 const offerItemButtons = document.querySelectorAll('.offer-item-button');
 
@@ -17,7 +25,7 @@ let chosenClass = "All Classes";
 let chosenItem = "Amulet";
 
 // Example array of button texts
-const myButtonData = ['Button 1', 'Button 2', 'Button 3'];
+const newButtonData = ['Button 1', 'Button 2', 'Button 3'];
 
 function startListeners(buttons) {
     buttons.forEach(button => {
@@ -43,18 +51,29 @@ startListeners(offerItemButtons);
 
 
 function createButtonsFromArray() {
-    console.log("test");
-    const container = document.getElementById('suffixes');
 
-    console.log(container);
+    const suffixes = document.getElementById('suffixes');
+    const currentButtons = suffixes.querySelectorAll('button');
+    console.log(currentButtons);
+
+    // // Remove buttons that do not match
+    // currentButtons.forEach(button => {
+    //     const buttonText = button.innerText;
+    //     if (!newButtonData.includes(buttonText)) {
+    //         suffixes.removeChild(button);
+    //     }
+    // });
 
     // Loop through the array and create buttons
-    myButtonData.forEach((buttonText) => {
-        const button = document.createElement('button');
-        button.classList.add('grey', 'darken-3');
-        button.innerText = buttonText;
-        container.appendChild(button);
-        console.log(button);
+    newButtonData.forEach(buttonText => {
+        // Check if button with same text already exists
+        const existingButton = Array.from(currentButtons).find(button => button.innerText === buttonText);
+        console.log(existingButton);
+        if (!existingButton) {
+            const button = document.createElement('button');
+            button.classList.add('waves-effect', 'waves-light', 'btn', 'grey', 'darken-3');
+            button.innerText = buttonText;
+            suffixes.appendChild(button);
+        }
     });
 }
-
