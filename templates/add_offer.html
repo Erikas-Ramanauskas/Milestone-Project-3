@@ -92,12 +92,63 @@
   <div id="affixes" class="center-align col s12"></div>
 </div>
 
-<!-- item Details -->
+<!-- Form -->
+<div id="item-details" class="row card-panel grey lighten-5">
+    <form class="col s12" method="POST" action="#">
+       
+        <div class="range-field input-field" id="armor-damage">
+            <i class="fa-solid fa-hand-fist prefix light-blue-text text-darken-4"></i>
+            <input type="range" id="test5" min="0" max="100"/>
+        </div>
+        
 
-<div id="item-details" class="row grey darken-3">
-  <div id="item-details" class="center-align col s12">
-    <form action=""></form>
-  </div>
+        <!-- Task name -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fa-solid fa-shield prefix light-blue-text text-darken-4"></i>
+                <input id="task_name" name="task_name" minlength="5" maxlength="50" type="text" class="validate"
+                    required>
+                <label for="task_name">Task Name</label>
+            </div>
+        </div>
+        <!-- task Description -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-align-left prefix light-blue-text text-darken-4"></i>
+                <textarea id="task_description" name="task_description" minlength="5" maxlength="200"
+                    class="materialize-textarea validate" required></textarea>
+                <label for="task_description">Task Description</label>
+            </div>
+        </div>
+        <!-- date picker -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-calendar-alt prefix light-blue-text text-darken-4"></i>
+                <input id="due_date" name="due_date" type="text" class="datepicker validate" required>
+                <label for="due_date">Due Date</label>
+            </div>
+        </div>
+        <!-- Is urgent  -->
+        <div class="row">
+            <div class="input-field col s12">
+                <div class="switch">
+                    <i class="fas fa-exclamation-circle prefix light-blue-text text-darken-4"></i>
+                    <label for="is_urgent">
+                        <input type="checkbox" id="is_urgent" name="is_urgent">
+                        <span class="lever"></span>
+                        Is Urgent
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!-- submit button -->
+        <div class="row">
+            <div class="col s12 center-align">
+                <button type="submit" class="btn-large light-blue darken-1 text-shadow">
+                    Add task <i class="fas fa-plus-square right"></i>
+            </div>
+        </div>
+    </form>
 </div>
 
 {% endblock %}

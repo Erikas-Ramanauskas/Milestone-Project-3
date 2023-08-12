@@ -1,3 +1,7 @@
+body {
+    overflow-x: hidden;
+}
+
 .offer-class-button.active,
 .offer-item-button.active,
 .suffix-button.active,

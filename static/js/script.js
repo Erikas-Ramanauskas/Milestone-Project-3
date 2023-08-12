@@ -121,6 +121,9 @@ function createButtonsFromArray() {
             affixes.appendChild(button);
         }
     });
+
+    // call functions 
+    armorAndDamage(newItemData);
 }
 
 // creates suffixes for the item type
@@ -176,6 +179,54 @@ function toggleActive(button) {
             button.classList.remove('rejected');
         }, 700);
     }
+
+}
+
+
+// creating range element
+function armorAndDamage(newItemData) {
+    const aAndDDIV = document.getElementsByTagName('form')[0];
+    const armorAndDamageInput = document.getElementById('armor-damage');
+
+    // remove previous imput if it exist
+    if (armorAndDamageInput != null) {
+        aAndDDIV.removeChild(armorAndDamageInput);
+    }
+
+    const armor = JSON.parse(newItemData.armor);
+    const damage = JSON.parse(newItemData.damage);
+
+    if (armor || damage) {
+        const details = {
+            "type": armor ? "fa-shield" : "fa-hand-fist",
+            "id": armor ? "test5" : "test5",
+            "max": armor ? "1500" : "2500",
+        };
+
+        const elementP = document.createElement('p');
+        elementP.classList.add('range-field', 'input-field');
+        elementP.id = "armor-damage";
+
+        const elementI = document.createElement('i');
+        elementI.classList.add('fa-solid', details.type, 'prefix', 'light-blue-text', 'text-darken-4');
+
+        const input = document.createElement('input');
+        input.type = "range";
+        input.id = details.id;
+        input.min = "0";
+        input.max = armor.max;
+
+        elementP.appendChild(elementI);
+        elementP.appendChild(input);
+        aAndDDIV.prepend(elementP);
+    }
+}
+
+function addSuffixHTML() {
+
+}
+
+function removeSuffixHTML() {
 
 }
 
