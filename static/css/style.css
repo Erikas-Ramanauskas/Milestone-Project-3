@@ -1,5 +1,11 @@
 .offer-class-button.active,
-.offer-item-button.active {
+.offer-item-button.active,
+.suffix-button.active,
+.affix-button.active {
     color: #1de9b6;
     /* Add your desired style for the active state */
+}
+
+.affix-button.rejected {
+    color: #f90372;
 }

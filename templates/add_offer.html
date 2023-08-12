@@ -64,7 +64,6 @@
 </div>
 
 <!-- Item picker -->
-
 <div class="row grey darken-3">
   <div class="center-align col s12">
     {% for item in item_types %} {% if item == "Amulet" %}
@@ -85,8 +84,20 @@
   </div>
 </div>
 
+<!-- Suffixes -->
+<div id="suffixes" class="row grey darken-3"></div>
+
+<!-- Affixes -->
 <div class="row grey darken-3">
-  <div id="suffixes" class="center-align col s12"></div>
+  <div id="affixes" class="center-align col s12"></div>
+</div>
+
+<!-- item Details -->
+
+<div id="item-details" class="row grey darken-3">
+  <div id="item-details" class="center-align col s12">
+    <form action=""></form>
+  </div>
 </div>
 
 {% endblock %}
