@@ -29,15 +29,15 @@
 </div>
 
 <!-- is hardcore toogle -->
-<div class="row center-align grey darken-3">
+<div class="row center-align grey darken-3 " id="check-boxes">
   <div class="input-field col m6 s12">
     <div class="switch">
       <i class="fa-solid fa-skull prefix teal-text text-accent-3"></i>
       <label for="is_hardcore" class="teal-text text-accent-3">
         {% if user.is_hardcore == "on" %}
-        <input type="checkbox" id="is_hardcore" name="is_hardcore" checked />
+        <input type="checkbox" form="mainForm" id="is_hardcore" name="is_hardcore" checked />
         {% else %}
-        <input type="checkbox" id="is_hardcore" name="is_hardcore" />
+        <input type="checkbox" form="mainForm" id="is_hardcore" name="is_hardcore" />
         {% endif %}
         <span class="lever"></span>
         Hardcore
@@ -45,16 +45,16 @@
     </div>
   </div>
 
-  <!-- is seasson toogle -->
+  <!-- is season toogle -->
 
   <div class="input-field col m6 s12">
     <div class="switch">
       <i class="fa-brands fa-envira prefix teal-text text-accent-3"></i>
-      <label for="is_seasson" class="teal-text text-accent-3">
-        {% if user.is_seasson == "on" %}
-        <input type="checkbox" id="is_seasson" name="is_seasson" checked />
+      <label for="is_season" class="teal-text text-accent-3">
+        {% if user.is_season == "on" %}
+        <input type="checkbox" form="mainForm" id="is_season" name="is_season" checked />
         {% else %}
-        <input type="checkbox" id="is_seasson" name="is_seasson" />
+        <input type="checkbox" form="mainForm" name="is_season" />
         {% endif %}
         <span class="lever"></span>
         Season
@@ -66,21 +66,14 @@
 <!-- Item picker -->
 <div class="row grey darken-3">
   <div class="center-align col s12">
-    {% for item in item_types %} {% if item == "Amulet" %}
-    <button
-      class="waves-effect waves-light btn grey darken-3 main-choices offer-item-button active"
-      data-item="{{ item }}"
-    >
-      {{ item }}
-    </button>
-    {% else %}
+    {% for item in item_types %}
     <button
       class="waves-effect waves-light btn grey darken-3 main-choices offer-item-button"
       data-item="{{ item }}"
     >
       {{ item }}
     </button>
-    {% endif %} {% endfor %}
+ {% endfor %}
   </div>
 </div>
 
@@ -94,58 +87,36 @@
 
 <!-- Form -->
 <div id="item-details" class="row card-panel grey lighten-5">
-    <form class="col s12" method="POST" action="#">
-       
-        <div class="range-field input-field" id="armor-damage">
-            <i class="fa-solid fa-hand-fist prefix light-blue-text text-darken-4"></i>
-            <input type="range" id="test5" min="0" max="100"/>
-        </div>
-        
+    <form class="col s12" id="mainForm" method="POST" action="#">
 
-        <!-- Task name -->
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="fa-solid fa-shield prefix light-blue-text text-darken-4"></i>
-                <input id="task_name" name="task_name" minlength="5" maxlength="50" type="text" class="validate"
-                    required>
-                <label for="task_name">Task Name</label>
-            </div>
+        <!-- Class -->
+        <div id="class-invisible-data">
+            <input id="class_data" name="class_data" type="hidden" readOnly="true">
         </div>
-        <!-- task Description -->
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="fas fa-align-left prefix light-blue-text text-darken-4"></i>
-                <textarea id="task_description" name="task_description" minlength="5" maxlength="200"
-                    class="materialize-textarea validate" required></textarea>
-                <label for="task_description">Task Description</label>
-            </div>
+
+        <!-- item -->
+        <div id="item-invisible-data">
+            <input id="item_data" name="item_data" type="hidden" readOnly="true">
         </div>
-        <!-- date picker -->
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="fas fa-calendar-alt prefix light-blue-text text-darken-4"></i>
-                <input id="due_date" name="due_date" type="text" class="datepicker validate" required>
-                <label for="due_date">Due Date</label>
-            </div>
+
+        <!-- hardcore -->
+        <div id="hardcore-invisible-data">
+            <input id="hardcore" name="hardcore" type="hidden" readOnly="true">
         </div>
-        <!-- Is urgent  -->
-        <div class="row">
-            <div class="input-field col s12">
-                <div class="switch">
-                    <i class="fas fa-exclamation-circle prefix light-blue-text text-darken-4"></i>
-                    <label for="is_urgent">
-                        <input type="checkbox" id="is_urgent" name="is_urgent">
-                        <span class="lever"></span>
-                        Is Urgent
-                    </label>
-                </div>
-            </div>
+
+        <!-- Class -->
+        <div id="season-invisible-data">
+            <input id="season" name="season" type="hidden" readOnly="true">
         </div>
+
+        <!-- suffix data -->
+        <div id="suffix-data" class="row"></div>
+
         <!-- submit button -->
         <div class="row">
             <div class="col s12 center-align">
                 <button type="submit" class="btn-large light-blue darken-1 text-shadow">
-                    Add task <i class="fas fa-plus-square right"></i>
+                    Add item <i class="fas fa-plus-square right"></i>
             </div>
         </div>
     </form>

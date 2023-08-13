@@ -156,7 +156,7 @@ def edit_profile(username):
     # if user is being eddited
     if request.method == "POST" and session["user"]:
         is_hardcore = "on" if request.form.get("is_hardcore") else "off"
-        is_seasson = "on" if request.form.get("is_seasson") else "off"
+        is_season = "on" if request.form.get("is_season") else "off"
         submit = {
             "username": user["username"],
             "password": user["password"],
@@ -164,7 +164,7 @@ def edit_profile(username):
             "discord_id": request.form.get("discord_id"),
             "class_preference": request.form.get("class_preference"),
             "is_hardcore": is_hardcore,
-            "is_seasson": is_seasson
+            "is_season": is_season
         }
         mongo.db.users.replace_one({"_id": ObjectId(user["_id"])}, submit)
         user2 = mongo.db.users.find_one({"_id": ObjectId(user["_id"])})

@@ -1,58 +1,71 @@
 // materialise enablers
 $(document).ready(function () {
     // mobile side nav activation
-    $('.sidenav').sidenav();
+    $(".sidenav").sidenav();
     //Navigation Dropdown activation
     $(".dropdown-trigger").dropdown();
     // form check
-    $('input#input_text, textarea#textarea2').characterCounter();
+    $("input#input_text, textarea#textarea2").characterCounter();
 });
 
 // Setting default choices and adjusting them later if player has preferences
-let chosenClass = document.querySelector('.offer-class-button.active').dataset.class;
-let chosenItem = "Amulet"; // I will leave amulet as permemnet default choice. 
+let chosenClass = document.querySelector(".offer-class-button.active").dataset
+    .class;
+let chosenItem = "";
+let checkBoxes = document.querySelector("#check-boxes");
+
 
 let itemData;
 
 // takes jason data
-fetch('/static/json/item_data.json')
+fetch("/static/json/item_data.json")
     .then((response) => response.json())
     .then((json) => {
         itemData = json;
     });
 
-const offerClassButtons = document.querySelectorAll('.offer-class-button');
-const offerItemButtons = document.querySelectorAll('.offer-item-button');
-const suffixesDiv = document.getElementById('suffixes');
+
+checkBoxes.addEventListener("change", function () {
+    isHardcore = document.querySelector("#is_hardcore");
+    isSeason = document.querySelector("#is_season");
+    console.log(isHardcore);
+    staticFormHTML();
+});
+
+const offerClassButtons = document.querySelectorAll(".offer-class-button");
+const offerItemButtons = document.querySelectorAll(".offer-item-button");
+const suffixesDiv = document.getElementById("suffixes");
+
 
 function startListeners(buttons) {
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            buttons.forEach(btn => {
-                btn.classList.remove('active');
+    buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+            buttons.forEach((btn) => {
+                btn.classList.remove("active");
             });
-            button.classList.add('active');
-            if (button.classList.contains('offer-class-button')) {
+            button.classList.add("active");
+            if (button.classList.contains("offer-class-button")) {
                 chosenClass = button.dataset.class;
-            } else if (button.classList.contains('offer-item-button')) {
+                staticFormHTML();
+            } else if (button.classList.contains("offer-item-button")) {
                 chosenItem = button.dataset.item;
-            } else if (button.classList.contains('suffix-button')) {
-                createSuffixInfo();
+                staticFormHTML();
+                addSuffixHTML();
+            } else if (button.classList.contains("suffix-button")) {
+                addSuffixHTML();
             }
         });
-        if (!button.classList.contains('suffix-button')) {
-            button.addEventListener('click', createButtonsFromArray);
+        if (!button.classList.contains("suffix-button")) {
+            button.addEventListener("click", createButtonsFromArray);
         }
-
     });
 }
-
 
 startListeners(offerClassButtons);
 startListeners(offerItemButtons);
 
 function createButtonsFromArray() {
-    const affixes = document.getElementById('affixes');
+    const affixes = document.getElementById("affixes");
 
     lowerChosenItem = chosenItem.toLowerCase().replace(" ", "_");
     lowerChosenClass = chosenClass.toLowerCase().replace(" ", "_");
@@ -65,21 +78,23 @@ function createButtonsFromArray() {
 
     // determines if user selected all classes so the individual classes affixes would not be included
     if (lowerChosenClass != "all_classes") {
-        newButtonAffixes = [...newItemData.affixes.all_classes, ...newItemData.affixes[lowerChosenClass]];
+        newButtonAffixes = [
+            ...newItemData.affixes.all_classes,
+            ...newItemData.affixes[lowerChosenClass],
+        ];
     } else {
         newButtonAffixes = newItemData.affixes.all_classes;
     }
 
-
-    let currentButtons = affixes.querySelectorAll('.affix-button');
+    let currentButtons = affixes.querySelectorAll(".affix-button");
 
     // Remove buttons that do not match
-    currentButtons.forEach(button => {
+    currentButtons.forEach((button) => {
         const buttonAffix = button.dataset.affix;
         const buttonMinimum = button.dataset.minimum;
         const buttonMaximum = button.dataset.maximum;
 
-        const matchingData = newButtonAffixes.find(item => {
+        const matchingData = newButtonAffixes.find((item) => {
             const affixMatch = item.affix === buttonAffix;
             const minimumMatch = item.minimum == buttonMinimum;
             const maximumMatch = item.maximum == buttonMaximum;
@@ -93,7 +108,7 @@ function createButtonsFromArray() {
     });
 
     // recaptures all buttons again so the ones that dont matched is removed
-    currentButtons = affixes.querySelectorAll('.affix-button');
+    currentButtons = affixes.querySelectorAll(".affix-button");
 
     // creates and affix data array of current buttons to prevent repeating buttons
     let currentButtonsArray = [];
@@ -102,34 +117,42 @@ function createButtonsFromArray() {
     });
 
     // Loop through the array and create buttons
-    newButtonAffixes.forEach(newButtonData => {
+    newButtonAffixes.forEach((newButtonData) => {
         // Checks if new butons matches a current buttons and skips the loop if so
-        const existingButton = currentButtonsArray.find(affixName => affixName === newButtonData.affix);
+        const existingButton = currentButtonsArray.find(
+            (affixName) => affixName === newButtonData.affix
+        );
 
         // button creation that holds affix data
         if (!existingButton) {
-            const button = document.createElement('button');
-            button.classList.add('waves-effect', 'waves-light', 'btn', 'grey', 'darken-3', 'affix-button');
+            const button = document.createElement("button");
+            button.classList.add(
+                "waves-effect",
+                "waves-light",
+                "btn",
+                "grey",
+                "darken-3",
+                "affix-button"
+            );
             button.innerText = newButtonData.affix;
             button.setAttribute("data-affix", newButtonData.affix);
-            button.setAttribute("data-procentage", newButtonData.procentage);
+            button.setAttribute("data-percentage", newButtonData.percentage);
             button.setAttribute("data-minimum", newButtonData.minimum);
             button.setAttribute("data-maximum", newButtonData.maximum);
-            button.addEventListener('click', () => {
+            button.addEventListener("click", () => {
                 toggleActive(button);
             });
             affixes.appendChild(button);
         }
     });
 
-    // call functions 
+    // call functions
     armorAndDamage(newItemData);
 }
 
 // creates suffixes for the item type
 function creatSuffixesButtons(itemData) {
-
-    suffixesDiv.innerHTML = '';
+    suffixesDiv.innerHTML = "";
 
     const suffixes = itemData.suffix;
     // Check if the array is empty
@@ -138,55 +161,65 @@ function creatSuffixesButtons(itemData) {
     }
 
     // Create a parent div to hold the buttons
-    const parentDiv = document.createElement('div');
-    parentDiv.classList.add('center-align', 'col', 's12');
-
+    const parentDiv = document.createElement("div");
+    parentDiv.classList.add("center-align", "col", "s12");
 
     // Loop through the array and create a button for each item
     suffixes.forEach((suffix, index) => {
-        const button = document.createElement('button');
-        button.classList.add('waves-effect', 'waves-light', 'btn', 'grey', 'darken-3', 'suffix-button');
+        const button = document.createElement("button");
+        button.classList.add(
+            "waves-effect",
+            "waves-light",
+            "btn",
+            "grey",
+            "darken-3",
+            "suffix-button"
+        );
+        button.setAttribute("data-suffix", suffix);
         if (index == 0) {
-            button.classList.add('active');
+            button.classList.add("active");
         }
         button.textContent = suffix;
         parentDiv.appendChild(button);
     });
 
     suffixesDiv.appendChild(parentDiv);
-    const suffixButtons = document.querySelectorAll('.suffix-button');
+    const suffixButtons = document.querySelectorAll(".suffix-button");
     startListeners(suffixButtons);
-}
-
-function createSuffixInfo() {
-    return null;
+    addSuffixHTML();
 }
 
 function toggleActive(button) {
     // Count the active buttons
-    const activeButtons = document.querySelectorAll('.affix-button.active');
+    const activeButtons = document.querySelectorAll(".affix-button.active");
 
-    console.log(activeButtons.length);
     // If active buttons exceed the maximum, find the first active button and remove its active class
     if (activeButtons.length < 4) {
-        button.classList.toggle('active');
-    } else if (button.classList.contains('active')) {
-
-        button.classList.remove('active');
+        button.classList.add("active");
+        addAffixHTML(button);
+    } else if (button.classList.contains("active")) {
+        button.classList.remove("active");
     } else {
-        button.classList.add('rejected');
+        button.classList.add("rejected");
         setTimeout(() => {
-            button.classList.remove('rejected');
+            button.classList.remove("rejected");
         }, 700);
     }
-
 }
 
+// Updating static info: class / item / hardcore/ season
+function staticFormHTML(change) {
+    const playerClass = document.getElementById('class_data');
+    const item = document.getElementById('item_data');
+
+    playerClass.value = chosenClass;
+    item.value = chosenItem;
+}
 
 // creating range element
 function armorAndDamage(newItemData) {
-    const aAndDDIV = document.getElementsByTagName('form')[0];
-    const armorAndDamageInput = document.getElementById('armor-damage');
+    const aAndDDIV = document.getElementsByTagName("form")[0];
+    const armorAndDamageInput = document.getElementById("armor-damage");
 
     // remove previous imput if it exist
     if (armorAndDamageInput != null) {
@@ -198,37 +231,135 @@ function armorAndDamage(newItemData) {
 
     if (armor || damage) {
         const details = {
-            "type": armor ? "fa-shield" : "fa-hand-fist",
-            "id": armor ? "test5" : "test5",
-            "max": armor ? "1500" : "2500",
+            type: armor ? "fa-shield" : "fa-hand-fist",
+            id: armor ? "test5" : "test5",
+            max: armor ? 1500 : 2500,
         };
 
-        const elementP = document.createElement('p');
-        elementP.classList.add('range-field', 'input-field');
+        const elementP = document.createElement("p");
+        elementP.classList.add("range-field", "input-field");
         elementP.id = "armor-damage";
 
-        const elementI = document.createElement('i');
-        elementI.classList.add('fa-solid', details.type, 'prefix', 'light-blue-text', 'text-darken-4');
+        const elementI = document.createElement("i");
+        elementI.classList.add(
+            "fa-solid",
+            details.type,
+            "prefix",
+            "light-blue-text",
+            "text-darken-4"
+        );
 
-        const input = document.createElement('input');
+        const input = document.createElement("input");
         input.type = "range";
         input.id = details.id;
-        input.min = "0";
-        input.max = armor.max;
+        input.name = details.id;
+        input.min = "50";
+        input.max = details.max;
+        input.value = details.max / 2;
+
+        const output = document.createElement("output");
+        output.setAttribute("for", details.id);
+        output.classList.add("prefix", "light-blue-text", "text-darken-4");
+        output.value = details.max / 2;
+
+        input.addEventListener("input", (e) => {
+            output.textContent = e.target.value;
+        });
 
         elementP.appendChild(elementI);
         elementP.appendChild(input);
+        elementP.appendChild(output);
         aAndDDIV.prepend(elementP);
     }
 }
 
+// creating suffix form info.
 function addSuffixHTML() {
+    const suffixHTML = document.querySelector("#suffix-data");
 
+    //   clearing suffix data
+    if (suffixHTML) {
+        suffixHTML.innerHTML = "";
+    }
+
+    //   creating new data
+    const suffix = document.querySelector(".suffix-button.active");
+    console.log(suffix);
+
+    if (suffix) {
+        const midDIV = document.createElement("div");
+        midDIV.classList.add("col", "s12");
+
+        const input = document.createElement("input");
+        input.classList.add("col", "s12", "light-blue-text", "text-darken-4", "center-align");
+        input.type = "text";
+        input.id = suffix.dataset.suffix;
+        input.name = suffix.dataset.suffix;
+        input.value = suffix.dataset.suffix;
+        input.readOnly = true;
+
+        midDIV.appendChild(input);
+        suffixHTML.appendChild(midDIV);
+    }
 }
 
-function removeSuffixHTML() {
+// creating Affix form imput
+function addAffixHTML(button) {
+    const data = {
+        affix: button.dataset.affix,
+        id: button.dataset.affix.replace(" ", "-").toLowerCase(),
+        percentage: button.dataset.percentage === "true" ? true : false,
+        min: parseInt(button.dataset.minimum),
+        max: parseInt(button.dataset.maximum),
+        average: Math.ceil(
+            (parseInt(button.dataset.minimum) + parseInt(button.dataset.maximum)) / 2
+        ),
+    };
 
+    const form = document.getElementsByTagName("form")[0];
+
+    const topDIV = document.createElement("div");
+    topDIV.classList.add("row");
+    topDIV.id = data.id + "-parent";
+
+    const midDIV = document.createElement("div");
+    midDIV.classList.add("col", "s12", "space-between");
+
+    const affixValue = document.createElement("p");
+    affixValue.classList.add("col", "s9", "light-blue-text", "text-darken-4");
+    affixValue.innerText = data.affix;
+
+    const input = document.createElement("input");
+    input.classList.add("col", "s12");
+    input.type = "range";
+    input.id = data.id;
+    input.name = data.id;
+    input.min = data.min;
+    input.max = data.max;
+    input.step = data.percentage ? 0.1 : 1;
+    console.log(input.step);
+    input.value = data.average;
+
+    const output = document.createElement("output");
+    output.setAttribute("for", data.id);
+    output.classList.add(
+        "col",
+        "s3",
+        "light-blue-text",
+        "text-darken-4",
+        "right-align"
+    );
+    output.value = data.average + `${data.percentage ? "%" : ""}`;
+
+    input.addEventListener("input", (e) => {
+        output.textContent = e.target.value + `${data.percentage ? "%" : ""}`;
+    });
+
+    midDIV.appendChild(affixValue);
+    midDIV.appendChild(output);
+    topDIV.appendChild(midDIV);
+    topDIV.appendChild(input);
+    form.insertBefore(topDIV, form.lastElementChild);
 }
 
-
-
+function removeSuffixHTML() { }

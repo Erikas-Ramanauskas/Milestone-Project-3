@@ -13,3 +13,8 @@ body {
 .affix-button.rejected {
     color: #f90372;
 }
+
+output {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+}
