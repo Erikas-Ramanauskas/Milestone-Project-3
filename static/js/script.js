@@ -53,6 +53,7 @@ function startListeners(buttons) {
         });
         if (!button.classList.contains("suffix-button")) {
             button.addEventListener("click", createButtonsFromArray);
+
         }
     });
 }
@@ -143,6 +144,7 @@ function createButtonsFromArray() {
 
     // call functions
     armorAndDamage(newItemData);
+    removeAffixHTML(null, true);
 }
 
 // creates suffixes for the item type
@@ -187,12 +189,11 @@ function creatSuffixesButtons(itemData) {
 function toggleActive(button) {
     // Count the active buttons
     const activeButtons = document.querySelectorAll(".affix-button.active");
-    console.log(activeButtons);
 
     // If active buttons exceed the maximum, find the first active button and remove its active class
     if (button.classList.contains("active")) {
         button.classList.remove("active");
-        removeAffixHTML(button);
+        removeAffixHTML(button, false);
     } else if (activeButtons.length < 4) {
         button.classList.add("active");
         addAffixHTML(button);
@@ -327,7 +328,7 @@ function addAffixHTML(button) {
     const form = document.getElementsByTagName("form")[0];
 
     const topDIV = document.createElement("div");
-    topDIV.classList.add("row");
+    topDIV.classList.add("row", "affix-input");
     topDIV.id = data.id + "-parent";
 
     const midDIV = document.createElement("div");
@@ -374,11 +375,24 @@ function addAffixHTML(button) {
 
 }
 
-function removeAffixHTML(button) {
+function removeAffixHTML(button, all) {
+    const formElement = document.getElementsByTagName("form")[0];
+    if (all) {
+        const allAffixInputs = document.querySelectorAll('.affix-input');
+        allAffixInputs.forEach((input) => {
+            formElement.removeChild(input);
+        });
+        const allAffixActiveButtons = document.querySelectorAll('.affix-button.active');
+        allAffixActiveButtons.forEach((button) => {
+            addAffixHTML(button);
+        });
+        return;
+    }
+
     const affix = button.dataset.affix.toLowerCase().replaceAll(" ", "-");
     const elementToRemove = document.getElementById(`${affix}-parent`);
     if (elementToRemove) {
-        const formElement = document.getElementsByTagName("form")[0];
+
         formElement.removeChild(elementToRemove);
     }
 }
