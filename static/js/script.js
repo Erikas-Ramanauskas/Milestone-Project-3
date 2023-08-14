@@ -11,8 +11,7 @@ $(document).ready(function () {
 // Setting default choices and adjusting them later if player has preferences
 let chosenClass = document.querySelector(".offer-class-button.active").dataset
     .class;
-let chosenItem = "";
-let checkBoxes = document.querySelector("#check-boxes");
+let chosenItem;
 
 
 let itemData;
@@ -24,18 +23,15 @@ fetch("/static/json/item_data.json")
         itemData = json;
     });
 
-
-checkBoxes.addEventListener("change", function () {
-    isHardcore = document.querySelector("#is_hardcore");
-    isSeason = document.querySelector("#is_season");
-    console.log(isHardcore);
-    staticFormHTML();
-});
-
 const offerClassButtons = document.querySelectorAll(".offer-class-button");
 const offerItemButtons = document.querySelectorAll(".offer-item-button");
 const suffixesDiv = document.getElementById("suffixes");
 
+window.addEventListener("load", function () {
+    startListeners(offerClassButtons);
+    startListeners(offerItemButtons);
+    staticFormHTML();
+});
 
 function startListeners(buttons) {
     buttons.forEach((button) => {
@@ -61,8 +57,7 @@ function startListeners(buttons) {
     });
 }
 
-startListeners(offerClassButtons);
-startListeners(offerItemButtons);
+
 
 function createButtonsFromArray() {
     const affixes = document.getElementById("affixes");
@@ -192,13 +187,15 @@ function creatSuffixesButtons(itemData) {
 function toggleActive(button) {
     // Count the active buttons
     const activeButtons = document.querySelectorAll(".affix-button.active");
+    console.log(activeButtons);
 
     // If active buttons exceed the maximum, find the first active button and remove its active class
-    if (activeButtons.length < 4) {
+    if (button.classList.contains("active")) {
+        button.classList.remove("active");
+        removeAffixHTML(button);
+    } else if (activeButtons.length < 4) {
         button.classList.add("active");
         addAffixHTML(button);
-    } else if (button.classList.contains("active")) {
-        button.classList.remove("active");
     } else {
         button.classList.add("rejected");
         setTimeout(() => {
@@ -208,7 +205,7 @@ function toggleActive(button) {
 }
 
 // Updating static info: class / item / hardcore/ season
-function staticFormHTML(change) {
+function staticFormHTML() {
     const playerClass = document.getElementById('class_data');
     const item = document.getElementById('item_data');
 
@@ -232,13 +229,19 @@ function armorAndDamage(newItemData) {
     if (armor || damage) {
         const details = {
             type: armor ? "fa-shield" : "fa-hand-fist",
+            text: armor ? "Armor" : "Damage",
             id: armor ? "test5" : "test5",
             max: armor ? 1500 : 2500,
         };
 
+        const mainDIV = document.createElement("div");
+        mainDIV.id = "armor-damage";
+
+        const topDIV = document.createElement("div");
+        topDIV.classList.add("row", "space-between", "col", "s12");
+
         const elementP = document.createElement("p");
-        elementP.classList.add("range-field", "input-field");
-        elementP.id = "armor-damage";
+        elementP.classList.add("range-field", "input-field", "col", "s12");
 
         const elementI = document.createElement("i");
         elementI.classList.add(
@@ -246,8 +249,12 @@ function armorAndDamage(newItemData) {
             details.type,
             "prefix",
             "light-blue-text",
-            "text-darken-4"
+            "text-darken-4",
+            "col", "s9"
         );
+
+        const span = document.createElement("span");
+        span.innerHTML = details.text;
 
         const input = document.createElement("input");
         input.type = "range";
@@ -259,17 +266,19 @@ function armorAndDamage(newItemData) {
 
         const output = document.createElement("output");
         output.setAttribute("for", details.id);
-        output.classList.add("prefix", "light-blue-text", "text-darken-4");
+        output.classList.add("light-blue-text", "text-darken-4", "col", "s3");
         output.value = details.max / 2;
 
         input.addEventListener("input", (e) => {
             output.textContent = e.target.value;
         });
 
-        elementP.appendChild(elementI);
+        topDIV.appendChild(elementI);
         elementP.appendChild(input);
-        elementP.appendChild(output);
-        aAndDDIV.prepend(elementP);
+        topDIV.appendChild(output);
+        mainDIV.appendChild(topDIV);
+        mainDIV.appendChild(elementP);
+        aAndDDIV.prepend(mainDIV);
     }
 }
 
@@ -284,7 +293,6 @@ function addSuffixHTML() {
 
     //   creating new data
     const suffix = document.querySelector(".suffix-button.active");
-    console.log(suffix);
 
     if (suffix) {
         const midDIV = document.createElement("div");
@@ -307,7 +315,7 @@ function addSuffixHTML() {
 function addAffixHTML(button) {
     const data = {
         affix: button.dataset.affix,
-        id: button.dataset.affix.replace(" ", "-").toLowerCase(),
+        id: button.dataset.affix.toLowerCase().replaceAll(" ", "-"),
         percentage: button.dataset.percentage === "true" ? true : false,
         min: parseInt(button.dataset.minimum),
         max: parseInt(button.dataset.maximum),
@@ -337,7 +345,6 @@ function addAffixHTML(button) {
     input.min = data.min;
     input.max = data.max;
     input.step = data.percentage ? 0.1 : 1;
-    console.log(input.step);
     input.value = data.average;
 
     const output = document.createElement("output");
@@ -359,7 +366,21 @@ function addAffixHTML(button) {
     midDIV.appendChild(output);
     topDIV.appendChild(midDIV);
     topDIV.appendChild(input);
-    form.insertBefore(topDIV, form.lastElementChild);
+
+    const elementToRemove = document.getElementById(`${data.id}-parent`);
+    if (elementToRemove == null) {
+        form.insertBefore(topDIV, form.lastElementChild);
+    }
+
 }
 
-function removeSuffixHTML() { }
+function removeAffixHTML(button) {
+    const affix = button.dataset.affix.toLowerCase().replaceAll(" ", "-");
+    const elementToRemove = document.getElementById(`${affix}-parent`);
+    if (elementToRemove) {
+        const formElement = document.getElementsByTagName("form")[0];
+        formElement.removeChild(elementToRemove);
+    }
+}
+
+
