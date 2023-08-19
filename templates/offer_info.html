@@ -1,0 +1,92 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="">
+  <h3 class="light-blue-text text-darken-4 center-align">{{ offer.item_data }} ({{ offer.class_data }})
+{% if offer.is_hardcore == "on" %}
+<i class="fa-solid fa-skull prefix teal-text text-accent-3 tooltipped" data-position="top"
+    data-tooltip="Hardcore item"></i>
+{% endif %}
+{% if offer.is_season == "on" %}
+<i class="fa-brands fa-envira prefix teal-text text-accent-3 tooltipped" data-position="top"
+    data-tooltip="Seasonal item"></i>
+{% endif %}</h3>
+</div>
+
+<div class="row">
+  
+  <div class="col s12 m6">
+    <div class="card grey darken-3 text-shadow center-align">
+      <div class="card-content white-text">
+        <p>
+            {% if offer.armor > 0 %} 
+                Armor: <span class="red-text text-lighten-2">{{ offer.armor }}</span>
+                <hr>
+            {% endif %} 
+            {% if offer.damage > 0 %} 
+                Damage per second: <span class="red-text text-lighten-2">{{ offer.damage }}</span>
+                <hr>
+            {% endif %} 
+            {% if offer.suffix is not none %} 
+                {{ offer.suffix }} <hr>
+            {% endif %} 
+            {% for key, value in offer.affixes.items() %} 
+                {{ key.replace("-", " ").capitalize() }}: 
+               <span class="red-text text-lighten-2">{{ value }}</span>
+                </br> 
+            {% endfor %} 
+            <hr>
+        </p>
+      </div>
+      <div class="card-action">
+        <form method="POST" action="{{ url_for('offer_info', offer_id=offer._id) }}">
+            <h6 id="offer-bid-label" class="teal-text text-accent-3">Your Bid:</h6>
+            <div class="col s12">
+                <i class="fa-solid fa-backward-fast teal-text text-accent-3 bid-button" onclick="changeValue(1000000, false)"></i>
+                <i class="fa-solid fa-backward-step teal-text text-accent-3 bid-button" onclick="changeValue(100000, false)"></i>
+                {% if offer.bids|length == 0 %}
+                <input id="offer-bid" name="offer_bid" value="{{ offer.offer_price }}" type="text" readOnly="true" class="teal-text text-accent-3" />
+                {% else %}
+                {% set offer2= offer.bids[0].offer_bid|int|n %}
+                <input id="offer-bid" name="offer_bid" value="{{ offer2 }}" type="text" readOnly="true"
+                    class="teal-text text-accent-3" />
+                {% endif %}
+                <i class="fa-solid fa-forward-step teal-text text-accent-3 bid-button" onclick="changeValue(100000, true)"></i>
+                <i class="fa-solid fa-forward-fast teal-text text-accent-3 bid-button" onclick="changeValue(1000000, true)"></i>
+            </div>
+            <a href="{{ url_for('offers')}}" class="btn-small red text-shadow">Cancel <i class="fa-solid fa-xmark"></i></a>
+            <button type="submit" id="bid-submit-btn" class="btn-small green accent-4 text-shadow" disabled>
+                Bid <i class="fa-solid fa-coins"></i>
+            </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m6">
+    <div class="card grey darken-3 text-shadow center-align">
+        <div class="card-content white-text">
+            Posted by: <span class="red-text text-lighten-2">{{ offer.created_by }}</span>
+            <br>
+            {% set time_d = (current_datetime - offer.date).days %}
+            {% set time_m = ((current_datetime - offer.date).seconds / 60) | round(0, 'floor') | int %}
+            {% set time_h = ((current_datetime - offer.date).seconds / 3600) | round(0, 'floor') | int %}
+            {% if time_d == 1 %}
+            Posted {{ time_d }} day ago </br>
+            {% elif time_d > 0 %}
+            Posted {{ time_d }} days ago </br>
+            {% elif time_m == 1 %}
+            Posted {{ time_m }} minute ago </br>
+            {% elif time_m < 59 %} Posted {{ time_m }} minutes ago </br>
+            {% elif time_h == 1 %}
+            Posted {{ time_h }} hour ago </br>
+            {% elif time_h < 59 %} Posted {{ time_h }} hours ago </br>
+            {% endif %}
+            <hr>
+        </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %} 
+    <script src="{{ url_for('static', filename='js/offer_info.js') }}"></script>
+{% endblock %}

@@ -20,6 +20,7 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+
 # ------------------------------------------------------------------------------
 # turning json data in to item data
 # file_path = 'item_data.json'
@@ -189,6 +190,8 @@ def add_offer():
             "is_hardcore": is_hardcore,
             "is_season": is_season,
             "created_by": session["user"],
+            "offer_price": request.form.get("offer_price"),
+            "bids": [],
             "date": datetime.datetime.now()
         }
 
@@ -212,6 +215,27 @@ def add_offer():
         {"username": session["user"]})
     return render_template("add_offer.html", user=user, p_class=p_class,
                            item_types=item_types)
+
+
+@app.route("/offer_info/<offer_id>", methods=["GET", "POST"])
+def offer_info(offer_id):
+    offer = mongo.db.offers.find_one({"_id": ObjectId(offer_id)})
+    if request.method == "POST":
+        new_offer = {
+            "offer_bid": int(request.form.get("offer_bid").replace(",", "")),
+            "user": session["user"],
+            "date": datetime.datetime.now()
+        }
+
+        offer["bids"].insert(0, new_offer)
+
+        # use replace_one instead of update_one
+        mongo.db.offers.replace_one({"_id": ObjectId(offer_id)}, offer)
+        flash("Task Successfully Updated")
+
+    current_datetime = datetime.datetime.now()
+    return render_template("offer_info.html", offer=offer,
+                           current_datetime=current_datetime)
 
 
 if __name__ == "__main__":

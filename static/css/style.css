@@ -10,11 +10,34 @@ body {
     /* Add your desired style for the active state */
 }
 
-.affix-button.rejected {
-    color: #f90372;
+.affix-button.rejected,
+#offer-bid.changed {
+    color: #f90372 !important;
 }
+
 
 output {
     margin-block-start: 1em;
     margin-block-end: 1em;
+}
+
+#offer-bid {
+    width: 40%;
+    text-align: center;
+}
+
+#offer-bid-label {
+    text-align: center;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+#offer-bid {
+    font-size: 1.5rem;
+}
+
+.bid-button {
+    cursor: pointer;
+    font-size: 1.5rem;
+    width: 1.7rem;
 }

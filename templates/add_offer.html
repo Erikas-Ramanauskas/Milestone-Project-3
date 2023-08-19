@@ -85,6 +85,8 @@
   <div id="affixes" class="center-align col s12"></div>
 </div>
 
+
+
 <!-- Form -->
 <div id="item-details" class="row card-panel grey lighten-5">
     <form class="col s12" id="mainForm" method="POST" action="#">
@@ -102,14 +104,30 @@
         <!-- suffix data -->
         <div id="suffix-data" class="row"></div>
 
+        <!-- Offer price -->
+        <div class="col s12 center-align" id="offer-price">
+            <i class="fa-solid fa-backward-fast teal-text text-accent-3 bid-button" onclick="changeValue(1000000, false)"></i>
+            <i class="fa-solid fa-backward-step teal-text text-accent-3 bid-button" onclick="changeValue(100000, false)"></i>
+            <input id="offer-bid" form="mainForm" name="offer_price" value="100,000" type="text" readOnly="true"
+                class="teal-text text-accent-3" />
+            <i class="fa-solid fa-forward-step teal-text text-accent-3 bid-button" onclick="changeValue(100000, true)"></i>
+            <i class="fa-solid fa-forward-fast teal-text text-accent-3 bid-button" onclick="changeValue(1000000, true)"></i>
+        </div>
+
         <!-- submit button -->
         <div class="row">
             <div class="col s12 center-align">
                 <button type="submit" class="btn-large light-blue darken-1 text-shadow">
-                    Add item <i class="fas fa-plus-square right"></i>
+                    Add item <i class="fa-solid fa-circle-check"></i>
             </div>
         </div>
     </form>
 </div>
 
 {% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/add_offer.js') }}"></script>
+<script src="{{ url_for('static', filename='js/offer_info.js') }}"></script>
+{% endblock %}
+
