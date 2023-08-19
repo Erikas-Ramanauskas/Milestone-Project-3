@@ -14,11 +14,22 @@
           >{{ offer.item_type }} ({{ offer.item_quality}})</span
         >
         <p>
-          {% if offer.armour > 0 %} {{ offer.armour }} </br> {% endif %} {% if
-          offer.damage_per_second > 0 %} {{ offer.damage_per_second }} {% endif
-          %} {% if offer.suffix != "none" %} {{ offer.suffix }} {% endif %} {%
-          for key, value in offer.affixes.items() %} {{ key.replace("_", "
-          ").capitalize() }}: {{ value }}</br> {% endfor %} 
+             {% if offer.armor > 0 %} 
+            {{ offer.armor }} 
+        </br> 
+        {% endif %} 
+            {% if offer.damage > 0 %} 
+            {{ offer.damage }} 
+            </br>
+            {% endif %} 
+          {% if offer.suffix != "none" %} 
+          {{ offer.suffix }} 
+          {% endif %} 
+          {% for key, value in offer.affixes.items() %} 
+          {{ key.replace("_", " ").capitalize() }}: 
+          {{ value }}
+        </br> 
+          {% endfor %} 
         </p>
       </div>
       <div class="card-action">

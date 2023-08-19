@@ -231,7 +231,7 @@ function armorAndDamage(newItemData) {
         const details = {
             type: armor ? "fa-shield" : "fa-hand-fist",
             text: armor ? "Armor" : "Damage",
-            id: armor ? "test5" : "test5",
+            id: armor ? "armor" : "damage",
             max: armor ? 1500 : 2500,
         };
 
@@ -261,7 +261,7 @@ function armorAndDamage(newItemData) {
         input.type = "range";
         input.id = details.id;
         input.name = details.id;
-        input.min = "50";
+        input.min = "0";
         input.max = details.max;
         input.value = details.max / 2;
 
@@ -302,8 +302,8 @@ function addSuffixHTML() {
         const input = document.createElement("input");
         input.classList.add("col", "s12", "light-blue-text", "text-darken-4", "center-align");
         input.type = "text";
-        input.id = suffix.dataset.suffix;
-        input.name = suffix.dataset.suffix;
+        input.id = "suffix_data";
+        input.name = "suffix_data";
         input.value = suffix.dataset.suffix;
         input.readOnly = true;
 

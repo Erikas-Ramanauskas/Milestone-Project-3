@@ -1,5 +1,6 @@
 import os
 import json
+import datetime
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
@@ -46,20 +47,6 @@ item_types = ["Helm", "Chest Armor", "Gloves", "Pants", "Boots", "Amulet",
 def offers():
     offers = list(mongo.db.offers.find())
     return render_template("offers.html", offers=offers)
-
-# @app.route("/")
-# @app.route("/requests")
-# def requests():
-#     requests = list(mongo.db.requests.find())
-#     return render_template("requests.html", requests=requests)
-
-
-@app.route("/add_offer", methods=["GET", "POST"])
-def add_offer():
-    user = mongo.db.users.find_one(
-        {"username": session["user"]})
-    return render_template("add_offer.html", user=user, p_class=p_class,
-                           item_types=item_types)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -183,6 +170,45 @@ def logout():
     flash("You have been logged out")
     session.pop("user")
     return redirect(url_for("login"))
+
+
+@app.route("/add_offer", methods=["GET", "POST"])
+def add_offer():
+    if request.method == "POST":
+        is_hardcore = "on" if request.form.get("is_hardcore") else "off"
+        is_season = "on" if request.form.get("is_season") else "off"
+
+        offer = {
+            "class_data": request.form.get("class_data"),
+            "item_data": request.form.get("item_data"),
+            "suffix-data": request.form.get("suffix_data"),
+            "armor": request.form.get("armor", 0),
+            "damage": request.form.get("damge", 0),
+            "is_hardcore": is_hardcore,
+            "is_season": is_season,
+            "created_by": session["user"]
+        }
+
+        # Create a list to store unknown key-value pairs
+        affixes = {}
+
+        # Capture any additional form keys dynamically and store in affixes
+        for key in request.form.keys():
+            if key not in offer:
+                affixes[key] = request.form.getlist(key)[0]
+
+        # Add affixes to the offer dictionary if there are any
+        if affixes:
+            offer["affixes"] = affixes
+
+        mongo.db.offers.insert_one(offer)
+        flash("Task Successfully Added")
+        return redirect(url_for("offers"))
+
+    user = mongo.db.users.find_one(
+        {"username": session["user"]})
+    return render_template("add_offer.html", user=user, p_class=p_class,
+                           item_types=item_types)
 
 
 if __name__ == "__main__":
