@@ -7,29 +7,48 @@
 
 <div class="row">
   {% for offer in offers %}
-  <div class="col s12 m3">
+  <div class="col s12 m4">
     <div class="card light-blue darken-4 text-shadow center-align">
       <div class="card-content white-text">
-        <span class="card-title"
-          >{{ offer.item_data }} ({{ offer.class_data }})</span
-        >
+        <span class="card-title">
+            {{ offer.item_data }} ({{ offer.class_data }})
+        </span>
         <p>
-             {% if offer.armor > 0 %} 
-           Armor: {{ offer.armor }} 
-        <hr>
-        {% endif %} 
-            {% if offer.damage > 0 %} 
-           Damage per second: {{ offer.damage }} 
-            <hr>
+            {% if offer.armor > 0 %} 
+                Armor: <span class="red-text text-lighten-2">{{ offer.armor }}</span>
+                <hr>
             {% endif %} 
-          {% if offer.suffix is not none %} 
-          {{ offer.suffix }} <hr>
-          {% endif %} 
-          {% for key, value in offer.affixes.items() %} 
-          {{ key.replace("-", " ").capitalize() }}: 
-          {{ value }}
-        </br> 
-          {% endfor %} 
+            {% if offer.damage > 0 %} 
+                Damage per second: <span class="red-text text-lighten-2">{{ offer.damage }}</span>
+                <hr>
+            {% endif %} 
+            {% if offer.suffix is not none %} 
+                {{ offer.suffix }} <hr>
+            {% endif %} 
+            {% for key, value in offer.affixes.items() %} 
+                {{ key.replace("-", " ").capitalize() }}: 
+               <span class="red-text text-lighten-2">{{ value }}</span>
+                </br> 
+            {% endfor %} 
+            <hr>
+            Posted by: <span class="red-text text-lighten-2">{{ offer.created_by }}</span>
+            <br>
+            {% set time_d = (current_datetime - offer.date).days %}
+            {% set time_m = ((current_datetime - offer.date).seconds / 60) | round(0, 'floor') | int %}
+            {% set time_h = ((current_datetime - offer.date).seconds / 3600) | round(0, 'floor') | int %}
+            {% if time_d == 1 %}    
+                Posted {{ time_d }} day ago </br>
+            {% elif time_d > 0 %}
+                Posted {{ time_d }} days ago </br>
+            {% elif time_m == 1 %}
+                Posted {{ time_m }} minute ago </br>
+            {% elif time_m < 59 %} 
+                Posted {{ time_m }} minutes ago </br>
+            {% elif time_h == 1  %}    
+                Posted {{ time_h }} hour ago </br>
+            {% elif time_h < 59 %} 
+                Posted {{ time_h }} hours ago </br>
+            {% endif %}
         </p>
       </div>
       <div class="card-action">
@@ -40,5 +59,4 @@
   </div>
   {% endfor %}
 </div>
-
 {% endblock %}

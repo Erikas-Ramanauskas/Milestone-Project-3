@@ -46,7 +46,9 @@ item_types = ["Helm", "Chest Armor", "Gloves", "Pants", "Boots", "Amulet",
 @app.route("/offers")
 def offers():
     offers = list(mongo.db.offers.find())
-    return render_template("offers.html", offers=offers)
+    current_datetime = datetime.datetime.now()
+    return render_template("offers.html", offers=offers,
+                           current_datetime=current_datetime)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -186,7 +188,8 @@ def add_offer():
             "damage": int(request.form.get("damage", 0)),
             "is_hardcore": is_hardcore,
             "is_season": is_season,
-            "created_by": session["user"]
+            "created_by": session["user"],
+            "date": datetime.datetime.now()
         }
 
         # Create a list to store unknown key-value pairs
@@ -202,7 +205,7 @@ def add_offer():
             offer["affixes"] = affixes
 
         mongo.db.offers.insert_one(offer)
-        flash("Task Successfully Added")
+        flash("Offer Successfully Added")
         return redirect(url_for("offers"))
 
     user = mongo.db.users.find_one(
