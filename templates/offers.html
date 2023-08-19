@@ -11,22 +11,22 @@
     <div class="card light-blue darken-4 text-shadow center-align">
       <div class="card-content white-text">
         <span class="card-title"
-          >{{ offer.item_type }} ({{ offer.item_quality}})</span
+          >{{ offer.item_data }} ({{ offer.class_data }})</span
         >
         <p>
              {% if offer.armor > 0 %} 
-            {{ offer.armor }} 
-        </br> 
+           Armor: {{ offer.armor }} 
+        <hr>
         {% endif %} 
             {% if offer.damage > 0 %} 
-            {{ offer.damage }} 
-            </br>
+           Damage per second: {{ offer.damage }} 
+            <hr>
             {% endif %} 
-          {% if offer.suffix != "none" %} 
-          {{ offer.suffix }} 
+          {% if offer.suffix is not none %} 
+          {{ offer.suffix }} <hr>
           {% endif %} 
           {% for key, value in offer.affixes.items() %} 
-          {{ key.replace("_", " ").capitalize() }}: 
+          {{ key.replace("-", " ").capitalize() }}: 
           {{ value }}
         </br> 
           {% endfor %} 

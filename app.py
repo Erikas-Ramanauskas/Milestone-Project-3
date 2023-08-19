@@ -181,9 +181,9 @@ def add_offer():
         offer = {
             "class_data": request.form.get("class_data"),
             "item_data": request.form.get("item_data"),
-            "suffix-data": request.form.get("suffix_data"),
-            "armor": request.form.get("armor", 0),
-            "damage": request.form.get("damge", 0),
+            "suffix": request.form.get("suffix"),
+            "armor": int(request.form.get("armor", 0)),
+            "damage": int(request.form.get("damage", 0)),
             "is_hardcore": is_hardcore,
             "is_season": is_season,
             "created_by": session["user"]

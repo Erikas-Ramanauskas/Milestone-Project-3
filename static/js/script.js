@@ -205,10 +205,10 @@ function toggleActive(button) {
     }
 }
 
-// Updating static info: class / item / hardcore/ season
+// Updating static info: class / item 
 function staticFormHTML() {
-    const playerClass = document.getElementById('class_data');
-    const item = document.getElementById('item_data');
+    const playerClass = document.getElementById('class-data');
+    const item = document.getElementById('item-data');
 
     playerClass.value = chosenClass;
     item.value = chosenItem;
@@ -302,8 +302,8 @@ function addSuffixHTML() {
         const input = document.createElement("input");
         input.classList.add("col", "s12", "light-blue-text", "text-darken-4", "center-align");
         input.type = "text";
-        input.id = "suffix_data";
-        input.name = "suffix_data";
+        input.id = "suffix";
+        input.name = "suffix";
         input.value = suffix.dataset.suffix;
         input.readOnly = true;
 
