@@ -30,9 +30,11 @@
                 {{ offer.suffix }} <hr>
             {% endif %} 
             {% for key, value in offer.affixes.items() %} 
-                {{ key.replace("-", " ").capitalize() }}: 
-               <span class="red-text text-lighten-2">{{ value }}</span>
-                </br> 
+            <div class="affix-key">
+                <span> {{ key.replace("-", " ").capitalize() }}: </span>
+                <span class="red-text text-lighten-2">{{ value }}</span>
+                </br>
+            </div>
             {% endfor %} 
             <hr>
         </p>
@@ -63,25 +65,52 @@
   </div>
   <div class="col s12 m6">
     <div class="card grey darken-3 text-shadow center-align">
-        <div class="card-content white-text">
+        <div class="card-title white-text">
             Posted by: <span class="red-text text-lighten-2">{{ offer.created_by }}</span>
             <br>
             {% set time_d = (current_datetime - offer.date).days %}
             {% set time_m = ((current_datetime - offer.date).seconds / 60) | round(0, 'floor') | int %}
             {% set time_h = ((current_datetime - offer.date).seconds / 3600) | round(0, 'floor') | int %}
             {% if time_d == 1 %}
-            Posted {{ time_d }} day ago </br>
+            {{ time_d }} day ago </br>
             {% elif time_d > 0 %}
-            Posted {{ time_d }} days ago </br>
+            {{ time_d }} days ago </br>
             {% elif time_m == 1 %}
-            Posted {{ time_m }} minute ago </br>
-            {% elif time_m < 59 %} Posted {{ time_m }} minutes ago </br>
+            {{ time_m }} minute ago </br>
+            {% elif time_m < 59 %} 
+            {{ time_m }} minutes ago </br>
             {% elif time_h == 1 %}
-            Posted {{ time_h }} hour ago </br>
-            {% elif time_h < 59 %} Posted {{ time_h }} hours ago </br>
+            {{ time_h }} hour ago </br>
+            {% elif time_h < 59 %} 
+            {{ time_h }} hours ago </br>
             {% endif %}
             <hr>
         </div>
+        <hr>
+        <table>
+            <tbody>
+                {% for offer in offer.bids %}
+                    <tr class="offer-bid-window">
+                        <th>{{ offer.user }}</th>
+                        <th>{{ offer.offer_bid }}</th>
+                        <th>{% set time_d = (current_datetime - offer.date).days %}
+                        {% set time_m = ((current_datetime - offer.date).seconds / 60) | round(0, 'floor') | int %}
+                        {% set time_h = ((current_datetime - offer.date).seconds / 3600) | round(0, 'floor') | int %}
+                        {% if time_d == 1 %}
+                        {{ time_d }} day ago </br>
+                        {% elif time_d > 0 %}
+                        {{ time_d }} days ago </br>
+                        {% elif time_m == 1 %}
+                        {{ time_m }} minute ago </br>
+                        {% elif time_m < 59 %} {{ time_m }} minutes ago </br>
+                            {% elif time_h == 1 %}
+                            {{ time_h }} hour ago </br>
+                            {% elif time_h < 59 %} {{ time_h }} hours ago </br>
+                                {% endif %}</th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
   </div>
 </div>

@@ -41,3 +41,34 @@ output {
     font-size: 1.5rem;
     width: 1.7rem;
 }
+
+/* Loader  */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #424242;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+}
+
+.loader img {
+    width: 256px;
+    height: 34px;
+}
+
+.loader-hidden {
+    animation: fade-out 0.5s forwards;
+}
+
+@keyframes fade-out {
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        z-index: -2;
+    }
+}

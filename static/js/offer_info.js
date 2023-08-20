@@ -1,10 +1,9 @@
+
+// THe fallowing sorts out bidding and price set up 
 const inputField = document.getElementById('offer-bid');
 const submitButton = document.getElementById('bid-submit-btn');
 const originalValue = parseInt(inputField.value.replace(/,/g, ""));
 let currentValue = originalValue;
-
-console.log(originalValue);
-console.log(currentValue);
 
 function changeValue(value, change) {
     if (change) {
@@ -28,3 +27,4 @@ function changeValue(value, change) {
 
     inputField.value = currentValue.toLocaleString();
 }
+

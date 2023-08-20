@@ -33,9 +33,11 @@
                 {{ offer.suffix }} <hr>
             {% endif %} 
             {% for key, value in offer.affixes.items() %} 
-                {{ key.replace("-", " ").capitalize() }}: 
+            <div class="affix-key">
+               <span> {{ key.replace("-", " ").capitalize() }}: </span>
                <span class="red-text text-lighten-2">{{ value }}</span>
                 </br> 
+            </div>
             {% endfor %} 
             <hr>
             Posted by: <span class="red-text text-lighten-2">{{ offer.created_by }}</span>

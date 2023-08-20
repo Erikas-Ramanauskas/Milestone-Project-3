@@ -231,7 +231,7 @@ def offer_info(offer_id):
 
         # use replace_one instead of update_one
         mongo.db.offers.replace_one({"_id": ObjectId(offer_id)}, offer)
-        flash("Task Successfully Updated")
+        flash("Bid added")
 
     current_datetime = datetime.datetime.now()
     return render_template("offer_info.html", offer=offer,

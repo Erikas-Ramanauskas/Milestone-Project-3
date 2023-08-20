@@ -1,0 +1,1112 @@
+{
+    "affixes": [
+        {
+            "affix": "all stats",
+            "percentage": "false"
+        },
+        {
+            "affix": "attack speed",
+            "percentage": "true"
+        },
+        {
+            "affix": "attack speed for 4 seconds after dodging an attack",
+            "percentage": "true"
+        },
+        {
+            "affix": "barrier generation",
+            "percentage": "true"
+        },
+        {
+            "affix": "basic skill attack speed",
+            "percentage": "true"
+        },
+        {
+            "affix": "basic skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "berserking duration",
+            "percentage": "true"
+        },
+        {
+            "affix": "blood orb healing",
+            "percentage": "true"
+        },
+        {
+            "affix": "blood skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "bone skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "brawling skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "chance to execute injured non-elites",
+            "percentage": "true"
+        },
+        {
+            "affix": "chance to slow",
+            "percentage": "true"
+        },
+        {
+            "affix": "chance to slow 3.1 - 7.3% damage reduction",
+            "percentage": "true"
+        },
+        {
+            "affix": "cold damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "cold resistance",
+            "percentage": "true"
+        },
+        {
+            "affix": "companion skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "conjuration skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "control impaired duration reduction",
+            "percentage": "true"
+        },
+        {
+            "affix": "cooldown reduction",
+            "percentage": "true"
+        },
+        {
+            "affix": "core skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "crackling energy damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "critical strike chance",
+            "percentage": "true"
+        },
+        {
+            "affix": "critical strike chance against injured enemies",
+            "percentage": "true"
+        },
+        {
+            "affix": "critical strike damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "critical strike damage with bone skills",
+            "percentage": "true"
+        },
+        {
+            "affix": "critical strike damage with earth skills",
+            "percentage": "true"
+        },
+        {
+            "affix": "critical strike damage with imbued skills",
+            "percentage": "true"
+        },
+        {
+            "affix": "critical strike damage with werewolf skills",
+            "percentage": "true"
+        },
+        {
+            "affix": "crowd control duration",
+            "percentage": "true"
+        },
+        {
+            "affix": "crowd control duration lucky hit: up to a 5% chance to heal [523 - 941] life",
+            "percentage": "true"
+        },
+        {
+            "affix": "cutthroat skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage for 4 seconds after killing an elite",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage for 4 seconds after picking up a blood orb",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage over time",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage reduction",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage reduction from affected by shadow damage over time enemies",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage reduction from close enemies",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage reduction from distant enemies",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage reduction from enemies that are bleeding",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage reduction from enemies that are burning",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage reduction from enemies that are poisoned",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage reduction while fortified",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage reduction while injured",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage to affected by shadow damage over time enemies",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage to bleeding enemies",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage to burning enemies",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage to chilled enemies",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage to close enemies",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage to crowd controlled enemies",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage to dazed enemies",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage to distant enemies",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage to enemies affected by trap skills",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage to frozen enemies",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage to injured enemies",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage to poisoned enemies",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage to slowed enemies",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage to stunned enemies",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage whiile in human form",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage while berserking",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage while shapeshifted",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage with dual-wielded weapons",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage with ranged weapons",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage with skills that swap to new weapons",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage with two-handed bludgeoning weapons",
+            "percentage": "true"
+        },
+        {
+            "affix": "damage with two-handed slashing weapons",
+            "percentage": "true"
+        },
+        {
+            "affix": "darkness skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "dexterity",
+            "percentage": "false"
+        },
+        {
+            "affix": "dodge chance",
+            "percentage": "true"
+        },
+        {
+            "affix": "dodge chance against close enemies",
+            "percentage": "true"
+        },
+        {
+            "affix": "dodge chance against distant enemies",
+            "percentage": "true"
+        },
+        {
+            "affix": "earth skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "energy cost reduction",
+            "percentage": "true"
+        },
+        {
+            "affix": "essence cost reduction",
+            "percentage": "true"
+        },
+        {
+            "affix": "fire damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "fire damage over time",
+            "percentage": "true"
+        },
+        {
+            "affix": "fire resistance",
+            "percentage": "true"
+        },
+        {
+            "affix": "fortify generation",
+            "percentage": "true"
+        },
+        {
+            "affix": "frost skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "fury cost reduction",
+            "percentage": "true"
+        },
+        {
+            "affix": "healing received",
+            "percentage": "true"
+        },
+        {
+            "affix": "imbued skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "imbuement skill cooldown reduction",
+            "percentage": "true"
+        },
+        {
+            "affix": "intelligence",
+            "percentage": "false"
+        },
+        {
+            "affix": "life on kill",
+            "percentage": "false"
+        },
+        {
+            "affix": "life regeneration while not damaged recently",
+            "percentage": "false"
+        },
+        {
+            "affix": "lightning critical strike damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "lightning damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "lightning resistance",
+            "percentage": "true"
+        },
+        {
+            "affix": "lucky hit chance",
+            "percentage": "true"
+        },
+        {
+            "affix": "lucky hit chance while you have a barrier",
+            "percentage": "true"
+        },
+        {
+            "affix": "mana cost reduction",
+            "percentage": "true"
+        },
+        {
+            "affix": "marksman skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "maximum energy",
+            "percentage": "false"
+        },
+        {
+            "affix": "maximum essence",
+            "percentage": "false"
+        },
+        {
+            "affix": "maximum fury",
+            "percentage": "false"
+        },
+        {
+            "affix": "maximum life",
+            "percentage": "false"
+        },
+        {
+            "affix": "maximum mana",
+            "percentage": "false"
+        },
+        {
+            "affix": "maximum minion life",
+            "percentage": "true"
+        },
+        {
+            "affix": "maximum spirit",
+            "percentage": "false"
+        },
+        {
+            "affix": "minion attack speed",
+            "percentage": "true"
+        },
+        {
+            "affix": "movement speed",
+            "percentage": "true"
+        },
+        {
+            "affix": "movement speed for 4 seconds after killing an elite",
+            "percentage": "true"
+        },
+        {
+            "affix": "of your thorns",
+            "percentage": "true"
+        },
+        {
+            "affix": "overpower damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "overpower damage with two-handed bludgeoning weapons",
+            "percentage": "true"
+        },
+        {
+            "affix": "overpower damage with werebear skills",
+            "percentage": "true"
+        },
+        {
+            "affix": "physical damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "physical damage over time",
+            "percentage": "true"
+        },
+        {
+            "affix": "poison damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "poison resistance",
+            "percentage": "true"
+        },
+        {
+            "affix": "potion capacity",
+            "percentage": "false"
+        },
+        {
+            "affix": "potion drop rate",
+            "percentage": "true"
+        },
+        {
+            "affix": "primary resource",
+            "percentage": "true"
+        },
+        {
+            "affix": "pyromancy skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "rank of all agility skills",
+            "percentage": "false"
+        },
+        {
+            "affix": "rank of all imbuement skills",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of all brawling skills",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of all companion skills",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of all conjuration skills",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of all corpse skills",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of all curse skills",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of all defensive skills",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of all macabre skills",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of all mastery skills",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of all subterfuge skills",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of all weapon mastery skills",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of all wrath skills",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of ball lightning",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of barrage",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of blight",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of blizzard",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of blood howl",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of blood lance",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of blood mist",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of blood surge",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of bone prison",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of bone spear",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of bone spirit",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of boulder",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of caltrops",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of chain lightning",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of challenging shout",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of charge",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of charged bolts",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of cold imbuement",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of concealment",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of corpse explosion",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of corpse tendrils",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of cyclone armor",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of dark shroud",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of dash",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of death blow",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of debilitating roar",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of decrepify",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of double swing",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of earthen bulwark",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of fireball",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of firewall",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of flame shield",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of flurry",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of frost nova",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of frozen orb",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of ground stomp",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of hammer of the ancients",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of hurricane",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of hydra",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of ice armor",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of ice blades",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of ice shards",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of incinerate",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of iron maiden",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of iron skin",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of kick",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of landslide",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of leap",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of lightning spear",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of lightning storm",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of meteor",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of penetrating shot",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of poison creeper",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of poison imbuement",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of poison trap",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of pulverize",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of rabies",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of rallying cry",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of rapid fire",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of ravens",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of rend",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of rupture",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of sever",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of shadow imbuement",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of shadow step",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of shred",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of smoke grenade",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of steel grasp",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of teleport",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the amplify damage passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the brute force passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the call of the wild passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the coalesced blood passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the compound fracture passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the conjuration mastery passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the counteroffensive passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the crushing earth passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the cut to the bone passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the deadly venom passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the death's reach passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the defiance passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the devouring blaze passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the elemental dominance passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the endless pyre passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the envenom passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the evulsion passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the exploit passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the frigid finesse passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the fueled by death passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the glass cannon passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the gloom passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the heavy handed passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the hellbent commander passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the hoarfrost passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the icy touch passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the imperfectly balanced passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the impetus passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the inner flames passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the malice passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the natural disaster passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the nature's reach passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the no mercy passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the outburst passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the permafrost passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the quickshift passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the resonance passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the shocking impact passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the slaying strike passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the stone guard passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the terror passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the tides of blood passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the tough as nails passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the toxic claws passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the wallop passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the weapon mastery passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of the wild impulses passive",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of tornado",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of trample",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of twisting blades",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of upheaval",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of war cry",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of whirlwind",
+            "percentage": "false"
+        },
+        {
+            "affix": "ranks of wolves",
+            "percentage": "false"
+        },
+        {
+            "affix": "resistance to all elements",
+            "percentage": "true"
+        },
+        {
+            "affix": "resource generation",
+            "percentage": "true"
+        },
+        {
+            "affix": "shadow damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "shadow damage over time",
+            "percentage": "true"
+        },
+        {
+            "affix": "shadow resistance",
+            "percentage": "true"
+        },
+        {
+            "affix": "shock skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "shrine buff duration",
+            "percentage": "true"
+        },
+        {
+            "affix": "slow duration reduction",
+            "percentage": "true"
+        },
+        {
+            "affix": "spirit cost reduction",
+            "percentage": "true"
+        },
+        {
+            "affix": "storm skill cooldown reduction",
+            "percentage": "true"
+        },
+        {
+            "affix": "storm skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "strength",
+            "percentage": "false"
+        },
+        {
+            "affix": "summoning skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "thorns",
+            "percentage": "false"
+        },
+        {
+            "affix": "total armor",
+            "percentage": "true"
+        },
+        {
+            "affix": "total armor while in werebear form",
+            "percentage": "true"
+        },
+        {
+            "affix": "total armor while in werewolf form",
+            "percentage": "true"
+        },
+        {
+            "affix": "trap skill cooldown reduction",
+            "percentage": "true"
+        },
+        {
+            "affix": "trap skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "ultimate skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "vulnerable damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "weapon mastery skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "werebear skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "werewolf skill damage",
+            "percentage": "true"
+        },
+        {
+            "affix": "willpower",
+            "percentage": "false"
+        }
+    ]
+}
