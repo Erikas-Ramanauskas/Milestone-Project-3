@@ -222,7 +222,7 @@ def offer_info(offer_id):
     offer = mongo.db.offers.find_one({"_id": ObjectId(offer_id)})
     if request.method == "POST":
         new_offer = {
-            "offer_bid": int(request.form.get("offer_bid").replace(",", "")),
+            "offer_bid": request.form.get("offer_bid"),
             "user": session["user"],
             "date": datetime.datetime.now()
         }

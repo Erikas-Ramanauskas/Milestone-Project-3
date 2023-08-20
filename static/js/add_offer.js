@@ -239,8 +239,8 @@ function armorAndDamage(newItemData) {
             "fa-solid",
             details.type,
             "prefix",
-            "light-blue-text",
-            "text-darken-4",
+            "teal-text",
+            "text-accent-3",
             "col", "s9"
         );
 
@@ -257,7 +257,7 @@ function armorAndDamage(newItemData) {
 
         const output = document.createElement("output");
         output.setAttribute("for", details.id);
-        output.classList.add("light-blue-text", "text-darken-4", "col", "s3");
+        output.classList.add("teal-text", "text-accent-3", "col", "s3");
         output.value = details.max / 2;
 
         input.addEventListener("input", (e) => {
@@ -290,7 +290,7 @@ function addSuffixHTML() {
         midDIV.classList.add("col", "s12");
 
         const input = document.createElement("input");
-        input.classList.add("col", "s12", "light-blue-text", "text-darken-4", "center-align");
+        input.classList.add("col", "s12", "teal-text", "text-accent-3", "center-align");
         input.type = "text";
         input.id = "suffix";
         input.name = "suffix";
@@ -326,7 +326,7 @@ function addAffixHTML(button) {
     midDIV.classList.add("col", "s12", "space-between");
 
     const affixValue = document.createElement("p");
-    affixValue.classList.add("col", "s9", "light-blue-text", "text-darken-4");
+    affixValue.classList.add("col", "s9", "teal-text", "text-accent-3");
     affixValue.innerText = data.affix;
 
     const input = document.createElement("input");
@@ -344,8 +344,8 @@ function addAffixHTML(button) {
     output.classList.add(
         "col",
         "s3",
-        "light-blue-text",
-        "text-darken-4",
+        "teal-text",
+        "text-accent-3",
         "right-align"
     );
     output.value = data.average + `${data.percentage ? "%" : ""}`;

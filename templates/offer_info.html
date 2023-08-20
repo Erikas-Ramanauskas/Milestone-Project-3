@@ -46,7 +46,7 @@
                 {% if offer.bids|length == 0 %}
                 <input id="offer-bid" name="offer_bid" value="{{ offer.offer_price }}" type="text" readOnly="true" class="teal-text text-accent-3" />
                 {% else %}
-                {% set offer2= offer.bids[0].offer_bid|int|n %}
+                {% set offer2= offer.bids[0].offer_bid %}
                 <input id="offer-bid" name="offer_bid" value="{{ offer2 }}" type="text" readOnly="true"
                     class="teal-text text-accent-3" />
                 {% endif %}

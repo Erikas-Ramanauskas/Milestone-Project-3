@@ -21,6 +21,10 @@ function changeValue(value, change) {
     if (currentValue < originalValue) {
         currentValue = originalValue;
     }
-    submitButton.disabled = currentValue <= originalValue;
+
+    if (submitButton) {
+        submitButton.disabled = currentValue <= originalValue;
+    }
+
     inputField.value = currentValue.toLocaleString();
 }
