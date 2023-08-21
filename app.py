@@ -211,27 +211,35 @@ def add_offer():
         flash("Offer Successfully Added")
         return redirect(url_for("offers"))
 
-    user = mongo.db.users.find_one(
-        {"username": session["user"]})
-    return render_template("add_offer.html", user=user, p_class=p_class,
-                           item_types=item_types)
+    if "user" in session:
+        user = mongo.db.users.find_one(
+            {"username": session["user"]})
+        return render_template("add_offer.html", user=user, p_class=p_class,
+                               item_types=item_types)
+    else:
+        flash("You must be logged in to create offer.")
+        return render_template("login.html")
 
 
 @app.route("/offer_info/<offer_id>", methods=["GET", "POST"])
 def offer_info(offer_id):
     offer = mongo.db.offers.find_one({"_id": ObjectId(offer_id)})
     if request.method == "POST":
-        new_offer = {
-            "offer_bid": request.form.get("offer_bid"),
-            "user": session["user"],
-            "date": datetime.datetime.now()
-        }
+        if "user" in session:
+            new_offer = {
+                "offer_bid": request.form.get("offer_bid"),
+                "user": session["user"],
+                "date": datetime.datetime.now()
+            }
 
-        offer["bids"].insert(0, new_offer)
+            offer["bids"].insert(0, new_offer)
 
-        # use replace_one instead of update_one
-        mongo.db.offers.replace_one({"_id": ObjectId(offer_id)}, offer)
-        flash("Bid added")
+            # use replace_one instead of update_one
+            mongo.db.offers.replace_one({"_id": ObjectId(offer_id)}, offer)
+            flash("Bid added")
+        else:
+            flash("You must be logged in to place a bid.")
+            return render_template("login.html")
 
     current_datetime = datetime.datetime.now()
     return render_template("offer_info.html", offer=offer,
