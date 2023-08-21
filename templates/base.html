@@ -68,9 +68,8 @@
           <ul class="right hide-on-med-and-down">
             <li><a href="{{ url_for('offers') }}">Offers</a></li>
             <li><a href="#">Requests</a></li>
-            {% if session.user %}
             <li><a href="{{ url_for('add_offer') }}">Create Offer</a></li>
-            {% endif %}
+
             <!-- dropdown triger for user meniu -->
             <li>
               <a class="dropdown-trigger" href="#!" data-target="dropdown1"
@@ -88,8 +87,8 @@
         </li>
         <li><a href="{{ url_for('offers') }}">Offers</a></li>
         <li><a href="#">Requests</a></li>
-        {% if session.user %}
         <li><a href="{{ url_for('add_offer') }}">Create Offer</a></li>
+        {% if session.user %}
         <li>
           <a href="{{ url_for('profile', username=session['user']) }}"
             >Profile</a
