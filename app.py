@@ -83,7 +83,7 @@ def register():
             "discord_id": "",
             "class_preference": "None",
             "is_hardcore": "off",
-            "is_ladder": "off"
+            "is_season": "off"
         }
 
         mongo.db.users.insert_one(register)
@@ -129,12 +129,21 @@ def login():
 def profile(username):
     # grab the session user's username from db
     user = mongo.db.users.find_one(
-        {"username": session["user"]})
+        {"username": username})
 
-    if session["user"]:
+    if session["user"] == username:
         return render_template("profile.html", user=user)
-
-    return redirect(url_for("login"))
+    elif session["user"] and username != session["user"]:
+        # preventing sensible data passed to front end.
+        user2 = {
+            "username": user["username"],
+            "class_preference": user["class_preference"],
+            "is_hardcore": user["is_hardcore"],
+            "is_season": user["is_season"]
+        }
+        return render_template("profile.html", user=user2)
+    else:
+        return redirect(url_for("login"))
 
 
 @app.route("/edit_profile/<username>", methods=["GET", "POST"])

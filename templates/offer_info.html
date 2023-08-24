@@ -66,7 +66,9 @@
   <div class="col s12 m6">
     <div class="card grey darken-3 text-shadow center-align">
         <div class="card-title white-text">
-            Posted by: <span class="red-text text-lighten-2">{{ offer.created_by }}</span>
+            Posted by: <span class="red-text text-lighten-2">
+                <a href="{{ url_for('profile', username=offer.created_by) }}">{{ offer.created_by }}</a>
+                </span>
             <br>
             {% set time_d = (current_datetime - offer.date).days %}
             {% set time_m = ((current_datetime - offer.date).seconds / 60) | round(0, 'floor') | int %}
@@ -91,7 +93,9 @@
             <tbody>
                 {% for offer in offer.bids %}
                     <tr class="offer-bid-window">
-                        <th>{{ offer.user }}</th>
+                        <th>
+                            <a href="{{ url_for('profile', username=offer.user) }}">{{ offer.user }}</a>
+                        </th>
                         <th>{{ offer.offer_bid }}</th>
                         <th>{% set time_d = (current_datetime - offer.date).days %}
                         {% set time_m = ((current_datetime - offer.date).seconds / 60) | round(0, 'floor') | int %}
