@@ -4,34 +4,14 @@
   <div class="col s12 m8 offset-m2">
     <div class="card-panel">
       <h3 class="center-align light-blue-text text-darken-4">
-        {{ user.username }}'s Profile
+        Chat with {{ reciever }}
       </h3>
-      <!-- keeping contact details private -->
-      {% if session.user == user.username %}
-      <i class="fa-brands fa-battle-net prefix teal-text text-accent-3"></i>
-      <p>Battle net ID: {{ user.b_net_id }}</p>
-      <i class="fa-brands fa-discord prefix teal-text text-accent-3"></i>
-      <p>Discord: {{ user.discord_id }}</p>
-      {% endif %}
-      <i class="fa-solid fa-people-group prefix teal-text text-accent-3"></i>
-      <p>Class {{ user.class_preference }}</p>
-      <i class="fa-solid fa-skull prefix teal-text text-accent-3"></i>
-      <p>Hardcore: {{ user.is_hardcore }}</p>
-      <i class="fa-brands fa-envira prefix teal-text text-accent-3"></i>
-      <p>Season: {{ user.is_season }}</p>
     </div>
-    {% if session.user == user.username %}
-    <a
-      href="{{ url_for('edit_profile', username=session['user']) }}"
-      class="btn-small light-blue lighten-1"
-      >Edit <i class="fa-regular fa-pen-to-square"></i
-    ></a>
-    {% elif session.user %}
-    <!-- url_for('message', username=session['user'], reciever=user.username) -->
-    <a href="#" class="btn-small light-blue lighten-1"
-      >message <i class="fa-regular fa-message"></i
-    ></a>
-    {% endif %}
+    <div class="card-content white-text chat-window">
+      {% for message in message_data.messages %}
+      <div class="message">Hello there!</div>
+      {% endfor %}
+    </div>
   </div>
 </div>
 

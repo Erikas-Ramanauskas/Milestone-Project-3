@@ -27,8 +27,9 @@
       >Edit <i class="fa-regular fa-pen-to-square"></i
     ></a>
     {% elif session.user %}
-    <!-- url_for('message', username=session['user'], reciever=user.username) -->
-    <a href="#" class="btn-small light-blue lighten-1"
+    <a
+      href="{{url_for('message', reciever=user.username)}}"
+      class="btn-small light-blue lighten-1"
       >message <i class="fa-regular fa-message"></i
     ></a>
     {% endif %}

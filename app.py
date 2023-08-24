@@ -255,6 +255,62 @@ def offer_info(offer_id):
                            current_datetime=current_datetime)
 
 
+@app.route("/message/<reciever>", methods=["GET", "POST"])
+def message(reciever):
+    # grab the session user's user from db
+    user1 = mongo.db.users.find_one(
+        {"username": session["user"]})
+
+    user2 = mongo.db.users.find_one(
+        {"username": reciever})
+
+    message_id = generate_combined_id(session["user"], reciever)
+
+    message_data = mongo.db.messages.find_one(
+        {"combined_id": message_id})
+
+    # if message is being sent
+    if request.method == "POST":
+
+        new_message_data = {
+            "user": user1,
+            "message": request.form.get("message"),
+            "discord": request.form.get("discord"),
+            "battle_net": request.form.get("battle-net"),
+            "date": datetime.datetime.now()
+        },
+
+        if message_data:
+            new_message_array = message_data["messages"].insert(
+                0, new_message_data)
+
+            updated_conversation = {
+                "combined_id": message_data["combined_id"],
+                "messages": new_message_array
+            }
+            mongo.db.messages.replace_one(
+                {"_id": ObjectId(message_data["_id"])}, updated_conversation)
+        else:
+            new_conversation = {
+                "combined_id": message_id,
+                "messages": []
+            }
+            new_conversation["messages"].append(new_message_data)
+
+            mongo.db.messages.insert_one(new_conversation)
+
+        return render_template("message.html", reciever=reciever,
+                               message_data=message_data)
+
+    return render_template("message.html", reciever=reciever,
+                           message_data=message_data)
+
+
+def generate_combined_id(user1, user2):
+    message_id = f"{max(user1, user2)}_{min(user1, user2)}"
+    return message_id
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
