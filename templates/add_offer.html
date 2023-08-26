@@ -32,8 +32,8 @@
 <div class="row center-align grey darken-3">
   <div class="input-field col m6 s12">
     <div class="switch">
-      <i class="fa-solid fa-skull prefix teal-text text-accent-3"></i>
-      <label for="is_hardcore" class="teal-text text-accent-3">
+      <i class="fa-solid fa-skull prefix teal-color-text"></i>
+      <label for="is_hardcore" class="teal-color-text">
         {% if user.is_hardcore == "on" %}
         <input type="checkbox" form="mainForm" id="is_hardcore" name="is_hardcore" checked />
         {% else %}
@@ -49,8 +49,8 @@
 
   <div class="input-field col m6 s12">
     <div class="switch">
-      <i class="fa-brands fa-envira prefix teal-text text-accent-3"></i>
-      <label for="is_season" class="teal-text text-accent-3">
+      <i class="fa-brands fa-envira prefix teal-color-text"></i>
+      <label for="is_season" class="teal-color-text">
         {% if user.is_season == "on" %}
         <input type="checkbox" form="mainForm" id="is_season" name="is_season" checked />
         {% else %}
@@ -106,12 +106,12 @@
 
         <!-- Offer price -->
         <div class="col s12 center-align" id="offer-price">
-            <i class="fa-solid fa-backward-fast teal-text text-accent-3 bid-button" onclick="changeValue(1000000, false)"></i>
-            <i class="fa-solid fa-backward-step teal-text text-accent-3 bid-button" onclick="changeValue(100000, false)"></i>
+            <i class="fa-solid fa-backward-fast teal-color-text bid-button" onclick="changeValue(1000000, false)"></i>
+            <i class="fa-solid fa-backward-step teal-color-text bid-button" onclick="changeValue(100000, false)"></i>
             <input id="offer-bid" form="mainForm" name="offer_price" value="100,000" type="text" readOnly="true"
-                class="teal-text text-accent-3" />
-            <i class="fa-solid fa-forward-step teal-text text-accent-3 bid-button" onclick="changeValue(100000, true)"></i>
-            <i class="fa-solid fa-forward-fast teal-text text-accent-3 bid-button" onclick="changeValue(1000000, true)"></i>
+                class="teal-color-text" />
+            <i class="fa-solid fa-forward-step teal-color-text bid-button" onclick="changeValue(100000, true)"></i>
+            <i class="fa-solid fa-forward-fast teal-color-text bid-button" onclick="changeValue(1000000, true)"></i>
         </div>
 
         <!-- submit button -->

@@ -12,7 +12,7 @@
     <!-- battle net id -->
     <div class="row">
       <div class="input-field col s12">
-        <i class="fa-brands fa-battle-net prefix teal-text text-accent-3"></i>
+        <i class="fa-brands fa-battle-net prefix teal-color-text"></i>
         <!-- battle net ID is always 5-12 letter characters fallowed by # and 4-5 number code -->
         <input
           id="b_net_id"
@@ -24,7 +24,7 @@
           type="text"
           class="validate"
         />
-        <label for="b_net_id" class="teal-text text-accent-3"
+        <label for="b_net_id" class="teal-color-text"
           >BattleNet Id</label
         >
       </div>
@@ -32,7 +32,7 @@
     <!-- Discord id check -->
     <div class="row">
       <div class="input-field col s12">
-        <i class="fa-brands fa-discord prefix teal-text text-accent-3"></i>
+        <i class="fa-brands fa-discord prefix teal-color-text"></i>
         <!-- battle net ID is always 5-12 letter characters fallowed by # and 4-5 number code -->
         <input
           id="discord_id"
@@ -44,7 +44,7 @@
           type="text"
           class="validate"
         />
-        <label for="discord_id" class="teal-text text-accent-3"
+        <label for="discord_id" class="teal-color-text"
           >Discord Id</label
         >
       </div>
@@ -63,7 +63,7 @@
             value="{{ class }}"
             checked
           />
-          <span class="teal-text text-accent-3">{{ class }}</span>
+          <span class="teal-color-text">{{ class }}</span>
         </label>
         {% else %}
         <label class="waves-effect waves-light btn grey darken-3">
@@ -83,8 +83,8 @@
     <div class="row center-align">
       <div class="input-field col m6 s12">
         <div class="switch">
-          <i class="fa-solid fa-skull prefix teal-text text-accent-3"></i>
-          <label for="is_hardcore" class="teal-text text-accent-3">
+          <i class="fa-solid fa-skull prefix teal-color-text"></i>
+          <label for="is_hardcore" class="teal-color-text">
             {% if user.is_hardcore == "on" %}
             <input
               type="checkbox"
@@ -105,8 +105,8 @@
 
       <div class="input-field col m6 s12">
         <div class="switch">
-          <i class="fa-brands fa-envira prefix teal-text text-accent-3"></i>
-          <label for="is_season" class="teal-text text-accent-3">
+          <i class="fa-brands fa-envira prefix teal-color-text"></i>
+          <label for="is_season" class="teal-color-text">
             {% if user.is_season == "on" %}
             <input type="checkbox" id="is_season" name="is_season" checked />
             {% else %}

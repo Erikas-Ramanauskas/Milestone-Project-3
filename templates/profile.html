@@ -8,28 +8,28 @@
       </h3>
       <!-- keeping contact details private -->
       {% if session.user == user.username %}
-      <i class="fa-brands fa-battle-net prefix teal-text text-accent-3"></i>
+      <i class="fa-brands fa-battle-net prefix teal-color-text"></i>
       <p>Battle net ID: {{ user.b_net_id }}</p>
-      <i class="fa-brands fa-discord prefix teal-text text-accent-3"></i>
+      <i class="fa-brands fa-discord prefix teal-color-text"></i>
       <p>Discord: {{ user.discord_id }}</p>
       {% endif %}
-      <i class="fa-solid fa-people-group prefix teal-text text-accent-3"></i>
+      <i class="fa-solid fa-people-group prefix teal-color-text"></i>
       <p>Class {{ user.class_preference }}</p>
-      <i class="fa-solid fa-skull prefix teal-text text-accent-3"></i>
+      <i class="fa-solid fa-skull prefix teal-color-text"></i>
       <p>Hardcore: {{ user.is_hardcore }}</p>
-      <i class="fa-brands fa-envira prefix teal-text text-accent-3"></i>
+      <i class="fa-brands fa-envira prefix teal-color-text"></i>
       <p>Season: {{ user.is_season }}</p>
     </div>
     {% if session.user == user.username %}
     <a
       href="{{ url_for('edit_profile', username=session['user']) }}"
-      class="btn-small light-blue lighten-1"
+      class="btn-small gold-color"
       >Edit <i class="fa-regular fa-pen-to-square"></i
     ></a>
     {% elif session.user %}
     <a
       href="{{url_for('message', reciever=user.username)}}"
-      class="btn-small light-blue lighten-1"
+      class="btn-small gold-color"
       >message <i class="fa-regular fa-message"></i
     ></a>
     {% endif %}

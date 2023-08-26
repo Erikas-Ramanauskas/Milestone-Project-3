@@ -1,14 +1,30 @@
 {% extends "base.html" %} {% block content %}
 
-<div class="row">
-  <div class="col s12">
-    <div class="card-panel">
-      <h3 class="center-align light-blue-text text-darken-4">
-        Chat with {{ reciever }}
-      </h3>
+<div class="row grey darken-3">
+  <div class="col s12 grey darken-3">
+    <div class="card-panel grey darken-3">
+      <h3 class="center-align grey darken-3">Chat with {{ reciever }}</h3>
     </div>
 
-    <div class="card-content grey darken-3" id="chat-window">
+    <div class="card-content" id="chat-window">
+      {% if message_data.messages | length == 0 %}
+      <div class="center-align">
+        <p>
+          Start your chat with
+          <span>
+            <a
+              href="{{ url_for('profile', username=reciever) }}"
+              class="purple-color-text"
+              >{{ reciever }}</a
+            ></span
+          >
+          by sending them a first message
+        </p>
+      </div>
+
+      {% endif %}
+
+      <!-- Generated messages -->
       {% for message in message_data.messages %}
 
       <!-- bellow recongises and calculates the time to turn it in to user friendly format -->
@@ -24,9 +40,9 @@
       = (time_h| string + " hours ago") %} {% endif %}
       <!-- Messages acording to user -->
       {% if message.user == session.user %}
-      <div class="user-message grey darken-3 text-shadow">
+      <div class="user-message text-shadow">
         <p
-          class="teal-text text-accent-3 tooltipped"
+          class="teal-color-text tooltipped"
           data-position="right"
           data-tooltip="{{ tooltip }}"
         >
@@ -34,9 +50,9 @@
         </p>
       </div>
       {% else %}
-      <div class="user-message grey darken-3 text-shadow">
+      <div class="received-message text-shadow">
         <p
-          class="teal-text text-accent-3 tooltipped"
+          class="teal-color-text tooltipped"
           data-position="right"
           data-tooltip="{{ tooltip }}"
         >
@@ -51,29 +67,26 @@
       method="POST"
       action="{{ url_for('message', reciever=reciever) }}"
     >
-      <div class="card-panel">
+      <div class="grey darken-3" id="message-form">
         <!-- message send -->
-        <div class="row">
-          <div class="input-field col s11">
-            <input
-              id="message"
-              name="message"
-              type="text"
-              minlength="1"
-              class="validate"
-            />
-            <label for="message">Send message</label>
-          </div>
 
-          <!-- Send message -->
-
-          <button
-            type="submit"
-            class="col s1 btn-large light-blue darken-4 text-shadow"
-          >
-            <i class="fa-regular fa-paper-plane"></i>
-          </button>
+        <div class="input-field">
+          <textarea
+            id="message"
+            name="message"
+            class="materialize-textarea"
+            required
+          ></textarea>
+          <label for="message">Send message</label>
         </div>
+        <!-- Send message -->
+        <button
+          id="message-submit"
+          type="submit"
+          class="btn-small gold-color text-shadow"
+        >
+          <i class="fa-regular fa-paper-plane"></i>
+        </button>
       </div>
     </form>
   </div>

@@ -1,3 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box !important;
+    font-family: "Short Stack", cursive;
+}
+
+:root {
+    --teal-color: #1DE9B6;
+    /* This color is not used across the website but it is main colour for a background picture and left over for testing purposes and future additions if needed.*/
+    --orange-color: #E8AF05;
+    --green-color: #039C75;
+    --purple-color: #D733E8;
+    --gold-color: #9C770B;
+}
+
+/* the fallowing is colour classes */
+.teal-color {
+    background-color: var(--teal-color);
+}
+
+.teal-color-text {
+    color: var(--teal-color);
+}
+
+.orange-color {
+    background-color: var(--orange-color);
+}
+
+.orange-color-text {
+    color: var(--orange-color);
+}
+
+.green-color {
+    background-color: var(--green-color);
+}
+
+.green-color-text {
+    color: var(--green-color);
+}
+
+.purple-color {
+    background-color: var(--purple-color);
+}
+
+.purple-color-text {
+    color: var(--purple-color);
+}
+
+.gold-color {
+    background-color: var(--gold-color);
+}
+
+.gold-color-text {
+    color: var(--gold-color);
+}
+
+/* Collor classes end */
+
+
 body {
     overflow-x: hidden;
 }
@@ -12,7 +73,7 @@ body {
 
 .affix-button.rejected,
 #offer-bid.changed {
-    color: #f90372 !important;
+    color: var(--purple-color) !important;
 }
 
 
@@ -75,11 +136,11 @@ output {
 #chat-window {
     width: 100%;
     max-height: 60vh;
-    border: 1px solid rgb(9, 255, 0);
-    overflow-y: scroll;
+    overflow-y: auto;
+    padding: 6px;
     display: flex;
     flex-direction: column;
-    margin: 10px;
+
 }
 
 /* style for user messages */
@@ -87,9 +148,9 @@ output {
     align-self: flex-end;
     border-radius: 12px 12px 0px 12px;
     padding: 0px 12px;
-    margin-bottom: 6px;
     max-width: 90%;
     border: #00695c solid 2px;
+    text-align: end;
 }
 
 /* Style for received messages */
@@ -102,11 +163,13 @@ output {
 }
 
 .user-message p,
-.recieved-message p,
-{
-margin: 0;
+.recieved-message p {
+    margin: 2px;
 }
 
-.user-message p {
-    text-align: end;
+#message-form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 10px;
 }
