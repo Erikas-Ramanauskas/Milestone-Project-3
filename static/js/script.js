@@ -7,7 +7,12 @@ $(document).ready(function () {
     // form check
     $("input#input_text, textarea#textarea2").characterCounter();
     // Tooltip activation
-    $('.tooltipped').tooltip();
+    $('.tooltipped').tooltip(
+        {
+            enterDelay: 500,
+            exitDelay: 100
+        }
+    );
 });
 
 // Preloader fade out called together with json data load so the procentage change would not be vissable
@@ -18,12 +23,15 @@ const loader = document.querySelector(".loader");
 let affixPerc;
 
 // takes json data
+// also since it takes the most time also works as dom content fuction for the other actions
 fetch("/static/json/affix.json")
     .then((response) => response.json())
     .then((json) => {
         affixPerc = json;
+        // its important procentage symbosl to be added before loader disapears
         addPercentageSymbols();
         loader.classList.add("loader-hidden");
+        chatWindowFocus();
     });
 
 
@@ -52,4 +60,11 @@ function addPercentageSymbols() {
         }
     });
 
+}
+
+
+// Message chat window bottom focus
+function chatWindowFocus() {
+    const chatWindow = document.getElementById("chat-window");
+    chatWindow.scrollTop = chatWindow.scrollHeight;
 }

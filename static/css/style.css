@@ -24,15 +24,12 @@ output {
 #offer-bid {
     width: 40%;
     text-align: center;
+    font-size: 1.5rem;
 }
 
 #offer-bid-label {
     text-align: center;
     margin: 0;
-    font-size: 1.5rem;
-}
-
-#offer-bid {
     font-size: 1.5rem;
 }
 
@@ -73,18 +70,43 @@ output {
     }
 }
 
+/* Messsages chat design */
 
-.chat-window {
+#chat-window {
     width: 100%;
-    height: 60vh;
+    max-height: 60vh;
     border: 1px solid rgb(9, 255, 0);
     overflow-y: scroll;
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
 }
 
-.message {
-    background-color: #f0f0f0;
-    padding: 5px 10px;
-    margin: 5px 0;
-    border-radius: 10px;
+/* style for user messages */
+.user-message {
+    align-self: flex-end;
+    border-radius: 12px 12px 0px 12px;
+    padding: 0px 12px;
+    margin-bottom: 6px;
+    max-width: 90%;
+    border: #00695c solid 2px;
+}
+
+/* Style for received messages */
+.received-message {
+    align-self: flex-start;
+    border-radius: 12px 12px 12px 0px;
+    padding: 0px 12px;
+    margin-bottom: 6px;
+    max-width: 90%;
+}
+
+.user-message p,
+.recieved-message p,
+{
+margin: 0;
+}
+
+.user-message p {
+    text-align: end;
 }

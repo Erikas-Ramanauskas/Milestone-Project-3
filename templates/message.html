@@ -1,17 +1,81 @@
 {% extends "base.html" %} {% block content %}
 
 <div class="row">
-  <div class="col s12 m8 offset-m2">
+  <div class="col s12">
     <div class="card-panel">
       <h3 class="center-align light-blue-text text-darken-4">
         Chat with {{ reciever }}
       </h3>
     </div>
-    <div class="card-content white-text chat-window">
+
+    <div class="card-content grey darken-3" id="chat-window">
       {% for message in message_data.messages %}
-      <div class="message">Hello there!</div>
-      {% endfor %}
+
+      <!-- bellow recongises and calculates the time to turn it in to user friendly format -->
+      {% set time_d = (current_datetime - message.date).days %} {% set time_m =
+      ((current_datetime - message.date).seconds / 60) | round(0, 'floor') | int
+      %} {% set time_h = ((current_datetime - message.date).seconds / 3600) |
+      round(0, 'floor') | int %} {% if time_d == 1 %} {% set tooltip = (time_d|
+      string + " day ago") %} {% elif time_d > 0 %} {% set tooltip = (time_d|
+      string + " days ago") %} {% elif time_m == 1 %} {% set tooltip = (time_m|
+      string + " minute ago") %} {% elif time_m < 59 %} {% set tooltip =
+      (time_m| string + " minutes ago") %} {% elif time_h == 1 %} {% set tooltip
+      = (time_h| string + " hour ago") %} {% elif time_h < 59 %} {% set tooltip
+      = (time_h| string + " hours ago") %} {% endif %}
+      <!-- Messages acording to user -->
+      {% if message.user == session.user %}
+      <div class="user-message grey darken-3 text-shadow">
+        <p
+          class="teal-text text-accent-3 tooltipped"
+          data-position="right"
+          data-tooltip="{{ tooltip }}"
+        >
+          {{ message.message }}
+        </p>
+      </div>
+      {% else %}
+      <div class="user-message grey darken-3 text-shadow">
+        <p
+          class="teal-text text-accent-3 tooltipped"
+          data-position="right"
+          data-tooltip="{{ tooltip }}"
+        >
+          {{ message.message }}
+        </p>
+      </div>
+      {% endif %} {% endfor %}
     </div>
+
+    <form
+      class="col s12"
+      method="POST"
+      action="{{ url_for('message', reciever=reciever) }}"
+    >
+      <div class="card-panel">
+        <!-- message send -->
+        <div class="row">
+          <div class="input-field col s11">
+            <input
+              id="message"
+              name="message"
+              type="text"
+              minlength="1"
+              class="validate"
+            />
+            <label for="message">Send message</label>
+          </div>
+
+          <!-- Send message -->
+
+          <button
+            type="submit"
+            class="col s1 btn-large light-blue darken-4 text-shadow"
+          >
+            <i class="fa-regular fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
 

@@ -40,7 +40,7 @@
             </div>
             {% endfor %} 
             <hr>
-            Posted by: <span class="red-text text-lighten-2">{{ offer.created_by }}</span>
+            Posted by: <a href="{{ url_for('profile', username=offer.created_by) }}">{{ offer.created_by }}</a>
             <br>
             {% set time_d = (current_datetime - offer.date).days %}
             {% set time_m = ((current_datetime - offer.date).seconds / 60) | round(0, 'floor') | int %}

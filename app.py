@@ -258,31 +258,28 @@ def offer_info(offer_id):
 @app.route("/message/<reciever>", methods=["GET", "POST"])
 def message(reciever):
     # grab the session user's user from db
-    user1 = mongo.db.users.find_one(
-        {"username": session["user"]})
-
-    user2 = mongo.db.users.find_one(
-        {"username": reciever})
 
     message_id = generate_combined_id(session["user"], reciever)
 
     message_data = mongo.db.messages.find_one(
         {"combined_id": message_id})
 
+    current_datetime = datetime.datetime.now()
+
     # if message is being sent
     if request.method == "POST":
 
         new_message_data = {
-            "user": user1,
+            "user": session["user"],
             "message": request.form.get("message"),
             "discord": request.form.get("discord"),
             "battle_net": request.form.get("battle-net"),
             "date": datetime.datetime.now()
-        },
+        }
 
         if message_data:
-            new_message_array = message_data["messages"].insert(
-                0, new_message_data)
+            message_data["messages"].append(new_message_data)
+            new_message_array = message_data["messages"]
 
             updated_conversation = {
                 "combined_id": message_data["combined_id"],
@@ -299,13 +296,16 @@ def message(reciever):
 
             mongo.db.messages.insert_one(new_conversation)
 
-        return render_template("message.html", reciever=reciever,
-                               message_data=message_data)
+        message_data = mongo.db.messages.find_one({"combined_id": message_id})
 
     return render_template("message.html", reciever=reciever,
-                           message_data=message_data)
+                           message_data=message_data,
+                           current_datetime=current_datetime)
 
 
+# function takes 2 users and determines which name has higher
+# value placing it first. Same Unique id is creted regardles with
+# user is passed first keeping it consistent and dublicating records
 def generate_combined_id(user1, user2):
     message_id = f"{max(user1, user2)}_{min(user1, user2)}"
     return message_id
