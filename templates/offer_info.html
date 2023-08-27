@@ -44,7 +44,7 @@
             <p class="bid-info teal-color-text">best bid by: <span><a class="gold-color-text" href="{{ url_for('profile', username=offer.bids[0].user) }}">{{ offer.bids[0].user }}</a></span></p>
             <p class="bid-info white-text"> {{ offer.bids[0].offer_bid }} </p>
             <a href="{{ url_for('offers') }}" class="btn-small purple-color text-shadow">Cancel <i class="fa-solid fa-xmark"></i></a>
-            <a href="{{ url_for('offers') }}" class="btn-small green-color accent-4 text-shadow">Accept Offer <i class="fa-solid fa-coins"></i></a>
+            <a href="{{ url_for('offers') }}" class="btn-small green-color accent-4 text-shadow">Accept Offer <i class="fa-solid fa-handshake-simple"></i></a>
         </div>
       {% elif offer.created_by == session.user and offer.bids|length == 0 %}
         <div class="card-action">
@@ -104,10 +104,10 @@
         </div>
         <hr>
        <div class="bid-table white-text">
-           <table>
-               <tbody>
+           <table >
+               <tbody id="offer-bid-table">
                    {% for offer in offer.bids %}
-                       <tr class="offer-bid-window">
+                       <tr class="offer-bid-row">
                         {% if loop.index == 1 %}
                         <th>
                            <a class="purple-color-text" href="{{ url_for('profile', username=offer.user) }}">{{ offer.user }}</a>
@@ -133,6 +133,9 @@
                                <span class="purple-color-text">{{ time_h }} hours ago </span></br>
                                    {% endif %}
                         </th>
+                        <th>
+                        <a href="#" class="btn-small purple-color bid-accept-button accept-hidden"><i class="fa-solid fa-handshake-simple"></i></a>
+                        </th>
                         {% else %}
                         <th>
                             <a class="orange-color-text" href="{{ url_for('profile', username=offer.user) }}">{{ offer.user }}</a>
@@ -155,6 +158,9 @@
                                 <span >{{ time_h }} hour ago </span></br>
                                 {% elif time_h < 59 %} <span >{{ time_h }} hours ago </span></br>
                                     {% endif %}
+                        </th>
+                        <th>
+                            <a href="#" class="btn-small teal-color bid-accept-button accept-hidden"><i class="fa-solid fa-handshake-simple"></i></a>
                         </th>
                         {% endif %}
                        </tr>

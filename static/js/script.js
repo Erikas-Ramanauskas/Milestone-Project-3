@@ -84,3 +84,23 @@ function shareContactID(button) {
 if (window.history.replaceState) {
     window.history.replaceState(null, null, window.location.href);
 }
+
+
+// bids accept button modification
+const bidTable = document.getElementById('offer-bid-table');
+const bidRow = bidTable.getElementsByClassName('offer-bid-row');
+console.log(bidRow);
+
+for (let i = 0; i < bidRow.length; i++) {
+    const row = bidRow[i];
+    const bidButton = row.getElementsByClassName('bid-accept-button')[0];
+    console.log(bidButton);
+
+    row.addEventListener('mouseenter', () => {
+        bidButton.classList.remove('accept-hidden');
+    });
+
+    row.addEventListener('mouseleave', () => {
+        bidButton.classList.add('accept-hidden');
+    });
+}

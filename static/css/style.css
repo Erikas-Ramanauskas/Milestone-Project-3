@@ -145,6 +145,10 @@ output {
     text-transform: none !important;
 }
 
+.accept-hidden {
+    visibility: hidden;
+}
+
 /* Loader  */
 .loader {
     position: fixed;
