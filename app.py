@@ -261,6 +261,9 @@ def message(reciever):
 
     message_id = generate_combined_id(session["user"], reciever)
 
+    user = mongo.db.users.find_one(
+        {"username": session["user"]})
+
     message_data = mongo.db.messages.find_one(
         {"combined_id": message_id})
 
@@ -300,7 +303,7 @@ def message(reciever):
 
     return render_template("message.html", reciever=reciever,
                            message_data=message_data,
-                           current_datetime=current_datetime)
+                           current_datetime=current_datetime, user=user)
 
 
 # function takes 2 users and determines which name has higher

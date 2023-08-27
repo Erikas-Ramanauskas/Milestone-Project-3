@@ -13,6 +13,8 @@ $(document).ready(function () {
             exitDelay: 100
         }
     );
+    // Modal activation
+    $('.modal').modal();
 });
 
 // Preloader fade out called together with json data load so the procentage change would not be vissable

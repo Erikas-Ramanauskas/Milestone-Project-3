@@ -5,13 +5,13 @@
   <p class="">Search below for player item offers</p>
 </div>
 
-<div class="row grey darken-3" >
+<div class="row" >
   {% for offer in offers %}
-  <div class="col s12 m4 card-panel hoverable">
+  <div class="col s12 m4 card-panel hoverable green-color">
     <div class="card grey darken-3 text-shadow center-align">
-      <div class="card-content white-text ">
+      <div class="card-content white-text">
     
-        <span class="card-title ">
+        <span class="card-title">
             {{ offer.item_data }} ({{ offer.class_data }})
                 {% if offer.is_hardcore == "on" %}
                 <i class="fa-solid fa-skull prefix teal-color-text tooltipped" data-position="top" data-tooltip="Hardcore item"></i>
@@ -22,11 +22,11 @@
         </span>
         <p>
             {% if offer.armor > 0 %} 
-                Armor: <span class="purple-color-text">{{ offer.armor }}</span>
+                Armor: <span class="orange-color-text">{{ offer.armor }}</span>
                 <hr>
             {% endif %} 
             {% if offer.damage > 0 %} 
-                Damage per second: <span class="purple-color-text">{{ offer.damage }}</span>
+                Damage per second: <span class="orange-color-text">{{ offer.damage }}</span>
                 <hr>
             {% endif %} 
             {% if offer.suffix is not none %} 
@@ -40,7 +40,7 @@
             </div>
             {% endfor %} 
             <hr>
-            Posted by: <a href="{{ url_for('profile', username=offer.created_by) }}">{{ offer.created_by }}</a>
+            Posted by: <a href="{{ url_for('profile', username=offer.created_by) }}" class="teal-color-text">{{ offer.created_by }}</a>
             <br>
             {% set time_d = (current_datetime - offer.date).days %}
             {% set time_m = ((current_datetime - offer.date).seconds / 60) | round(0, 'floor') | int %}
@@ -61,8 +61,17 @@
         </p>
       </div>
       <div class="card-action">
-        <p>Current price</p>
-        <a href="{{ url_for('offer_info', offer_id=offer._id) }}" class="btn gold-color">Check Bids</a>
+        <p class="orange-color-text">Current price: 
+            <span>
+                {% if offer.bids|length == 0 %}
+                {{ offer.offer_price }}
+                {% else %}
+                {% set offer2= offer.bids[0].offer_bid %}
+                {{ offer2 }}
+                {% endif %}
+            </span>
+        </p>
+        <a  href="{{ url_for('offer_info', offer_id=offer._id) }}" class="btn gold-color bid-check-button">Check Bids <i class="fa-solid fa-sack-dollar"></i></a>
       </div>
     </div>
   </div>

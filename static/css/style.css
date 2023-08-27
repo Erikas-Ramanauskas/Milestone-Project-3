@@ -15,7 +15,20 @@
     --gold-color: #9C770B;
 }
 
-/* the fallowing is colour classes */
+body {
+    overflow-x: hidden;
+}
+
+tbody {
+    width: 100%;
+}
+
+input,
+textarea {
+    color: white;
+}
+
+/* The fallowing is colour classes */
 .teal-color {
     background-color: var(--teal-color);
 }
@@ -58,17 +71,13 @@
 
 /* Collor classes end */
 
-
-body {
-    overflow-x: hidden;
-}
-
+/* Offer creation  */
 .offer-class-button.active,
 .offer-item-button.active,
 .suffix-button.active,
 .affix-button.active {
-    color: #1de9b6;
-    /* Add your desired style for the active state */
+    color: var(--teal-color);
+
 }
 
 .affix-button.rejected,
@@ -76,7 +85,7 @@ body {
     color: var(--purple-color) !important;
 }
 
-
+/* Bid settings */
 output {
     margin-block-start: 1em;
     margin-block-end: 1em;
@@ -98,6 +107,24 @@ output {
     cursor: pointer;
     font-size: 1.5rem;
     width: 1.7rem;
+}
+
+.card-action p {
+    margin-bottom: 0.7rem;
+}
+
+.bid-table th {
+    text-align: center;
+}
+
+.bid-table table tr {
+    border-bottom: var(--orange-color) 1px solid
+}
+
+/* materialise transforms card action links to upercase which i use for linking profile of another user. Proper casing is important
+ */
+.card .card-action a {
+    text-transform: none !important;
 }
 
 /* Loader  */
@@ -132,6 +159,9 @@ output {
 }
 
 /* Messsages chat design */
+#chat-container {
+    margin-top: 1rem;
+}
 
 #chat-window {
     width: 100%;
@@ -149,7 +179,7 @@ output {
     border-radius: 12px 12px 0px 12px;
     padding: 0px 12px;
     max-width: 90%;
-    border: #00695c solid 2px;
+    border: var(--green-color) solid 2px;
     text-align: end;
 }
 
@@ -160,6 +190,7 @@ output {
     padding: 0px 12px;
     margin-bottom: 6px;
     max-width: 90%;
+    border: var(--gold-color) solid 2px;
 }
 
 .user-message p,
@@ -169,7 +200,22 @@ output {
 
 #message-form {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr auto auto auto;
     align-items: center;
     gap: 10px;
+}
+
+#contacts-modal {
+    padding-bottom: 1.5rem;
+}
+
+/* Profile page css */
+
+.profile-layout {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    text-align: left;
+    gap: 10px;
+    font-size: 1.2em;
+    margin: 2px;
 }

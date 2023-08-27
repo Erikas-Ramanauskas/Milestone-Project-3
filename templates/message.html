@@ -1,12 +1,12 @@
 {% extends "base.html" %} {% block content %}
 
-<div class="row grey darken-3">
+<div id="chat-container" class="row grey darken-3">
   <div class="col s12 grey darken-3">
-    <div class="card-panel grey darken-3">
-      <h3 class="center-align grey darken-3">Chat with {{ reciever }}</h3>
-    </div>
+    <h4 class="center-align grey darken-3 gold-color-text">
+      Chat with {{ reciever }}
+    </h4>
 
-    <div class="card-content" id="chat-window">
+    <div id="chat-window">
       {% if message_data.messages | length == 0 %}
       <div class="center-align">
         <p>
@@ -42,7 +42,7 @@
       {% if message.user == session.user %}
       <div class="user-message text-shadow">
         <p
-          class="teal-color-text tooltipped"
+          class="green-color-text tooltipped"
           data-position="right"
           data-tooltip="{{ tooltip }}"
         >
@@ -52,8 +52,8 @@
       {% else %}
       <div class="received-message text-shadow">
         <p
-          class="teal-color-text tooltipped"
-          data-position="right"
+          class="gold-color-text tooltipped"
+          data-position="left"
           data-tooltip="{{ tooltip }}"
         >
           {{ message.message }}
@@ -83,11 +83,41 @@
         <button
           id="message-submit"
           type="submit"
-          class="btn-small gold-color text-shadow"
+          class="btn-small waves-effect gold-color text-shadow"
         >
           <i class="fa-regular fa-paper-plane"></i>
         </button>
+        <!-- Modal Trigger for -->
+        <a
+          id="share-contact-ids"
+          class="btn-small waves-effect purple-color text-shadow modal-trigger"
+          href="#contacts-modal"
+        >
+          <i class="fa-brands fa-battle-net"></i>
+          <i class="fa-brands fa-discord"></i>
+        </a>
+        <div id="contacts-modal" class="modal grey darken-3 center-align">
+          <div class="modal-content">
+            <h4 class="white-text">Share your social ID's</h4>
+          </div>
+          <button
+            id="bnet-submit"
+            type="submit"
+            class="btn-small modal-close waves-effect purple-color text-shadow"
+          >
+            <i class="fa-brands fa-battle-net"></i> {{ user.b_net_id }}
+          </button>
+          <button
+            id="discord-submit"
+            type="submit"
+            class="btn-small modal-close waves-effect purple-color text-shadow"
+          >
+            <i class="fa-brands fa-discord"></i> {{ user.discord_id }}
+          </button>
+        </div>
       </div>
+
+      <!-- Modal Structure -->
     </form>
   </div>
 </div>

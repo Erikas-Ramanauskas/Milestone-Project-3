@@ -2,23 +2,42 @@
 
 <div class="row">
   <div class="col s12 m8 offset-m2">
-    <div class="card-panel">
-      <h3 class="center-align light-blue-text text-darken-4">
+    <div class="card-panel grey darken-3 white-text">
+      <h3 class="center-align orange-color-text">
         {{ user.username }}'s Profile
       </h3>
       <!-- keeping contact details private -->
       {% if session.user == user.username %}
-      <i class="fa-brands fa-battle-net prefix teal-color-text"></i>
-      <p>Battle net ID: {{ user.b_net_id }}</p>
-      <i class="fa-brands fa-discord prefix teal-color-text"></i>
-      <p>Discord: {{ user.discord_id }}</p>
+      <div class="profile-layout">
+        <i class="fa-brands fa-battle-net teal-color-text"></i>
+        <p>
+          Battle net ID:
+          <span class="teal-color-text">{{ user.b_net_id }}</span>
+        </p>
+      </div>
+      <div class="profile-layout">
+        <i class="fa-brands fa-discord teal-color-text"></i>
+        <p>
+          Discord: <span class="teal-color-text">{{ user.discord_id }}</span>
+        </p>
+      </div>
       {% endif %}
-      <i class="fa-solid fa-people-group prefix teal-color-text"></i>
-      <p>Class {{ user.class_preference }}</p>
-      <i class="fa-solid fa-skull prefix teal-color-text"></i>
-      <p>Hardcore: {{ user.is_hardcore }}</p>
-      <i class="fa-brands fa-envira prefix teal-color-text"></i>
-      <p>Season: {{ user.is_season }}</p>
+      <div class="profile-layout">
+        <i class="fa-solid fa-people-group teal-color-text"></i>
+        <p>
+          Class <span class="teal-color-text">{{ user.class_preference }}</span>
+        </p>
+      </div>
+      <div class="profile-layout">
+        <i class="fa-solid fa-skull teal-color-text"></i>
+        <p>
+          Hardcore: <span class="teal-color-text">{{ user.is_hardcore }}</span>
+        </p>
+      </div>
+      <div class="profile-layout">
+        <i class="fa-brands fa-envira teal-color-text"></i>
+        <p>Season: <span class="teal-color-text">{{ user.is_season }}</span></p>
+      </div>
     </div>
     {% if session.user == user.username %}
     <a

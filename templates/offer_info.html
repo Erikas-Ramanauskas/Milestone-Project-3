@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
 
 <div class="">
-  <h3 class="light-blue-text text-darken-4 center-align">{{ offer.item_data }} ({{ offer.class_data }})
+  <h3 class="white-text center-align">{{ offer.item_data }} ({{ offer.class_data }})
 {% if offer.is_hardcore == "on" %}
 <i class="fa-solid fa-skull prefix teal-color-text tooltipped" data-position="top"
     data-tooltip="Hardcore item"></i>
@@ -19,11 +19,11 @@
       <div class="card-content white-text">
         <p>
             {% if offer.armor > 0 %} 
-                Armor: <span class="purple-color-text">{{ offer.armor }}</span>
+                Armor: <span class="gold-color-text">{{ offer.armor }}</span>
                 <hr>
             {% endif %} 
             {% if offer.damage > 0 %} 
-                Damage per second: <span class="purple-color-text">{{ offer.damage }}</span>
+                Damage per second: <span class="gold-color-text">{{ offer.damage }}</span>
                 <hr>
             {% endif %} 
             {% if offer.suffix is not none %} 
@@ -32,13 +32,21 @@
             {% for key, value in offer.affixes.items() %} 
             <div class="affix-key">
                 <span> {{ key.replace("-", " ").capitalize() }}: </span>
-                <span class="purple-color-text">{{ value }}</span>
+                <span class="gold-color-text">{{ value }}</span>
                 </br>
             </div>
             {% endfor %} 
             <hr>
         </p>
       </div>
+      {% if offer.created_by == session.user %}
+        <div class="card-action">
+            <p id="offer-bid-label" class="teal-color-text">best bid by: <span><a class="gold-color-text" href="{{ url_for('profile', username=offer.bids[0].user) }}">{{ offer.bids[0].user }}</a></span></p>
+            <p> {{ offer.bids[0].offer_bid }} </p>
+            <a href="{{ url_for('offers') }}" class="btn-small purple-color text-shadow">Cancel <i class="fa-solid fa-xmark"></i></a>
+            <a href="{{ url_for('offers') }}" class="btn-small green-color accent-4 text-shadow">Accept Offer <i class="fa-solid fa-coins"></i></a>
+        </div>
+    {% else %}
       <div class="card-action">
         <form method="POST" action="{{ url_for('offer_info', offer_id=offer._id) }}">
             <h6 id="offer-bid-label" class="teal-color-text">Your Bid:</h6>
@@ -55,21 +63,22 @@
                 <i class="fa-solid fa-forward-step teal-color-text bid-button" onclick="changeValue(100000, true)"></i>
                 <i class="fa-solid fa-forward-fast teal-color-text bid-button" onclick="changeValue(1000000, true)"></i>
             </div>
-            <a href="{{ url_for('offers')}}" class="btn-small red text-shadow">Cancel <i class="fa-solid fa-xmark"></i></a>
-            <button type="submit" id="bid-submit-btn" class="btn-small green accent-4 text-shadow" disabled>
+            <a href="{{ url_for('offers') }}" class="btn-small purple-color text-shadow">Cancel <i class="fa-solid fa-xmark"></i></a>
+            <button type="submit" id="bid-submit-btn" class="btn-small green-color accent-4 text-shadow" disabled>
                 Bid <i class="fa-solid fa-coins"></i>
             </button>
         </form>
       </div>
+      {% endif %}
     </div>
   </div>
   <div class="col s12 m6">
     <div class="card grey darken-3 text-shadow center-align">
         <div class="card-title white-text">
-            Posted by: <span class="purple-color-text">
-                <a href="{{ url_for('profile', username=offer.created_by) }}">{{ offer.created_by }}</a>
-                </span>
-            <br>
+           <p>Posted by: <span >
+                <a class="gold-color-text" href="{{ url_for('profile', username=offer.created_by) }}">{{ offer.created_by }}</a>
+                </span></p>
+            <p>
             {% set time_d = (current_datetime - offer.date).days %}
             {% set time_m = ((current_datetime - offer.date).seconds / 60) | round(0, 'floor') | int %}
             {% set time_h = ((current_datetime - offer.date).seconds / 3600) | round(0, 'floor') | int %}
@@ -86,35 +95,45 @@
             {% elif time_h < 59 %} 
             {{ time_h }} hours ago </br>
             {% endif %}
-            <hr>
+            </p>
+        </hr>
         </div>
         <hr>
-        <table>
-            <tbody>
-                {% for offer in offer.bids %}
-                    <tr class="offer-bid-window">
+       <div class="bid-table white-text">
+           <table>
+               <tbody>
+                   {% for offer in offer.bids %}
+                       <tr class="offer-bid-window">
                         <th>
                             <a href="{{ url_for('profile', username=offer.user) }}">{{ offer.user }}</a>
                         </th>
-                        <th>{{ offer.offer_bid }}</th>
+                        <th>
+                            {% if loop.index == 1 %}
+                            <span class="purple-color-text">{{ offer.offer_bid }}</span>
+                            {% else %}
+                            <span>{{ offer.offer_bid }}</span>
+                            {% endif %}
+                        </th>
                         <th>{% set time_d = (current_datetime - offer.date).days %}
-                        {% set time_m = ((current_datetime - offer.date).seconds / 60) | round(0, 'floor') | int %}
-                        {% set time_h = ((current_datetime - offer.date).seconds / 3600) | round(0, 'floor') | int %}
-                        {% if time_d == 1 %}
-                        {{ time_d }} day ago </br>
-                        {% elif time_d > 0 %}
-                        {{ time_d }} days ago </br>
-                        {% elif time_m == 1 %}
-                        {{ time_m }} minute ago </br>
-                        {% elif time_m < 59 %} {{ time_m }} minutes ago </br>
-                            {% elif time_h == 1 %}
-                            {{ time_h }} hour ago </br>
-                            {% elif time_h < 59 %} {{ time_h }} hours ago </br>
-                                {% endif %}</th>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                           {% set time_m = ((current_datetime - offer.date).seconds / 60) | round(0, 'floor') | int %}
+                           {% set time_h = ((current_datetime - offer.date).seconds / 3600) | round(0, 'floor') | int %}
+                           {% if time_d == 1 %}
+                           {{ time_d }} day ago </br>
+                           {% elif time_d > 0 %}
+                           {{ time_d }} days ago </br>
+                           {% elif time_m == 1 %}
+                           {{ time_m }} minute ago </br>
+                           {% elif time_m < 59 %} {{ time_m }} minutes ago </br>
+                               {% elif time_h == 1 %}
+                               {{ time_h }} hour ago </br>
+                               {% elif time_h < 59 %} {{ time_h }} hours ago </br>
+                                   {% endif %}
+                        </th>
+                       </tr>
+                   {% endfor %}
+               </tbody>
+           </table>
+       </div>
     </div>
   </div>
 </div>
