@@ -201,7 +201,14 @@ def add_offer():
             "created_by": session["user"],
             "offer_price": request.form.get("offer_price"),
             "bids": [],
-            "date": datetime.datetime.now()
+            "date": datetime.datetime.now(),
+            "trade": {
+                "user": "",
+                "price": "",
+                "traded_by_owner": "false",
+                "traded_by_bidder": "false",
+                "accepted": "false"
+            }
         }
 
         # Create a list to store unknown key-value pairs
@@ -235,17 +242,47 @@ def offer_info(offer_id):
     offer = mongo.db.offers.find_one({"_id": ObjectId(offer_id)})
     if request.method == "POST":
         if "user" in session:
-            new_offer = {
-                "offer_bid": request.form.get("offer_bid"),
-                "user": session["user"],
-                "date": datetime.datetime.now()
-            }
+            if request.form.get("offer_bid"):
+                new_offer = {
+                    "offer_bid": request.form.get("offer_bid"),
+                    "user": session["user"],
+                    "date": datetime.datetime.now()
+                }
 
-            offer["bids"].insert(0, new_offer)
+                offer["bids"].insert(0, new_offer)
 
-            # use replace_one instead of update_one
-            mongo.db.offers.replace_one({"_id": ObjectId(offer_id)}, offer)
-            flash("Bid added")
+                # use replace_one instead of update_one
+                mongo.db.offers.replace_one({"_id": ObjectId(offer_id)}, offer)
+                flash("Bid added")
+
+            elif request.form.get("offer_accepted"):
+                offer_accepted = {
+                    "user": request.form.get("user"),
+                    "price": request.form.get("price"),
+                    "traded_by_owner": "false",
+                    "traded_by_bidder": "false",
+                    "accepted": request.form.get("offer_accepted")
+                }
+                offer["trade"] = offer_accepted
+                mongo.db.offers.replace_one({"_id": ObjectId(offer_id)}, offer)
+
+            elif request.form.get("traded_by_owner") or request.form.get("traded_by_bidder"):
+
+                traded_by_owner = request.form.get(
+                    "traded_by_owner") or offer["trade"]["traded_by_owner"]
+                traded_by_bidder = request.form.get(
+                    "traded_by_bidder") or offer["trade"]["traded_by_bidder"]
+
+                offer_accepted = {
+                    "user": offer["trade"]["user"],
+                    "price": offer["trade"]["price"],
+                    "traded_by_owner": traded_by_owner,
+                    "traded_by_bidder": traded_by_bidder,
+                    "accepted": offer["trade"]["accepted"]
+                }
+                offer["trade"] = offer_accepted
+                mongo.db.offers.replace_one({"_id": ObjectId(offer_id)}, offer)
+
         else:
             flash("You must be logged in to place a bid.")
             return render_template("login.html")

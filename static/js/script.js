@@ -79,3 +79,8 @@ function shareContactID(button) {
     targetElement.value = contactID;
     targetElement.setAttribute("name", contactType);
 }
+
+
+if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+}

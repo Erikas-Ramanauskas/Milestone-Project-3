@@ -86,6 +86,9 @@ textarea {
 
 /* Collor classes end */
 
+
+
+
 /* Offer creation  */
 .offer-class-button.active,
 .offer-item-button.active,
@@ -112,7 +115,7 @@ output {
     font-size: 1.5rem;
 }
 
-#offer-bid-label {
+.bid-info {
     text-align: center;
     margin: 0;
     font-size: 1.5rem;

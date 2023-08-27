@@ -138,6 +138,7 @@
           <div class="modal-content">
             <h4 class="white-text">Share your social ID's</h4>
           </div>
+          {% if user.b_net_id %}
           <button
             id="bnet-submit"
             type="submit"
@@ -149,6 +150,7 @@
           >
             <i class="fa-brands fa-battle-net"></i> {{ user.b_net_id }}
           </button>
+          {% endif %} {% if user.discord_id %}
           <button
             id="discord-submit"
             type="submit"
@@ -160,6 +162,15 @@
           >
             <i class="fa-brands fa-discord"></i> {{ user.discord_id }}
           </button>
+          {% endif %} {% if not user.discord_id and not user.b_net_id %}
+          <p>
+            Plase go to your
+            <a href="{{ url_for('edit_profile', username=session['user']) }}"
+              >Profile</a
+            >
+            to update your contact details
+          </p>
+          {% endif %}
         </div>
       </div>
 
