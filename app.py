@@ -1,6 +1,8 @@
 import os
 import json
 import datetime
+# sys used for calling print during the app runing
+import sys
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
@@ -19,6 +21,8 @@ app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
+
+current_datetime = datetime.datetime.now()
 
 
 # ------------------------------------------------------------------------------
@@ -47,7 +51,6 @@ item_types = ["Helm", "Chest Armor", "Gloves", "Pants", "Boots", "Amulet",
 @app.route("/offers")
 def offers():
     offers = list(mongo.db.offers.find())
-    current_datetime = datetime.datetime.now()
     return render_template("offers.html", offers=offers,
                            current_datetime=current_datetime)
 
@@ -201,7 +204,7 @@ def add_offer():
             "created_by": session["user"],
             "offer_price": request.form.get("offer_price"),
             "bids": [],
-            "date": datetime.datetime.now(),
+            "date": current_datetime,
             "trade": {
                 "user": "",
                 "price": "",
@@ -240,13 +243,14 @@ def add_offer():
 @app.route("/offer_info/<offer_id>", methods=["GET", "POST"])
 def offer_info(offer_id):
     offer = mongo.db.offers.find_one({"_id": ObjectId(offer_id)})
+
     if request.method == "POST":
         if "user" in session:
             if request.form.get("offer_bid"):
                 new_offer = {
                     "offer_bid": request.form.get("offer_bid"),
                     "user": session["user"],
-                    "date": datetime.datetime.now()
+                    "date": current_datetime
                 }
 
                 offer["bids"].insert(0, new_offer)
@@ -255,16 +259,23 @@ def offer_info(offer_id):
                 mongo.db.offers.replace_one({"_id": ObjectId(offer_id)}, offer)
                 flash("Bid added")
 
-            elif request.form.get("offer_accepted"):
+            elif request.form.get("accepted"):
                 offer_accepted = {
                     "user": request.form.get("user"),
                     "price": request.form.get("price"),
                     "traded_by_owner": "false",
                     "traded_by_bidder": "false",
-                    "accepted": request.form.get("offer_accepted")
+                    "accepted": request.form.get("accepted")
                 }
                 offer["trade"] = offer_accepted
                 mongo.db.offers.replace_one({"_id": ObjectId(offer_id)}, offer)
+
+                # calls function to send a message of bid accepted
+                print(offer, file=sys.stderr)
+                message_bid_accepted(
+                    offer_accepted["user"], offer_accepted["price"], offer)
+
+                return redirect(url_for("message", reciever=offer_accepted["user"]))
 
             elif request.form.get("traded_by_owner") or request.form.get("traded_by_bidder"):
 
@@ -287,15 +298,14 @@ def offer_info(offer_id):
             flash("You must be logged in to place a bid.")
             return render_template("login.html")
 
-    current_datetime = datetime.datetime.now()
     return render_template("offer_info.html", offer=offer,
                            current_datetime=current_datetime)
 
 
 @app.route("/message/<reciever>", methods=["GET", "POST"])
 def message(reciever):
-    # grab the session user's user from db
 
+    # generate message id for a chat
     message_id = generate_combined_id(session["user"], reciever)
 
     user = mongo.db.users.find_one(
@@ -303,8 +313,6 @@ def message(reciever):
 
     message_data = mongo.db.messages.find_one(
         {"combined_id": message_id})
-
-    current_datetime = datetime.datetime.now()
 
     # if message is being sent
     if request.method == "POST":
@@ -314,7 +322,7 @@ def message(reciever):
             "message": request.form.get("message"),
             "discord_id": request.form.get("discord_id"),
             "b_net_id": request.form.get("b_net_id"),
-            "date": datetime.datetime.now()
+            "date": current_datetime,
         }
 
         if message_data:
@@ -341,6 +349,50 @@ def message(reciever):
     return render_template("message.html", reciever=reciever,
                            message_data=message_data,
                            current_datetime=current_datetime, user=user)
+
+
+# function takes bid-acceptence detaisl and creates new message.
+def message_bid_accepted(reciever, bid, offer):
+    # generate message id for a chat
+    message_id = generate_combined_id(session["user"], reciever)
+    message_data = mongo.db.messages.find_one(
+        {"combined_id": message_id})
+
+    offer = mongo.db.offers.find_one({"_id": ObjectId(offer["_id"])})
+
+    new_message_data = {
+        "user": session["user"],
+        "message": "",
+        "discord_id": "",
+        "b_net_id": "",
+        "date": current_datetime,
+        "offer_accepted": {
+            "bid": bid,
+            "offer_id": offer["_id"],
+            "offer_name": offer["item_data"]
+        }
+    }
+
+    if message_data:
+        message_data["messages"].append(new_message_data)
+        new_message_array = message_data["messages"]
+
+        updated_conversation = {
+            "combined_id": message_data["combined_id"],
+            "messages": new_message_array
+        }
+        mongo.db.messages.replace_one(
+            {"_id": ObjectId(message_data["_id"])}, updated_conversation)
+    else:
+        new_conversation = {
+            "combined_id": message_id,
+            "messages": [new_message_data]
+        }
+        new_conversation["messages"].append(new_message_data)
+
+        mongo.db.messages.insert_one(new_conversation)
+
+    message_data = mongo.db.messages.find_one({"combined_id": message_id})
 
 
 # function takes 2 users and determines which name has higher

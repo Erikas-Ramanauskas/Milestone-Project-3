@@ -59,6 +59,25 @@
           <i class="fa-brands fa-battle-net"></i> {{ message.b_net_id }}
         </p>
       </div>
+      {% elif message.offer_accepted %}
+      <div class="user-message text-shadow green-color">
+        <p
+          class="tooltipped"
+          data-position="right"
+          data-tooltip="{{ tooltip }}"
+        >
+          I accept your offer
+          <span class="orange-color-text">
+            {{ message.offer_accepted.bid }} </span
+          >for
+          <a
+            class="orange-color-text"
+            href="{{ url_for('offer_info', offer_id=message.offer_accepted.offer_id) }}"
+            >{{ message.offer_accepted.offer_name }}</a
+          >
+          <i class="fa-solid fa-handshake-simple"></i>
+        </p>
+      </div>
       {% else %}
       <div class="user-message text-shadow">
         <p
@@ -79,6 +98,22 @@
       <div class="received-message text-shadow gold-color">
         <p class="tooltipped" data-position="left" data-tooltip="{{ tooltip }}">
           {{ message.b_net_id }} <i class="fa-brands fa-battle-net"></i>
+        </p>
+      </div>
+      {% elif message.offer_accepted %}
+      <div class="received-message text-shadow gold-color">
+        <p class="tooltipped" data-position="left" data-tooltip="{{ tooltip }}">
+          I accept your offer
+          <span class="teal-color-text">
+            {{ message.offer_accepted.bid }}
+          </span>
+          for
+          <a
+            class="teal-color-text"
+            href="{{ url_for('offer_info', offer_id=message.offer_accepted.offer_id) }}"
+            >{{ message.offer_accepted.offer_name }}</a
+          >
+          <i class="fa-solid fa-handshake-simple"></i>
         </p>
       </div>
       {% else %}
