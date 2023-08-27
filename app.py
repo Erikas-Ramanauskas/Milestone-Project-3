@@ -275,7 +275,8 @@ def offer_info(offer_id):
                 message_bid_accepted(
                     offer_accepted["user"], offer_accepted["price"], offer)
 
-                return redirect(url_for("message", reciever=offer_accepted["user"]))
+                return redirect(url_for("message",
+                                        reciever=offer_accepted["user"]))
 
             elif request.form.get("traded_by_owner") or request.form.get("traded_by_bidder"):
 

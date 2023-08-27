@@ -68,8 +68,9 @@
         >
           I accept your offer
           <span class="orange-color-text">
-            {{ message.offer_accepted.bid }} </span
-          >for
+            {{ message.offer_accepted.bid }} <i class="fa-solid fa-coins"></i
+          ></span>
+          for
           <a
             class="orange-color-text"
             href="{{ url_for('offer_info', offer_id=message.offer_accepted.offer_id) }}"
@@ -105,7 +106,7 @@
         <p class="tooltipped" data-position="left" data-tooltip="{{ tooltip }}">
           I accept your offer
           <span class="teal-color-text">
-            {{ message.offer_accepted.bid }}
+            {{ message.offer_accepted.bid }} <i class="fa-solid fa-coins"></i>
           </span>
           for
           <a
