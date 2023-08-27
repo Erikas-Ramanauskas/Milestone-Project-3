@@ -70,3 +70,12 @@ function chatWindowFocus() {
     const chatWindow = document.getElementById("chat-window");
     chatWindow.scrollTop = chatWindow.scrollHeight;
 }
+
+function shareContactID(button) {
+    const contactID = button.getAttribute("data-contactID");
+    const contactType = button.getAttribute("data-contact-type");
+
+    const targetElement = document.getElementById("contact-id-field"); // Replace "targetElement" with the actual ID of the element
+    targetElement.value = contactID;
+    targetElement.setAttribute("name", contactType);
+}

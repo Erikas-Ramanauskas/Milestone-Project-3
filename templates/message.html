@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block content %}
 
-<div id="chat-container" class="row grey darken-3">
+<div id="chat-container" class="row grey darken-3 white-text">
   <div class="col s12 grey darken-3">
     <h4 class="center-align grey darken-3 gold-color-text">
       Chat with {{ reciever }}
@@ -39,27 +39,59 @@
       = (time_h| string + " hour ago") %} {% elif time_h < 59 %} {% set tooltip
       = (time_h| string + " hours ago") %} {% endif %}
       <!-- Messages acording to user -->
-      {% if message.user == session.user %}
+      {% if message.user == session.user %} {% if message.discord_id %}
+      <div class="user-message text-shadow green-color">
+        <p
+          class="tooltipped"
+          data-position="right"
+          data-tooltip="{{ tooltip }}"
+        >
+          <i class="fa-brands fa-discord"></i> {{ message.discord_id }}
+        </p>
+      </div>
+      {% elif message.b_net_id %}
+      <div class="user-message text-shadow green-color">
+        <p
+          class="tooltipped"
+          data-position="right"
+          data-tooltip="{{ tooltip }}"
+        >
+          <i class="fa-brands fa-battle-net"></i> {{ message.b_net_id }}
+        </p>
+      </div>
+      {% else %}
       <div class="user-message text-shadow">
         <p
-          class="green-color-text tooltipped"
+          class="tooltipped"
           data-position="right"
           data-tooltip="{{ tooltip }}"
         >
           {{ message.message }}
         </p>
       </div>
+      {% endif %} {% else %} {% if message.discord_id %}
+      <div class="received-message text-shadow gold-color>
+        <p class="tooltipped" data-position="left" data-tooltip="{{ tooltip }}">
+          {{ message.discord_id }} <i class="fa-brands fa-discord"></i>
+        </p>
+      </div>
+      {% elif message.b_net_id %}
+      <div class="received-message text-shadow gold-color>
+        <p class="tooltipped" data-position="left" data-tooltip="{{ tooltip }}">
+          {{ message.b_net_id }} <i class="fa-brands fa-battle-net"></i>
+        </p>
+      </div>
       {% else %}
       <div class="received-message text-shadow">
         <p
-          class="gold-color-text tooltipped"
+          class="text tooltipped"
           data-position="left"
           data-tooltip="{{ tooltip }}"
         >
           {{ message.message }}
         </p>
       </div>
-      {% endif %} {% endfor %}
+      {% endif %} {% endif %} {% endfor %}
     </div>
 
     <form
@@ -79,6 +111,12 @@
           ></textarea>
           <label for="message">Send message</label>
         </div>
+
+        <!-- Contact id trigger -->
+        <div>
+          <input id="contact-id-field" type="hidden" readonly="true" />
+        </div>
+
         <!-- Send message -->
         <button
           id="message-submit"
@@ -104,6 +142,10 @@
             id="bnet-submit"
             type="submit"
             class="btn-small modal-close waves-effect purple-color text-shadow"
+            onclick="shareContactID(this)"
+            data-contactID="{{ user.b_net_id }}"
+            data-contact-type="b_net_id"
+            formnovalidate
           >
             <i class="fa-brands fa-battle-net"></i> {{ user.b_net_id }}
           </button>
@@ -111,6 +153,10 @@
             id="discord-submit"
             type="submit"
             class="btn-small modal-close waves-effect purple-color text-shadow"
+            onclick="shareContactID(this)"
+            data-contactID="{{ user.discord_id }}"
+            data-contact-type="discord_id"
+            formnovalidate
           >
             <i class="fa-brands fa-discord"></i> {{ user.discord_id }}
           </button>

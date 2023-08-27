@@ -275,8 +275,8 @@ def message(reciever):
         new_message_data = {
             "user": session["user"],
             "message": request.form.get("message"),
-            "discord": request.form.get("discord"),
-            "battle_net": request.form.get("battle-net"),
+            "discord_id": request.form.get("discord_id"),
+            "b_net_id": request.form.get("b_net_id"),
             "date": datetime.datetime.now()
         }
 
