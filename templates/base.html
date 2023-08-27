@@ -61,13 +61,14 @@
       <!-- top navbar -->
       <nav class="nav-extended text-shadow grey darken-3">
         <div class="nav-wrapper">
-          <a href="{{ url_for('offers') }}" class="brand-logo">D4 Trading</a>
+          <a href="{{ url_for('offers') }}" class="brand-logo"
+            ><img src="../static/images/logo.png" alt="logo"
+          /></a>
           <a href="#" data-target="mobile-demo" class="sidenav-trigger right"
             ><i class="fas fa-bars"></i
           ></a>
           <ul class="right hide-on-med-and-down">
             <li><a href="{{ url_for('offers') }}">Offers</a></li>
-            <li><a href="#">Requests</a></li>
             <li><a href="{{ url_for('add_offer') }}">Create Offer</a></li>
 
             <!-- dropdown triger for user meniu -->
@@ -86,7 +87,6 @@
           <h4 class="center-align light-blue-text text-darken 4">D4 Trading</h4>
         </li>
         <li><a href="{{ url_for('offers') }}">Offers</a></li>
-        <li><a href="#">Requests</a></li>
         <li><a href="{{ url_for('add_offer') }}">Create Offer</a></li>
         {% if session.user %}
         <li>

@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    border: 0;
     box-sizing: border-box !important;
     font-family: "Short Stack", cursive;
 }
@@ -26,6 +25,22 @@ tbody {
 input,
 textarea {
     color: white;
+}
+
+.brand-logo img {
+    height: 2em;
+}
+
+@media screen and (max-width: 500px) {
+    .brand-logo img {
+        height: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 35px) {
+    .brand-logo img {
+        height: 1rem;
+    }
 }
 
 /* The fallowing is colour classes */
@@ -178,6 +193,7 @@ output {
     align-self: flex-end;
     border-radius: 12px 12px 0px 12px;
     padding: 0px 12px;
+    margin-bottom: 6px;
     max-width: 90%;
     border: var(--green-color) solid 2px;
     text-align: end;

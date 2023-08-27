@@ -1,13 +1,13 @@
 {% extends "base.html" %} {% block content %}
 
 <div class="">
-  <h3 class="light-blue-text text-darken-4 center-align">Items Offered</h3>
+  <h3 class="orange-color-text center-align">Items Offered</h3>
   <p class="">Search below for player item offers</p>
 </div>
 
 <div class="row" >
   {% for offer in offers %}
-  <div class="col s12 m4 card-panel hoverable green-color">
+  <div class="col s12 m6 l4 card-panel hoverable green-color">
     <div class="card grey darken-3 text-shadow center-align">
       <div class="card-content white-text">
     
@@ -23,11 +23,11 @@
         <p>
             {% if offer.armor > 0 %} 
                 Armor: <span class="orange-color-text">{{ offer.armor }}</span>
-                <hr>
+                <hr/>
             {% endif %} 
             {% if offer.damage > 0 %} 
                 Damage per second: <span class="orange-color-text">{{ offer.damage }}</span>
-                <hr>
+                <hr/>
             {% endif %} 
             {% if offer.suffix is not none %} 
                 {{ offer.suffix }} <hr>
@@ -39,7 +39,7 @@
                 </br> 
             </div>
             {% endfor %} 
-            <hr>
+            <hr/>
             Posted by: <a href="{{ url_for('profile', username=offer.created_by) }}" class="teal-color-text">{{ offer.created_by }}</a>
             <br>
             {% set time_d = (current_datetime - offer.date).days %}
