@@ -3,6 +3,7 @@ import json
 import datetime
 # sys used for calling print during the app runing
 import sys
+#  print(variable, file=sys.stderr)
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
@@ -188,6 +189,7 @@ def logout():
     # remove user from session cookie
     flash("You have been logged out")
     session.pop("user")
+    session.pop("messages")
     return redirect(url_for("login"))
 
 
@@ -275,7 +277,6 @@ def offer_info(offer_id):
                 mongo.db.offers.replace_one({"_id": ObjectId(offer_id)}, offer)
 
                 # calls function to send a message of bid accepted
-                print(offer, file=sys.stderr)
                 message_bid_accepted(
                     offer_accepted["user"], offer_accepted["price"], offer)
 
@@ -307,6 +308,25 @@ def offer_info(offer_id):
                            current_datetime=current_datetime)
 
 
+@app.route("/messages/<username>")
+def messages(username):
+    # grab the session user's user from db
+    chat_list = list(mongo.db.messages.find(
+        {"$text": {"$search": session["user"]}}))
+
+    print(chat_list, file=sys.stderr)
+
+    # Sort chat_list based on the most recent message in each chat
+    sorted_chat_list = sorted(
+        chat_list,
+        key=lambda chat: chat['messages'][-1]['date'],
+        reverse=True
+    )
+
+    return render_template("messages.html", chat_list=sorted_chat_list,
+                           current_datetime=current_datetime)
+
+
 @app.route("/message/<reciever>", methods=["GET", "POST"])
 def message(reciever):
 
@@ -315,6 +335,11 @@ def message(reciever):
 
     user = mongo.db.users.find_one(
         {"username": session["user"]})
+
+    user1 = session["user"]
+
+    user2 = mongo.db.users.find_one(
+        {"username": reciever})
 
     message_data = mongo.db.messages.find_one(
         {"combined_id": message_id})
@@ -336,6 +361,8 @@ def message(reciever):
 
             updated_conversation = {
                 "combined_id": message_data["combined_id"],
+                "user1": message_data["user1"],
+                "user2": message_data["user2"],
                 "messages": new_message_array
             }
             mongo.db.messages.replace_one(
@@ -343,6 +370,8 @@ def message(reciever):
         else:
             new_conversation = {
                 "combined_id": message_id,
+                "user1": user1,
+                "user2": user2,
                 "messages": []
             }
             new_conversation["messages"].append(new_message_data)
@@ -400,9 +429,17 @@ def message_bid_accepted(reciever, bid, offer):
     message_data = mongo.db.messages.find_one({"combined_id": message_id})
 
 
+# function check the active sesion["user"] and checks active messages and trades
+def check_notifications():
+    user = mongo.db.users.find_one(
+        {"username": session["user"]})
+    sesion["messages"] = user["message_count"]
+
 # function takes 2 users and determines which name has higher
 # value placing it first. Same Unique id is creted regardles with
 # user is passed first keeping it consistent and dublicating records
+
+
 def generate_combined_id(user1, user2):
     message_id = f"{max(user1, user2)}_{min(user1, user2)}"
     return message_id

@@ -1,0 +1,70 @@
+{% extends "base.html" %} {% block content %}
+
+<div id="chat-container" class="row grey darken-3 white-text">
+  <div class="col s12 grey darken-3">
+    <h4 class="center-align grey darken-3 gold-color-text">Messages</h4>
+    <table class="col s12">
+      {% if chat_list | length == 0 %}
+      <h4 class="center-align grey darken-3 purple-color-text">
+        No conversations started
+      </h4>
+      {% else %} {% for chat in chat_list %}
+      <!-- Time calculation -->
+      {% set time_d = (current_datetime - chat.messages[-1].date).days %} {% set
+      time_m = ((current_datetime - chat.messages[-1].date).seconds / 60) |
+      round(0, 'floor') | int%} {% set time_h = ((current_datetime -
+      chat.messages[-1].date).seconds / 3600) |round(0, 'floor') | int %} {% if
+      time_d == 1 %} {% set time_ago = (time_d | string + " day ago") %} {% elif
+      time_d > 0 %} {% set time_ago = (time_d | string + " days ago") %} {% elif
+      time_m == 1 %} {% set time_ago = (time_m | string + " minute ago") %} {%
+      elif time_m < 59 %} {% set time_ago=(time_m| string + " minutes ago" ) %}
+      {% elif time_h==1 %} {% set time_ago=(time_h | string + " hour ago" ) %}
+      {% elif time_h < 59 %} {% set time_ago=(time_h | string + " hours ago" )
+      %} {% endif %}
+
+      <!-- User set up -->
+      {% if chat.user1 == session.user %} {% set user_name = chat.user2 %} {%
+      else %} {% set user_name = chat.user1 %} {% endif %}
+
+      <!-- Message set up -->
+      {% if chat.messages[-1].message %} {% set last_message =
+      chat.messages[-1].message %} {% elif chat.messages[-1].discord_id %} {%
+      set last_message = chat.messages[-1].discord_id %} {% elif
+      chat.messages[-1].battle_net %} {% set last_message =
+      chat.messages[-1].battle_net %} {% elif chat.messages[-1].offer_accepted
+      %} {% set last_message = chat.messages[-1].offer_accepted.offer_name +
+      "offer accepted" %} {% else %} {% endif %}
+
+      <!-- loop start -->
+      {% if loop.index % 2 == 1 %}
+      <tr class="grey darken-2">
+        <th>
+          {% if chat.messages[-1].user == session.user %}
+          <span class="white-text">To </span>
+          {% else %}
+          <span class="white-text">From </span>
+          {% endif %}
+          <span class="orange-color-text">{{ user_name }}</span>
+          <span class="white-text">{{ time_ago }}</span>
+        </th>
+        <th>{{ last_message }}</th>
+      </tr>
+      {% else %}
+      <tr class="grey darken-1">
+        <th>
+          {% if chat.messages[-1].user == session.user %}
+          <span class="white-text">To </span>
+          {% else %}
+          <span class="white-text">From </span>
+          {% endif %}
+          <span class="orange-color-text">{{ user_name }}</span>
+          <span class="white-text">{{ time_ago }}</span>
+        </th>
+        <th>{{ last_message }}</th>
+      </tr>
+      {% endif %} {% endfor %} {% endif %}
+    </table>
+  </div>
+</div>
+
+{% endblock %}
