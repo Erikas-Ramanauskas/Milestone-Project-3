@@ -314,8 +314,6 @@ def messages(username):
     chat_list = list(mongo.db.messages.find(
         {"$text": {"$search": session["user"]}}))
 
-    print(chat_list, file=sys.stderr)
-
     # Sort chat_list based on the most recent message in each chat
     sorted_chat_list = sorted(
         chat_list,

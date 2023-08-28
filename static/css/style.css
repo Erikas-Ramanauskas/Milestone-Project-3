@@ -180,6 +180,18 @@ output {
     }
 }
 
+/* messages list */
+.messages-name {
+    width: 30%;
+}
+
+.messages-message {
+    width: 500px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /* Messsages chat design */
 #chat-container {
     margin-top: 1rem;

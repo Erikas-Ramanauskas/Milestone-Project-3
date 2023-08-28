@@ -30,15 +30,15 @@
       {% if chat.messages[-1].message %} {% set last_message =
       chat.messages[-1].message %} {% elif chat.messages[-1].discord_id %} {%
       set last_message = chat.messages[-1].discord_id %} {% elif
-      chat.messages[-1].battle_net %} {% set last_message =
-      chat.messages[-1].battle_net %} {% elif chat.messages[-1].offer_accepted
-      %} {% set last_message = chat.messages[-1].offer_accepted.offer_name +
-      "offer accepted" %} {% else %} {% endif %}
+      chat.messages[-1].b_net_id %} {% set last_message =
+      chat.messages[-1].b_net_id %} {% elif chat.messages[-1].offer_accepted %}
+      {% set last_message = chat.messages[-1].offer_accepted.offer_name + "offer
+      accepted" %} {% else %} {% endif %}
 
       <!-- loop start -->
       {% if loop.index % 2 == 1 %}
       <tr class="grey darken-2">
-        <th>
+        <td class="messages-name">
           {% if chat.messages[-1].user == session.user %}
           <span class="white-text">To </span>
           {% else %}
@@ -46,12 +46,12 @@
           {% endif %}
           <span class="orange-color-text">{{ user_name }}</span>
           <span class="white-text">{{ time_ago }}</span>
-        </th>
-        <th>{{ last_message }}</th>
+        </td>
+        <td class="messages-message">{{ last_message }}</td>
       </tr>
       {% else %}
       <tr class="grey darken-1">
-        <th>
+        <td class="messages-name">
           {% if chat.messages[-1].user == session.user %}
           <span class="white-text">To </span>
           {% else %}
@@ -59,8 +59,8 @@
           {% endif %}
           <span class="orange-color-text">{{ user_name }}</span>
           <span class="white-text">{{ time_ago }}</span>
-        </th>
-        <th>{{ last_message }}</th>
+        </td>
+        <td class="messages-message">{{ last_message }}</td>
       </tr>
       {% endif %} {% endfor %} {% endif %}
     </table>
