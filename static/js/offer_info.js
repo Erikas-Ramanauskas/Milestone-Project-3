@@ -54,7 +54,6 @@ for (let i = 0; i < bidRow.length; i++) {
 // function adjust invisible form that trigers offer acceptence by owner of offer
 function renderBidAcceptForm(button) {
 
-
     // Get the data attributes
     const user = button.getAttribute('data-user');
     const bid = button.getAttribute('data-bid');
@@ -63,6 +62,10 @@ function renderBidAcceptForm(button) {
     const userInput = document.getElementById('trade-user');
     const priceInput = document.getElementById('trade-price');
     const accepted = document.getElementById('trade-accepted');
+
+    const offerDetails = document.getElementById('offer-details');
+
+    offerDetails.innerHTML = `<p class="bid-info"><a class="orange-color-text" href="/profile/${user}">${user}</a> offered <span class="orange-color-text">${bid}</span></p>`;
 
     // Set the values of the input elements
     userInput.value = user;

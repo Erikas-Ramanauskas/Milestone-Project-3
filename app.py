@@ -134,8 +134,11 @@ def profile(username):
     user = mongo.db.users.find_one(
         {"username": username})
 
+    offers = list(mongo.db.offers.find({"created_by": username}))
+
     if session["user"] == username:
-        return render_template("profile.html", user=user)
+        return render_template("profile.html", user=user, offers=offers,
+                               current_datetime=current_datetime)
     elif session["user"] and username != session["user"]:
         # preventing sensible data passed to front end.
         user2 = {
@@ -144,7 +147,8 @@ def profile(username):
             "is_hardcore": user["is_hardcore"],
             "is_season": user["is_season"]
         }
-        return render_template("profile.html", user=user2)
+        return render_template("profile.html", user=user2, offers=offers,
+                               current_datetime=current_datetime)
     else:
         return redirect(url_for("login"))
 
