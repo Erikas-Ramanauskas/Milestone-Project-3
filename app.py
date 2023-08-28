@@ -336,8 +336,7 @@ def message(reciever):
 
     user1 = session["user"]
 
-    user2 = mongo.db.users.find_one(
-        {"username": reciever})
+    user2 = reciever
 
     message_data = mongo.db.messages.find_one(
         {"combined_id": message_id})

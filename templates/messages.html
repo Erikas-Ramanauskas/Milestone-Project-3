@@ -3,7 +3,7 @@
 <div id="chat-container" class="row grey darken-3 white-text">
   <div class="col s12 grey darken-3">
     <h4 class="center-align grey darken-3 gold-color-text">Messages</h4>
-    <table class="col s12">
+    <div>
       {% if chat_list | length == 0 %}
       <h4 class="center-align grey darken-3 purple-color-text">
         No conversations started
@@ -37,33 +37,47 @@
 
       <!-- loop start -->
       {% if loop.index % 2 == 1 %}
-      <tr class="grey darken-2">
-        <td class="messages-name">
-          {% if chat.messages[-1].user == session.user %}
-          <span class="white-text">To </span>
-          {% else %}
-          <span class="white-text">From </span>
-          {% endif %}
-          <span class="orange-color-text">{{ user_name }}</span>
-          <span class="white-text">{{ time_ago }}</span>
-        </td>
-        <td class="messages-message">{{ last_message }}</td>
-      </tr>
+      <a
+        class="row grey darken-2 message-line"
+        href="{{url_for('message', reciever=user_name)}}"
+      >
+        <div class="col m12 l3 messages-name">
+          <p>
+            {% if chat.messages[-1].user == session.user %}
+            <span class="white-text">To </span>
+            {% else %}
+            <span class="white-text">From </span>
+            {% endif %}
+            <span class="orange-color-text messages-user">{{ user_name }}</span>
+            <span class="white-text messages-time">{{ time_ago }}</span>
+          </p>
+        </div>
+        <div class="col s9 messages-message teal-color-text">
+          {{ last_message }}
+        </div>
+      </a>
       {% else %}
-      <tr class="grey darken-1">
-        <td class="messages-name">
-          {% if chat.messages[-1].user == session.user %}
-          <span class="white-text">To </span>
-          {% else %}
-          <span class="white-text">From </span>
-          {% endif %}
-          <span class="orange-color-text">{{ user_name }}</span>
-          <span class="white-text">{{ time_ago }}</span>
-        </td>
-        <td class="messages-message">{{ last_message }}</td>
-      </tr>
+      <a
+        class="row grey darken-1 message-line"
+        href="{{url_for('message', reciever=user_name)}}"
+      >
+        <div class="col m12 l3 messages-name">
+          <p>
+            {% if chat.messages[-1].user == session.user %}
+            <span class="white-text">To </span>
+            {% else %}
+            <span class="white-text">From </span>
+            {% endif %}
+            <span class="orange-color-text messages-user">{{ user_name }}</span>
+            <span class="white-text messages-time">{{ time_ago }}</span>
+          </p>
+        </div>
+        <div class="col s9 messages-message teal-color-text">
+          {{ last_message }}
+        </div>
+      </a>
       {% endif %} {% endfor %} {% endif %}
-    </table>
+    </div>
   </div>
 </div>
 
