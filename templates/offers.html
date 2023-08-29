@@ -12,13 +12,17 @@
       <div class="card-content white-text">
     
         <span class="card-title">
+            <div>
             {{ offer.item_data }} ({{ offer.class_data }})
-                {% if offer.is_hardcore == "on" %}
-                <i class="fa-solid fa-skull prefix teal-color-text tooltipped" data-position="top" data-tooltip="Hardcore item"></i>
-                {% endif %}
-                {% if offer.is_season == "on" %}
-                <i class="fa-brands fa-envira prefix teal-color-text tooltipped" data-position="top" data-tooltip="Seasonal item"></i>
-                {% endif %}
+            </div>
+            <div>
+            {% if offer.is_hardcore == "on" %}
+            <i class="fa-solid fa-skull prefix teal-color-text tooltipped" data-position="top" data-tooltip="Hardcore item"></i>
+            {% endif %}
+            {% if offer.is_season == "on" %}
+            <i class="fa-brands fa-envira prefix teal-color-text tooltipped" data-position="top" data-tooltip="Seasonal item"></i>
+            {% endif %}
+            </div>
         </span>
         <p>
             {% if offer.armor > 0 %} 

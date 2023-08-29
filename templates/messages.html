@@ -61,7 +61,7 @@
         class="row grey darken-1 message-line"
         href="{{url_for('message', reciever=user_name)}}"
       >
-        <div class="col m12 l3 messages-name">
+        <div class="col m12 messages-name">
           <p>
             {% if chat.messages[-1].user == session.user %}
             <span class="white-text">Sent to </span>

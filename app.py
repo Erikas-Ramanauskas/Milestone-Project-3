@@ -52,6 +52,7 @@ item_types = ["Helm", "Chest Armor", "Gloves", "Pants", "Boots", "Amulet",
 @app.route("/offers")
 def offers():
     offers = list(mongo.db.offers.find())
+    check_notifications("", True)
     return render_template("offers.html", offers=offers,
                            current_datetime=current_datetime)
 
@@ -61,14 +62,14 @@ def register():
     if request.method == "POST":
         # check if username already exists in db
         existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
+            {"username": request.form.get("username")})
 
         if existing_user:
             flash("Username already exists")
             return redirect(url_for("register"))
 
         # takes users details
-        username = request.form.get("username").lower()
+        username = request.form.get("username")
         password = request.form.get("password")
         r_password = request.form.get("r_password")
 
@@ -93,7 +94,8 @@ def register():
         mongo.db.users.insert_one(register)
 
         # put the new user into 'session' cookie
-        session["user"] = request.form.get("username").lower()
+        session["user"] = request.form.get("username")
+        session["messages"] = 0
         flash("Registration Successful!")
         return redirect(url_for("profile", username=session["user"]))
 
@@ -105,15 +107,17 @@ def login():
     if request.method == "POST":
         # check if username exists in db
         existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
+            {"username": request.form.get("username")})
 
         if existing_user:
             # ensure hashed password matches user input
             if check_password_hash(
                     existing_user["password"], request.form.get("password")):
-                session["user"] = request.form.get("username").lower()
+                session["user"] = request.form.get("username")
                 flash("Welcome, {}".format(
                     request.form.get("username")))
+                session["messages"] = 0
+                check_notifications("", True)
                 return redirect(url_for(
                     "profile", username=session["user"]))
             else:
@@ -138,6 +142,7 @@ def profile(username):
     offers = list(mongo.db.offers.find({"created_by": username}))
 
     if session["user"] == username:
+        check_notifications(user, False)
         return render_template("profile.html", user=user, offers=offers,
                                current_datetime=current_datetime)
     elif session["user"] and username != session["user"]:
@@ -148,6 +153,7 @@ def profile(username):
             "is_hardcore": user["is_hardcore"],
             "is_season": user["is_season"]
         }
+        check_notifications(user, False)
         return render_template("profile.html", user=user2, offers=offers,
                                current_datetime=current_datetime)
     else:
@@ -176,9 +182,11 @@ def edit_profile(username):
         mongo.db.users.replace_one({"_id": ObjectId(user["_id"])}, submit)
         user2 = mongo.db.users.find_one({"_id": ObjectId(user["_id"])})
         flash("Profile Successfully Updated")
+        check_notifications(user, False)
         return render_template("profile.html", user=user2)
 
     if session["user"]:
+        check_notifications(user, False)
         return render_template("edit_profile.html", user=user, p_class=p_class)
 
     return redirect(url_for("register"))
@@ -239,6 +247,7 @@ def add_offer():
     if "user" in session:
         user = mongo.db.users.find_one(
             {"username": session["user"]})
+        check_notifications(user, False)
         return render_template("add_offer.html", user=user, p_class=p_class,
                                item_types=item_types)
     else:
@@ -304,6 +313,7 @@ def offer_info(offer_id):
             flash("You must be logged in to place a bid.")
             return render_template("login.html")
 
+    check_notifications("", True)
     return render_template("offer_info.html", offer=offer,
                            current_datetime=current_datetime)
 
@@ -320,7 +330,7 @@ def messages(username):
         key=lambda chat: chat['messages'][-1]['date'],
         reverse=True
     )
-
+    check_notifications("", True)
     return render_template("messages.html", chat_list=sorted_chat_list,
                            current_datetime=current_datetime)
 
@@ -334,14 +344,26 @@ def message(reciever):
     user = mongo.db.users.find_one(
         {"username": session["user"]})
 
-    user1 = session["user"]
-
-    user2 = reciever
+    other_user = mongo.db.users.find_one(
+        {"username": reciever})
 
     message_data = mongo.db.messages.find_one(
         {"combined_id": message_id})
 
-    # if message is being sent
+    if message_data:
+        # find out which user is user1 and 2 and update unread message count
+        if session["user"] == message_data["user1"]:
+            user["message_count"] -= message_data["user1_unread"]
+            message_data["user1_unread"] = 0
+            user1_count = 0
+            user2_count = message_data["user2_unread"] + 1
+        else:
+            user["message_count"] -= message_data["user2_unread"]
+            message_data["user2_unread"] = 0
+            user1_count = message_data["user1_unread"] + 1
+            user2_count = 0
+
+    # if message is being sent first of check if conversation was started, if not starts new
     if request.method == "POST":
 
         new_message_data = {
@@ -352,6 +374,11 @@ def message(reciever):
             "date": current_datetime,
         }
 
+        # updates another user personal score for read messages and session info
+        other_user["message_count"] += 1
+        mongo.db.users.replace_one(
+            {"_id": ObjectId(other_user["_id"])}, other_user)
+
         if message_data:
             message_data["messages"].append(new_message_data)
             new_message_array = message_data["messages"]
@@ -359,16 +386,21 @@ def message(reciever):
             updated_conversation = {
                 "combined_id": message_data["combined_id"],
                 "user1": message_data["user1"],
+                "user1_unread": user1_count,
                 "user2": message_data["user2"],
+                "user2_unread":  user2_count,
                 "messages": new_message_array
             }
             mongo.db.messages.replace_one(
                 {"_id": ObjectId(message_data["_id"])}, updated_conversation)
+
         else:
             new_conversation = {
                 "combined_id": message_id,
-                "user1": user1,
-                "user2": user2,
+                "user1": session["user"],
+                "user1_unread": 0,
+                "user2": reciever,
+                "user2_unread": 1,
                 "messages": []
             }
             new_conversation["messages"].append(new_message_data)
@@ -376,7 +408,13 @@ def message(reciever):
             mongo.db.messages.insert_one(new_conversation)
 
         message_data = mongo.db.messages.find_one({"combined_id": message_id})
+        # in case of just loading the screen it updates the unread message count
+    else:
+        if message_data:
+            mongo.db.messages.replace_one(
+                {"_id": ObjectId(message_data["_id"])}, message_data)
 
+    check_notifications(user, False)
     return render_template("message.html", reciever=reciever,
                            message_data=message_data,
                            current_datetime=current_datetime, user=user)
@@ -427,10 +465,13 @@ def message_bid_accepted(reciever, bid, offer):
 
 
 # function check the active sesion["user"] and checks active messages and trades
-def check_notifications():
-    user = mongo.db.users.find_one(
-        {"username": session["user"]})
-    sesion["messages"] = user["message_count"]
+# some functions will already call user some will not, allowing for both options to reduce loading times
+def check_notifications(user, check):
+    if check:
+        user = mongo.db.users.find_one(
+            {"username": session["user"]})
+
+    session["messages"] = user["message_count"]
 
 # function takes 2 users and determines which name has higher
 # value placing it first. Same Unique id is creted regardles with
