@@ -30,8 +30,10 @@ fetch("/static/json/affix.json")
     .then((response) => response.json())
     .then((json) => {
         affixPerc = json;
-        // its important procentage symbosl to be added before loader disapears
+        // its important procentage symbols to be added before loader disapears
         addPercentageSymbols();
+        // equalising the all cards to tallest.
+        setEqualCardHeight();
         loader.classList.add("loader-hidden");
         chatWindowFocus();
     });
@@ -85,5 +87,21 @@ function shareContactID(button) {
 
 if (window.history.replaceState) {
     window.history.replaceState(null, null, window.location.href);
+}
+
+
+// setting all item cards to be same height
+function setEqualCardHeight() {
+    const cards = document.getElementsByClassName("offer-card");
+
+    let maxHeight = 0;
+    for (let i = 0; i < cards.length; i++) {
+        const cardHeight = cards[i].clientHeight;
+        maxHeight = Math.max(maxHeight, cardHeight);
+    }
+
+    for (let i = 0; i < cards.length; i++) {
+        cards[i].style.height = `${maxHeight}px`;
+    }
 }
 

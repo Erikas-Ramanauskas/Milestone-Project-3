@@ -183,7 +183,10 @@ output {
 /* messages list */
 .message-line {
     margin-bottom: 0px !important;
-    display: block
+    display: block;
+    margin: 5px;
+    border-radius: 0.7rem;
+
 }
 
 .messages-user {
@@ -193,23 +196,25 @@ output {
 .messages-name {
     box-sizing: border-box;
     white-space: nowrap;
-    width: 20%;
+    width: 100%;
     font-size: 1.2rem;
-    margin: 0.5rem 0 1rem;
+    margin: 0.5rem
 }
 
-.messages-time {
-    font-size: 0.8rem;
-    text-decoration: none;
-}
-
-.messages-message {
+.messages-message-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
     box-sizing: border-box;
-    width: 70%;
     white-space: nowrap;
+    width: 100%;
+    margin: 0.5rem
+}
+
+.message-text {
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
-    margin: 1rem 0 0.5rem;
 }
 
 /* Messsages chat design */

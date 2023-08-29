@@ -41,19 +41,19 @@
         class="row grey darken-2 message-line"
         href="{{url_for('message', reciever=user_name)}}"
       >
-        <div class="col m12 l3 messages-name">
+        <div class="col s12 messages-name">
           <p>
             {% if chat.messages[-1].user == session.user %}
-            <span class="white-text">To </span>
+            <span class="white-text">Sent to </span>
             {% else %}
-            <span class="white-text">From </span>
+            <span class="white-text">Recieved from </span>
             {% endif %}
             <span class="orange-color-text messages-user">{{ user_name }}</span>
-            <span class="white-text messages-time">{{ time_ago }}</span>
           </p>
         </div>
-        <div class="col s9 messages-message teal-color-text">
-          {{ last_message }}
+        <div class="col s12 messages-message-container teal-color-text">
+          <p class="message-text">{{ last_message }}</p>
+          <p class="white-text messages-time">{{ time_ago }}</p>
         </div>
       </a>
       {% else %}
@@ -64,16 +64,16 @@
         <div class="col m12 l3 messages-name">
           <p>
             {% if chat.messages[-1].user == session.user %}
-            <span class="white-text">To </span>
+            <span class="white-text">Sent to </span>
             {% else %}
-            <span class="white-text">From </span>
+            <span class="white-text">Recieved from </span>
             {% endif %}
             <span class="orange-color-text messages-user">{{ user_name }}</span>
-            <span class="white-text messages-time">{{ time_ago }}</span>
           </p>
         </div>
-        <div class="col s9 messages-message teal-color-text">
-          {{ last_message }}
+        <div class="col s12 messages-message-container teal-color-text">
+          <p class="message-text">{{ last_message }}</p>
+          <p class="white-text messages-time">{{ time_ago }}</p>
         </div>
       </a>
       {% endif %} {% endfor %} {% endif %}
