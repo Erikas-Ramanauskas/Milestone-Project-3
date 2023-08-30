@@ -363,7 +363,7 @@ def message(reciever):
             user1_count = message_data["user1_unread"] + 1
             user2_count = 0
 
-    # Updates user message score so it later can be
+    # Updates user message score
     mongo.db.users.replace_one(
         {"_id": ObjectId(user["_id"])}, user)
 
@@ -441,6 +441,10 @@ def message_bid_accepted(reciever, bid, offer):
     other_user = mongo.db.users.find_one(
         {"username": reciever})
 
+    other_user["message_count"] += 1
+    mongo.db.users.replace_one(
+        {"_id": ObjectId(other_user["_id"])}, other_user)
+
     if message_data:
         # find out which user is user1 and 2 and update unread message count
         if session["user"] == message_data["user1"]:
@@ -492,7 +496,6 @@ def message_bid_accepted(reciever, bid, offer):
             "user2_unread": 1,
             "messages": [new_message_data]
         }
-        new_conversation["messages"].append(new_message_data)
 
         mongo.db.messages.insert_one(new_conversation)
 

@@ -3,7 +3,6 @@ let chosenClass = document.querySelector(".offer-class-button.active").dataset
     .class;
 let chosenItem;
 
-
 let itemData;
 
 // takes jason data
@@ -179,15 +178,21 @@ function creatSuffixesButtons(itemData) {
 function toggleActive(button) {
     // Count the active buttons
     const activeButtons = document.querySelectorAll(".affix-button.active");
+    const submitButton = document.querySelector('#item-submit');
 
     // If active buttons exceed the maximum, find the first active button and remove its active class
     if (button.classList.contains("active")) {
         button.classList.remove("active");
+        submitButton.disabled = true;
         removeAffixHTML(button, false);
     } else if (activeButtons.length < 4) {
+        activeButtons.length < 3 ? M.toast({ html: `Please select ${3 - activeButtons.length} more Affix${activeButtons.length < 2 ? "es" : ""}` }) : "";
+        submitButton.disabled = activeButtons.length < 3;
         button.classList.add("active");
         addAffixHTML(button);
     } else {
+        submitButton.disabled = false;
+        M.toast({ html: 'Maximum 4 affixes allowed' });
         button.classList.add("rejected");
         setTimeout(() => {
             button.classList.remove("rejected");
@@ -387,5 +392,3 @@ function removeAffixHTML(button, all) {
         formElement.removeChild(elementToRemove);
     }
 }
-
-

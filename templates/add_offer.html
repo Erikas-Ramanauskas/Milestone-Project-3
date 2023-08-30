@@ -1,31 +1,31 @@
 {% extends "base.html" %} {% block content %}
 
-<div class="">
-  <h3 class="gold-color-text center-align">Add offer</h3>
+<div>
+  <h3 class="orange-color-text center-align">Add offer</h3>
 </div>
 
 
   <!-- Class picker -->
 
-  <div class="row grey darken-3">
+<div class="row grey darken-3">
     <div class="center-align col s12">
-      {% for class in p_class %} {% if class == user.class_preference %}
-      <button
+        {% for class in p_class %} {% if class == user.class_preference %}
+        <button
         class="waves-effect waves-light btn grey darken-3 main-choices offer-class-button active"
         data-class="{{ class }}"
-      >
+        >
         {{ class }}
-      </button>
-      {% else %}
-      <button
+        </button>
+        {% else %}
+        <button
         class="waves-effect waves-light btn grey darken-3 main-choices offer-class-button"
         data-class="{{ class }}"
-      >
+        >
         {{ class }}
-      </button>
-      {% endif %} {% endfor %}
+        </button>
+        {% endif %} {% endfor %}
     </div>
-  </div>
+</div>
 
 
 <!-- is hardcore toogle -->
@@ -63,6 +63,10 @@
   </div>
 </div>
 
+<div>
+    <h5 class="orange-color-text center-align">Item Type</h5>
+</div>
+
 <!-- Item picker -->
 <div class="row grey darken-3">
   <div class="center-align col s12">
@@ -78,7 +82,14 @@
 </div>
 
 <!-- Suffixes -->
-<div id="suffixes" class="row grey darken-3"></div>
+<div>
+    <h5 class="orange-color-text center-align">Suffixes</h5>
+    <div id="suffixes" class="row grey darken-3"></div>
+</div>
+
+<div>
+    <h5 class="orange-color-text center-align">Affixes</h5>
+</div>
 
 <!-- Affixes -->
 <div class="row grey darken-3">
@@ -117,7 +128,7 @@
         <!-- submit button -->
         <div class="row">
             <div class="col s12 center-align">
-                <button type="submit" class="btn-large grey darken-3 text-shadow gold-color-text">
+                <button type="submit" id="item-submit" class="btn-large grey darken-3 text-shadow gold-color-text" disabled>
                     Add item <i class="fa-solid fa-circle-check"></i>
             </div>
         </div>

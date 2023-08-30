@@ -50,7 +50,7 @@ function findPercentageForAffix(targetAffix) {
     }
 }
 
-// Caapture all affix-key/value created by flask, filter all that suposed to be with procentage not static number and add % at the end
+// Capture all affix-key/value created by flask, filter all that suposed to be with procentage not static number and add % at the end
 function addPercentageSymbols() {
 
     const affixKeys = document.querySelectorAll(".affix-key");
