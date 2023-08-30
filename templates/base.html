@@ -46,9 +46,12 @@
             <li><a href="{{ url_for('offers') }}">Offers</a></li>
             <li><a href="{{ url_for('add_offer') }}">Create Offer</a></li>
             <li>
-              <a href="{{ url_for('messages', username=session['user']) }}">
+              <a
+                id="nav-message"
+                href="{{ url_for('messages', username=session['user']) }}"
+              >
                 {% if session.messages > 0 %}
-                <span class="message-circle"> { session.messages } </span>
+                <span class="message-circle"> {{ session.messages }}</span>
                 {% endif %} Messages</a
               >
             </li>

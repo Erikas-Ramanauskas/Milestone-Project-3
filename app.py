@@ -420,7 +420,7 @@ def message(reciever):
                            current_datetime=current_datetime, user=user)
 
 
-# function takes bid-acceptence detaisl and creates new message.
+# function takes bid-acceptence details and creates new message.
 def message_bid_accepted(reciever, bid, offer):
     # generate message id for a chat
     message_id = generate_combined_id(session["user"], reciever)
@@ -467,11 +467,12 @@ def message_bid_accepted(reciever, bid, offer):
 # function check the active sesion["user"] and checks active messages and trades
 # some functions will already call user some will not, allowing for both options to reduce loading times
 def check_notifications(user, check):
-    if check:
-        user = mongo.db.users.find_one(
-            {"username": session["user"]})
+    if sesion["user"]:
+        if check:
+            user = mongo.db.users.find_one(
+                {"username": session["user"]})
 
-    session["messages"] = user["message_count"]
+        session["messages"] = user["message_count"]
 
 # function takes 2 users and determines which name has higher
 # value placing it first. Same Unique id is creted regardles with
