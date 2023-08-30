@@ -45,6 +45,7 @@
           <ul class="right hide-on-med-and-down">
             <li><a href="{{ url_for('offers') }}">Offers</a></li>
             <li><a href="{{ url_for('add_offer') }}">Create Offer</a></li>
+            {% if session.user %}
             <li>
               <a
                 id="nav-message"
@@ -55,7 +56,6 @@
                 {% endif %} Messages</a
               >
             </li>
-            {% if session.user %}
             <li>
               <a href="{{ url_for('profile', username=session['user']) }}"
                 >Profile</a
@@ -89,12 +89,17 @@
         </li>
         <li><a href="{{ url_for('offers') }}">Offers</a></li>
         <li><a href="{{ url_for('add_offer') }}">Create Offer</a></li>
-        <li>
-          <a href="{{ url_for('messages', username=session['user']) }}"
-            >Messages</a
-          >
-        </li>
         {% if session.user %}
+      <li>
+              <a
+                id="nav-message"
+                href="{{ url_for('messages', username=session['user']) }}"
+              >
+                {% if session.messages > 0 %}
+                <span class="message-circle"> {{ session.messages }}</span>
+                {% endif %} Messages</a
+              >
+            </li>
         <li>
           <a href="{{ url_for('profile', username=session['user']) }}"
             >Profile</a
