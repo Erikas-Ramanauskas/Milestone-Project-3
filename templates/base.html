@@ -53,8 +53,11 @@
               >
                 {% if session.messages > 0 %}
                 <span class="message-circle"> {{ session.messages }}</span>
-                {% endif %} Messages</a
-              >
+                <span class="purple-color-text">Messages</span>
+                {% else %}
+                Messages
+                 {% endif %}
+                </a>
             </li>
             <li>
               <a href="{{ url_for('profile', username=session['user']) }}"
@@ -90,17 +93,16 @@
         <li><a href="{{ url_for('offers') }}">Offers</a></li>
         <li><a href="{{ url_for('add_offer') }}">Create Offer</a></li>
         {% if session.user %}
-      <li>
-              <a
-                id="nav-message"
-                href="{{ url_for('messages', username=session['user']) }}"
-              >
-                {% if session.messages > 0 %}
-                <span class="message-circle"> {{ session.messages }}</span>
-                {% endif %} Messages</a
-              >
-            </li>
-        <li>
+    <li>
+        <a id="nav-message" href="{{ url_for('messages', username=session['user']) }}">
+            {% if session.messages > 0 %}
+            <span class="message-circle"> {{ session.messages }}</span>
+            <span class="purple-color-text">Messages</span>
+            {% else %}
+            Messages
+            {% endif %}
+        </a>
+    </li>
           <a href="{{ url_for('profile', username=session['user']) }}"
             >Profile</a
           >

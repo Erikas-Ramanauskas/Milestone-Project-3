@@ -89,13 +89,14 @@ textarea {
 .message-circle {
     width: 30px;
     height: 30px;
-    background-color: red;
+    background-color: var(--purple-color);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
     font-size: 1rem;
+    margin-right: 5px;
 }
 
 #nav-message {

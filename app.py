@@ -88,7 +88,8 @@ def register():
             "discord_id": "",
             "class_preference": "None",
             "is_hardcore": "off",
-            "is_season": "off"
+            "is_season": "off",
+            "message_count": 0
         }
 
         mongo.db.users.insert_one(register)
@@ -177,7 +178,8 @@ def edit_profile(username):
             "discord_id": request.form.get("discord_id"),
             "class_preference": request.form.get("class_preference"),
             "is_hardcore": is_hardcore,
-            "is_season": is_season
+            "is_season": is_season,
+            "message_count": user["message_count"]
         }
         mongo.db.users.replace_one({"_id": ObjectId(user["_id"])}, submit)
         user2 = mongo.db.users.find_one({"_id": ObjectId(user["_id"])})
@@ -340,15 +342,13 @@ def message(reciever):
 
     # generate message id for a chat
     message_id = generate_combined_id(session["user"], reciever)
+    message_data = mongo.db.messages.find_one(
+        {"combined_id": message_id})
 
     user = mongo.db.users.find_one(
         {"username": session["user"]})
-
     other_user = mongo.db.users.find_one(
         {"username": reciever})
-
-    message_data = mongo.db.messages.find_one(
-        {"combined_id": message_id})
 
     if message_data:
         # find out which user is user1 and 2 and update unread message count
@@ -363,7 +363,12 @@ def message(reciever):
             user1_count = message_data["user1_unread"] + 1
             user2_count = 0
 
-    # if message is being sent first of check if conversation was started, if not starts new
+    # Updates user message score so it later can be
+    mongo.db.users.replace_one(
+        {"_id": ObjectId(user["_id"])}, user)
+
+    # if message is being sent first of check if conversation was started,
+    # if not starts new
     if request.method == "POST":
 
         new_message_data = {
@@ -374,7 +379,8 @@ def message(reciever):
             "date": current_datetime,
         }
 
-        # updates another user personal score for read messages and session info
+        # updates another user personal score for read
+        # messages and session info
         other_user["message_count"] += 1
         mongo.db.users.replace_one(
             {"_id": ObjectId(other_user["_id"])}, other_user)
@@ -408,7 +414,9 @@ def message(reciever):
             mongo.db.messages.insert_one(new_conversation)
 
         message_data = mongo.db.messages.find_one({"combined_id": message_id})
-        # in case of just loading the screen it updates the unread message count
+
+        # in case of just loading the screen it updates
+        # the unread message count
     else:
         if message_data:
             mongo.db.messages.replace_one(
@@ -421,11 +429,30 @@ def message(reciever):
 
 
 # function takes bid-acceptence details and creates new message.
+# used in "@app.route offer_info"
 def message_bid_accepted(reciever, bid, offer):
     # generate message id for a chat
     message_id = generate_combined_id(session["user"], reciever)
     message_data = mongo.db.messages.find_one(
         {"combined_id": message_id})
+
+    user = mongo.db.users.find_one(
+        {"username": session["user"]})
+    other_user = mongo.db.users.find_one(
+        {"username": reciever})
+
+    if message_data:
+        # find out which user is user1 and 2 and update unread message count
+        if session["user"] == message_data["user1"]:
+            user["message_count"] -= message_data["user1_unread"]
+            message_data["user1_unread"] = 0
+            user1_count = 0
+            user2_count = message_data["user2_unread"] + 1
+        else:
+            user["message_count"] -= message_data["user2_unread"]
+            message_data["user2_unread"] = 0
+            user1_count = message_data["user1_unread"] + 1
+            user2_count = 0
 
     offer = mongo.db.offers.find_one({"_id": ObjectId(offer["_id"])})
 
@@ -448,6 +475,10 @@ def message_bid_accepted(reciever, bid, offer):
 
         updated_conversation = {
             "combined_id": message_data["combined_id"],
+            "user1": message_data["user1"],
+            "user1_unread": user1_count,
+            "user2": message_data["user2"],
+            "user2_unread":  user2_count,
             "messages": new_message_array
         }
         mongo.db.messages.replace_one(
@@ -455,6 +486,10 @@ def message_bid_accepted(reciever, bid, offer):
     else:
         new_conversation = {
             "combined_id": message_id,
+            "user1": session["user"],
+            "user1_unread": 0,
+            "user2": reciever,
+            "user2_unread": 1,
             "messages": [new_message_data]
         }
         new_conversation["messages"].append(new_message_data)
@@ -464,8 +499,11 @@ def message_bid_accepted(reciever, bid, offer):
     message_data = mongo.db.messages.find_one({"combined_id": message_id})
 
 
-# function check the active sesion["user"] and checks active messages and trades
-# some functions will already call user some will not, allowing for both options to reduce loading times
+# function check the active sesion["user"] and checks active messages from
+# server user profile to update session count this function called at
+# every loading screen to have up to date message count. Some functions
+# will already call user some will not, allowing for both options
+# to reduce loading times
 def check_notifications(user, check):
     if "user" in session:
         if check:
