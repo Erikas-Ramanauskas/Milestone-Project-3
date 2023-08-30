@@ -467,7 +467,7 @@ def message_bid_accepted(reciever, bid, offer):
 # function check the active sesion["user"] and checks active messages and trades
 # some functions will already call user some will not, allowing for both options to reduce loading times
 def check_notifications(user, check):
-    if sesion["user"]:
+    if session["user"]:
         if check:
             user = mongo.db.users.find_one(
                 {"username": session["user"]})
