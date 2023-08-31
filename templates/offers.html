@@ -1,9 +1,73 @@
 {% extends "base.html" %} {% block content %}
 
 <div class="">
-  <h3 class="orange-color-text center-align">Items Offered</h3>
-  <p class="">Search below for player item offers</p>
+     <h3 class="orange-color-text center-align">Items Offered</h3>
+
+    <!-- Materialise side nav turned in to filter options -->
+    <div id="slide-out" class="sidenav grey darken-3">
+        <h5 class="orange-color-text">Filter options</h5>
+       <form id="filter-form" action=""> 
+
+<div class="row center-align">
+    <div class="input-field col s4">
+        <div class="switch">
+            <i class="fa-solid fa-skull prefix teal-color-text"></i>
+            <label for="is_hardcore" class="teal-color-text swich-button">
+                {% if user.is_hardcore == "on" %}
+                <input type="checkbox" form="mainForm" id="is_hardcore" name="is_hardcore" checked />
+                {% else %}
+                <input type="checkbox" form="mainForm" id="is_hardcore" name="is_hardcore" />
+                {% endif %}
+                <span class="lever"></span>
+            </label>
+        </div>
+    </div>
+
+    <!-- is season toogle -->
+
+    <div class="input-field col s4">
+        <div class="switch center-align">
+            <i class="fa-brands fa-envira teal-color-text"></i>
+            <label for="is_season" class="teal-color-text swich-button">
+                {% if user.is_season == "on" %}
+                <input type="checkbox" form="mainForm" id="is_season" name="is_season" checked />
+                {% else %}
+                <input type="checkbox" form="mainForm" name="is_season" />
+                {% endif %}
+                <span class="lever"></span>
+            </label>
+        </div>
+    </div>
 </div>
+
+        <!-- class choice -->
+        <div class="input-field">
+            <select name="class_preference" >
+                {% for class in p_class %} {% if class == user.class_preference %}
+                <option value="{{ class }}" selected>{{ class }}</option>
+                {% else %}
+                <option value="{{ class }}" >{{ class }}</option>
+                {% endif %} {% endfor %}
+            </select>
+            <label>Chose class</label>
+        </div>
+        <div class="input-field">
+            <select name="item_preference">
+                <option value="" disabled selected>Choose your option</option>
+                {% for item in item_types %}
+                <option value="{{ item }}" selected>{{ item }}</option>
+                {% endfor %}
+            </select>
+            <label>Chose class</label>
+        </div>
+       </form>
+    </div>
+
+    <!-- button to call side-nav filter options -->
+    <a data-target="slide-out" class="sidenav-trigger btn-small orange-color"><i class="fa-solid fa-filter"></i> Filter options</a>
+</div>
+
+
 
 <div class="row offer-grid" >
   {% for offer in offers %}

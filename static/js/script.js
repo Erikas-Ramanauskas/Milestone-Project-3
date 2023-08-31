@@ -15,6 +15,12 @@ $(document).ready(function () {
     );
     // Modal activation
     $('.modal').modal();
+    // Collapsable enabler
+    $('.collapsible').collapsible();
+    // side nav initialisation
+    $('.sidenav').sidenav();
+    // Initialise select
+    $('select').formSelect();
 });
 
 // Preloader fade out called together with json data load so the procentage change would not be vissable

@@ -105,6 +105,28 @@ textarea {
     align-items: center;
 }
 
+/* filter form modifications */
+#slide-out h5 {
+    margin: 0.8rem;
+}
+
+#filter-form div {
+    margin: 2rem 1rem;
+}
+
+.swich-button {
+    margin-left: 0 !important;
+}
+
+.input-field.col.s4 {
+    margin: 0 !important;
+}
+
+.s4 .swtich {
+    display: flex;
+    flex-direction: row;
+}
+
 
 
 /* Offer creation  */

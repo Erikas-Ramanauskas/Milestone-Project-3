@@ -25,18 +25,6 @@ mongo = PyMongo(app)
 
 current_datetime = datetime.datetime.now()
 
-
-# ------------------------------------------------------------------------------
-# turning json data in to item data
-# file_path = 'item_data.json'
-# with open(file_path, 'r') as json_file:
-#     json_data = json_file.read()
-
-# parsed_data = json.loads(json_data)
-
-# print(parsed_data["Helm"]["affixes"]["all_classes"][2])
-# -----------------------------------------------------------------------------
-
 # page specific variables
 # these are stable and does not require its own database
 p_class = ["All Classes", "Barbarian", "Druid",
@@ -52,8 +40,11 @@ item_types = ["Helm", "Chest Armor", "Gloves", "Pants", "Boots", "Amulet",
 @app.route("/offers")
 def offers():
     offers = list(mongo.db.offers.find())
-    check_notifications("", True)
+    user = mongo.db.users.find_one(
+        {"username": session["user"]})
+    check_notifications(user, False)
     return render_template("offers.html", offers=offers,
+                           user=user, p_class=p_class, item_types=item_types,
                            current_datetime=current_datetime)
 
 
@@ -232,15 +223,18 @@ def add_offer():
 
         # Create a list to store unknown key-value pairs
         affixes = {}
+        affix_array = []
 
         # Capture any additional form keys dynamically and store in affixes
         for key in request.form.keys():
             if key not in offer:
                 affixes[key] = request.form.getlist(key)[0]
+                affix_array.append(key.replace('-', ' '))
 
         # Add affixes to the offer dictionary if there are any
-        if affixes:
+        if affixes or affix_array:
             offer["affixes"] = affixes
+            offer["affix_array"] = affix_array
 
         mongo.db.offers.insert_one(offer)
         flash("Offer Successfully Added")
@@ -407,9 +401,8 @@ def message(reciever):
                 "user1_unread": 0,
                 "user2": reciever,
                 "user2_unread": 1,
-                "messages": []
+                "messages": [new_message_data]
             }
-            new_conversation["messages"].append(new_message_data)
 
             mongo.db.messages.insert_one(new_conversation)
 
