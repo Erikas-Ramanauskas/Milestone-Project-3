@@ -114,17 +114,18 @@ textarea {
     margin: 2rem 1rem;
 }
 
-.swich-button {
-    margin-left: 0 !important;
-}
-
 .input-field.col.s4 {
     margin: 0 !important;
 }
 
-.s4 .swtich {
+.swich-offers {
     display: flex;
     flex-direction: row;
+    padding: 1rem;
+}
+
+.swich-offers i {
+    font-size: 1.8rem;
 }
 
 
