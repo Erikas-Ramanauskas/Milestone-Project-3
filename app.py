@@ -363,6 +363,7 @@ def offer_info(offer_id):
                     "accepted": offer["trade"]["accepted"]
                 }
                 offer["trade"] = offer_accepted
+
                 mongo.db.offers.replace_one({"_id": ObjectId(offer_id)}, offer)
 
         else:

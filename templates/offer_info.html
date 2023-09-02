@@ -41,45 +41,66 @@
       </div>
 
       <!-- Offer action -->
-      {% if offer.created_by == session.user and offer.bids|length > 0 %}
-      <!-- Created by sesion user and bids placed -->
-        <div class="card-action">
-            <p class="bid-info teal-color-text">best bid by: <span><a class="gold-color-text" href="{{ url_for('profile', username=offer.bids[0].user) }}">{{ offer.bids[0].user }}</a></span></p>
-            <p class="bid-info white-text"> {{ offer.bids[0].offer_bid }} </p>
-            <a href="{{ url_for('offers') }}" class="btn-small purple-color text-shadow">Cancel <i class="fa-solid fa-xmark"></i></a>
-            <a href="#bid-acceptence" onclick="renderBidAcceptForm(this)" data-user="{{ offer.bids[0].user }}" data-bid="{{ offer.bids[0].offer_bid }}"
-                class="btn-small green-color text-shadow bid-accept-button modal-trigger">Accept Offer <i class="fa-solid fa-handshake-simple"></i></a>
-        </div>
-      {% elif offer.created_by == session.user and offer.bids|length == 0 %}
-    <!-- Created by sesion user and no bids placed -->
-        <div class="card-action">
-            <p id="offer-bid-label" class="teal-color-text">There are no bids</p>   
-        </div>
-    {% else %}
-    <!-- Created by other user so bids allowed -->
-      <div class="card-action">
-        <form id="bid-form" method="POST" action="{{ url_for('offer_info', offer_id=offer._id) }}">
-            <h6 id="offer-bid-label" class="teal-color-text">Your Bid:</h6>
-            <div class="col s12">
-                <i class="fa-solid fa-backward-fast teal-color-text bid-button" onclick="changeValue(1000000, false)"></i>
-                <i class="fa-solid fa-backward-step teal-color-text bid-button" onclick="changeValue(100000, false)"></i>
-                {% if offer.bids|length == 0 %}
-                <input id="offer-bid" name="offer_bid" value="{{ offer.offer_price }}" type="text" readOnly="true" class="teal-color-text" />
-                {% else %}
-                {% set offer2= offer.bids[0].offer_bid %}
-                <input id="offer-bid" name="offer_bid" value="{{ offer2 }}" type="text" readOnly="true"
-                    class="teal-color-text" />
-                {% endif %}
-                <i class="fa-solid fa-forward-step teal-color-text bid-button" onclick="changeValue(100000, true)"></i>
-                <i class="fa-solid fa-forward-fast teal-color-text bid-button" onclick="changeValue(1000000, true)"></i>
+        {% if offer.created_by == session.user and offer.trade.user %}
+            <div class="card-action">
+                <p class="bid-info teal-color-text">You have accepted <span><a class="gold-color-text offer-user-link" href="{{ url_for('profile', username=offer.trade.user) }}">{{ offer.trade.user }}</a></span> offer:</p>
+                <p class="bid-info white-text"> {{ offer.trade.price }} </p>
+                <a href="{{ url_for('offers') }}" class="btn-small purple-color text-shadow">Cancel trade <i
+                        class="fa-solid fa-xmark"></i></a>
+                <a href="#trade-confirmation" onclick="renderBidAcceptForm(this)" data-user="{{ offer.trade.user }}" data-trade="t-owner"
+                    class="btn-small green-color text-shadow bid-accept-button modal-trigger">Confirm trade <i class="fa-solid fa-arrow-right-arrow-left"></i></a>
             </div>
-            <a href="{{ url_for('offers') }}" class="btn-small purple-color text-shadow">Cancel <i class="fa-solid fa-xmark"></i></a>
-            <button form="bid-form" type="submit" id="bid-submit-btn" class="btn-small green-color accent-4 text-shadow" disabled>
-                Bid <i class="fa-solid fa-coins"></i>
-            </button>
-        </form>
-      </div>
-      {% endif %}
+        {% elif offer.trade.user == session.user %}
+            <div class="card-action">
+                <p class="bid-info teal-color-text"><a class="gold-color-text offer-user-link" href="{{ url_for('profile', username=offer.created_by) }}">{{
+                    offer.created_by }}</a> have accepted Your offer:</p>
+                <p class="bid-info white-text"> {{ offer.trade.price }} </p>
+                <a href="{{ url_for('offers') }}" class="btn-small purple-color text-shadow">Cancel trade <i
+                        class="fa-solid fa-xmark"></i></a>
+                <a href="#trade-confirmation" onclick="renderBidAcceptForm(this)" data-user="{{ offer.trade.user }}"
+                    data-trade="t-bidder" data-owner="{{ offer.created_by }}"  
+                    class="btn-small green-color text-shadow bid-accept-button modal-trigger">Confirm trade <i
+                        class="fa-solid fa-arrow-right-arrow-left"></i></a>
+            </div>
+        {% elif offer.created_by == session.user and offer.bids|length > 0 %}
+        <!-- Created by sesion user and bids placed -->
+            <div class="card-action">
+                <p class="bid-info teal-color-text">best bid by: <span><a class="gold-color-text" href="{{ url_for('profile', username=offer.bids[0].user) }}">{{ offer.bids[0].user }}</a></span></p>
+                <p class="bid-info white-text"> {{ offer.bids[0].offer_bid }} </p>
+                <a href="{{ url_for('offers') }}" class="btn-small purple-color text-shadow">Cancel <i class="fa-solid fa-xmark"></i></a>
+                <a href="#bid-acceptence" onclick="renderBidAcceptForm(this)" data-user="{{ offer.bids[0].user }}" data-bid="{{ offer.bids[0].offer_bid }}" data-owner="sale"
+                    class="btn-small green-color text-shadow bid-accept-button modal-trigger">Accept Offer <i class="fa-solid fa-handshake-simple"></i></a>
+            </div>
+        {% elif offer.created_by == session.user and offer.bids|length == 0 %}
+            <!-- Created by sesion user and no bids placed -->
+            <div class="card-action">
+                <p id="offer-bid-label" class="teal-color-text">There are no bids</p>   
+            </div>
+        {% else %}
+         <!-- Created by other user so bids allowed -->
+            <div class="card-action">
+                <form id="bid-form" method="POST" action="{{ url_for('offer_info', offer_id=offer._id) }}">
+                    <h6 id="offer-bid-label" class="teal-color-text">Your Bid:</h6>
+                    <div class="col s12">
+                        <i class="fa-solid fa-backward-fast teal-color-text bid-button" onclick="changeValue(1000000, false)"></i>
+                        <i class="fa-solid fa-backward-step teal-color-text bid-button" onclick="changeValue(100000, false)"></i>
+                        {% if offer.bids|length == 0 %}
+                        <input id="offer-bid" name="offer_bid" value="{{ offer.offer_price }}" type="text" readOnly="true" class="teal-color-text" />
+                        {% else %}
+                        {% set offer2= offer.bids[0].offer_bid %}
+                        <input id="offer-bid" name="offer_bid" value="{{ offer2 }}" type="text" readOnly="true"
+                            class="teal-color-text" />
+                        {% endif %}
+                        <i class="fa-solid fa-forward-step teal-color-text bid-button" onclick="changeValue(100000, true)"></i>
+                        <i class="fa-solid fa-forward-fast teal-color-text bid-button" onclick="changeValue(1000000, true)"></i>
+                    </div>
+                    <a href="{{ url_for('offers') }}" class="btn-small purple-color text-shadow">Cancel <i class="fa-solid fa-xmark"></i></a>
+                    <button form="bid-form" type="submit" id="bid-submit-btn" class="btn-small green-color accent-4 text-shadow" disabled>
+                        Bid <i class="fa-solid fa-coins"></i>
+                    </button>
+                </form>
+            </div>
+        {% endif %}
     </div>
   </div>
 
@@ -212,7 +233,7 @@
 </form>
 {% endif %}
 
-<!-- Modal -->
+<!-- Modal bid -->
 <div id="bid-acceptence" class="modal grey darken-3 white-text ">
     <div class="modal-content center-align">
         <h4>Do you wish to accept an offer?</h4>
@@ -223,6 +244,20 @@
     <div class="modal-footer grey darken-3 center-align">
         <a href="#!" class="modal-close btn-small purple-color text-shadow">Cancel <i class="fa-solid fa-xmark"></i></a>
         <button type="submit" form="offer-form" class="modal-close btn-small teal-color">Accept <i class="fa-solid fa-handshake-simple"></i></button>
+    </div>
+</div>
+
+<!-- Modal Trade -->
+<div id="trade-confirmation" class="modal grey darken-3 white-text ">
+    <div class="modal-content center-align">
+        <h4>Confirm that you have traded item in game</h4>
+        <div id="trade-details">
+        </div>
+    </div>
+    <div class="modal-footer grey darken-3 center-align">
+        <a href="#!" class="modal-close btn-small purple-color text-shadow">Not traded yet <i class="fa-solid fa-xmark"></i></a>
+        <button type="submit" form="offer-form" class="modal-close btn-small teal-color">Trade completed <i
+                class="fa-solid fa-handshake-simple"></i></button>
     </div>
 </div>
 {% endblock %}

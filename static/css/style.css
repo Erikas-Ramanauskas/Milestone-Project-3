@@ -179,6 +179,11 @@ output {
     border-bottom: var(--orange-color) 1px solid
 }
 
+.offer-user-link {
+    margin-right: 0 !important;
+}
+
+
 /* materialise transforms card action links to upercase which i use for linking profile of another user. Proper casing is important
  */
 .card .card-action a {
