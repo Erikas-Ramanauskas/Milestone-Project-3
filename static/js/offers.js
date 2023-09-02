@@ -41,7 +41,6 @@ function renderNewAffixes() {
         return 0;
     });
 
-    console.log(rearrangedAffixes);
 
     const affixPreference = document.getElementById("affix-preference");
 
@@ -50,6 +49,7 @@ function renderNewAffixes() {
 
     // Create a default "Choose your option" option
     const defaultOption = document.createElement("option");
+    defaultOption.id = "selected-affix-option";
     defaultOption.value = "";
     defaultOption.text = "Choose your option";
     defaultOption.disabled = true;
@@ -59,7 +59,6 @@ function renderNewAffixes() {
     // Loop through the array and create options
     for (const item of newChoiceAffixes) {
 
-        console.log(item);
         const option = document.createElement("option");
         option.value = item.affix;
         option.text = item.affix;
@@ -70,3 +69,22 @@ function renderNewAffixes() {
     const elems = document.getElementById('affix-preference');
     M.FormSelect.init(elems, { isMultiple: true });
 }
+
+
+
+const affixPreference = document.getElementById('affix-preference');
+affixPreference.addEventListener('change', function () {
+    selectedAffixOption = document.getElementById('selected-affix-option');
+    selectedAffixOption.selected = false;
+    const affixOptions = this.selectedOptions;
+    if (affixOptions.length > 4) {
+        M.toast({ html: `Maximum 4 affixes allowed` });
+        affixOptions[affixOptions.length - 1].selected = false;
+    }
+    const filterSubmitBtn = document.getElementById("filter-submit-btn");
+    if (affixOptions.length < 1) {
+        filterSubmitBtn.disabled = true;
+    } else {
+        filterSubmitBtn.disabled = false;
+    }
+});

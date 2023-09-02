@@ -4,7 +4,8 @@ import datetime
 # sys used for calling print during the app runing
 import sys
 import pymongo
-#  print(variable, file=sys.stderr)
+import itertools
+#  print(variable, file = sys.stderr)
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
@@ -55,7 +56,6 @@ def offers():
 
 @app.route("/filter", methods=["GET", "POST"])
 def filter():
-    offers = list(mongo.db.offers.find())
 
     user = ""
     if "user" in session:
@@ -67,24 +67,35 @@ def filter():
     is_hardcore = "on" if request.form.get("is_hardcore") else "off"
     is_season = "on" if request.form.get("is_season") else "off"
     affix_preference = []
+
+    # affixes search sorted
+    # making affixes lowercase
     for item in request.form.getlist("affix_preference"):
         affix_preference.append(item.lower())
+
+    affix_range = int(request.form.get("affix_range"))
+
+    # Creating unique combinations
+    affix_combinations = list(
+        itertools.combinations(affix_preference, affix_range))
+
+    affix_queries = []
+
+    for combo in affix_combinations:
+        affix_queries.append({"affix_array": {"$all": list(combo)}})
 
     search_paramaters = {
         "class_preference": request.form.get("class_preference"),
         "item_preference": request.form.get("item_preference"),
-        "affix_preference": affix_preference,
         "is_hardcore": is_hardcore,
         "is_season": is_season,
     }
-
-    print(search_paramaters, file=sys.stderr)
 
     search_query = {
         "$and": [
             {"class_data": search_paramaters["class_preference"]},
             {"item_data": search_paramaters["item_preference"]},
-            {"affix_array": {"$in": search_paramaters["affix_preference"]}},
+            {"$or": affix_queries},
             {"is_hardcore": search_paramaters["is_hardcore"]},
             {"is_season": search_paramaters["is_season"]},
         ]
@@ -92,15 +103,12 @@ def filter():
 
     results = list(mongo.db.offers.find(search_query))
 
-    print(search_query, file=sys.stderr)
-    # query = request.form.get("query")
-    # offers = list(mongo.db.tasks.find({"$text": {"$search": query}}))
     return render_template("offers.html", offers=results,
                            user=user, p_class=p_class, item_types=item_types,
                            current_datetime=current_datetime)
 
 
-@app.route("/register", methods=["GET", "POST"])
+@ app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
         # check if username already exists in db
@@ -146,7 +154,7 @@ def register():
     return render_template("register.html")
 
 
-@app.route("/login", methods=["GET", "POST"])
+@ app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         # check if username exists in db
@@ -177,7 +185,7 @@ def login():
     return render_template("login.html")
 
 
-@app.route("/profile/<username>", methods=["GET", "POST"])
+@ app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     # grab the session user's username from db
     user = mongo.db.users.find_one(
@@ -204,7 +212,7 @@ def profile(username):
         return redirect(url_for("login"))
 
 
-@app.route("/edit_profile/<username>", methods=["GET", "POST"])
+@ app.route("/edit_profile/<username>", methods=["GET", "POST"])
 def edit_profile(username):
     # grab the session user's user from db
     user = mongo.db.users.find_one(
@@ -237,7 +245,7 @@ def edit_profile(username):
     return redirect(url_for("register"))
 
 
-@app.route("/logout")
+@ app.route("/logout")
 def logout():
     # remove user from session cookie
     flash("You have been logged out")
@@ -246,7 +254,7 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/add_offer", methods=["GET", "POST"])
+@ app.route("/add_offer", methods=["GET", "POST"])
 def add_offer():
     if request.method == "POST":
         is_hardcore = "on" if request.form.get("is_hardcore") else "off"
@@ -303,7 +311,7 @@ def add_offer():
         return render_template("login.html")
 
 
-@app.route("/offer_info/<offer_id>", methods=["GET", "POST"])
+@ app.route("/offer_info/<offer_id>", methods=["GET", "POST"])
 def offer_info(offer_id):
     offer = mongo.db.offers.find_one({"_id": ObjectId(offer_id)})
 
@@ -366,7 +374,7 @@ def offer_info(offer_id):
                            current_datetime=current_datetime)
 
 
-@app.route("/messages/<username>")
+@ app.route("/messages/<username>")
 def messages(username):
     # grab the session user's user from db
     chat_list = list(mongo.db.messages.find(
@@ -383,7 +391,7 @@ def messages(username):
                            current_datetime=current_datetime)
 
 
-@app.route("/message/<reciever>", methods=["GET", "POST"])
+@ app.route("/message/<reciever>", methods=["GET", "POST"])
 def message(reciever):
 
     # generate message id for a chat

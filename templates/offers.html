@@ -51,7 +51,7 @@
                 </select>
                 <label>Chose class</label>
             </div>
-            <!-- ittem choice -->
+            <!-- item choice -->
             <div class="input-field">
                 <select name="item_preference"  id="item-preference">
                     <option value="" disabled selected>Choose your option</option>
@@ -62,15 +62,22 @@
                 <label>Chose item</label>
             </div>
 
+            <h6 class="orange-color-text center-align">Up to 4 affixes can be mached</h6>
+
+            <!-- Affix range -->
+            <div class="input-field" class="range-field">
+                <input type="range" id="affix-range" name="affix_range" min="1" max="4" value="4" />
+            </div>
+
             <!-- Affixes choice -->
             <div class="input-field">
                 <select name="affix_preference" id="affix-preference" multiple>
                 </select>
-                <label>Chose up to 4 affixes</label>
+                <label>Chose up to affixes</label>
             </div>
             <div>
                 <a href="{{ url_for('offers') }}" class="orange-color btn-small">Reset <i class="fa-solid fa-arrows-rotate"></i></a>
-                <button type="submit" class="btn-small teal-color btn-small">Apply Filters <i class="fa-solid fa-filter"></i></button>
+                <button type="submit" id="filter-submit-btn" class="btn-small teal-color btn-small" disabled>Apply Filters <i class="fa-solid fa-filter"></i></button>
             </div>
        </form>
     </div>
