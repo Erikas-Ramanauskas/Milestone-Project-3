@@ -40,8 +40,11 @@ item_types = ["Helm", "Chest Armor", "Gloves", "Pants", "Boots", "Amulet",
 @app.route("/offers")
 def offers():
     offers = list(mongo.db.offers.find())
-    user = mongo.db.users.find_one(
-        {"username": session["user"]})
+
+    if "user" in session:
+        user = mongo.db.users.find_one(
+            {"username": session["user"]})
+
     check_notifications(user, False)
     return render_template("offers.html", offers=offers,
                            user=user, p_class=p_class, item_types=item_types,
