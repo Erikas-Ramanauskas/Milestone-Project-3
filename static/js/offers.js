@@ -22,8 +22,6 @@ function renderNewAffixes() {
     const itemValue = document.getElementById("item-preference").value.toLowerCase().replace(" ", "_");
 
     newItemData = itemData[itemValue];
-    console.log(newItemData);
-    console.log(classValue);
 
     let newChoiceAffixes;
 
@@ -37,7 +35,13 @@ function renderNewAffixes() {
         newChoiceAffixes = newItemData.affixes.all_classes;
     }
 
-    console.log(newChoiceAffixes);
+    rearrangedAffixes = newChoiceAffixes.sort((a, b) => {
+        if (a.affix < b.affix) return -1;
+        if (a.affix > b.affix) return 1;
+        return 0;
+    });
+
+    console.log(rearrangedAffixes);
 
     const affixPreference = document.getElementById("affix-preference");
 

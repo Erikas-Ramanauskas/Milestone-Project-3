@@ -6,67 +6,71 @@
     <!-- Materialise side nav turned in to filter options -->
     <div id="slide-out" class="sidenav grey darken-3">
         <h5 class="orange-color-text center-align">Filter options</h5>
-       <form id="filter-form" action=""> 
+        <form id="filter-form" action="{{ url_for('filter') }}" method="post"> 
 
-<div class="row center-align">
-    <div class="input-field col s4">
-        <div class="switch swich-offers">
-            <i class="fa-solid fa-skull teal-color-text"></i>
-            <label for="is_hardcore" class="teal-color-text swich-button">
-                {% if user.is_hardcore == "on" %}
-                <input type="checkbox" form="mainForm" id="is_hardcore" name="is_hardcore" checked />
-                {% else %}
-                <input type="checkbox" form="mainForm" id="is_hardcore" name="is_hardcore" />
-                {% endif %}
-                <span class="lever"></span>
-            </label>
-        </div>
-    </div>
+            <div class="row center-align">
+                <div class="input-field col s4">
+                    <div class="switch swich-offers">
+                        <i class="fa-solid fa-skull teal-color-text"></i>
+                        <label for="is_hardcore" class="teal-color-text swich-button">
+                            {% if user.is_hardcore == "on" %}
+                            <input type="checkbox" id="is_hardcore" name="is_hardcore" checked />
+                            {% else %}
+                            <input type="checkbox" id="is_hardcore" name="is_hardcore" />
+                            {% endif %}
+                            <span class="lever"></span>
+                        </label>
+                    </div>
+                </div>
 
-    <!-- is season toogle -->
+                <!-- is season toogle -->
 
-    <div class="input-field col s4">
-        <div class="switch swich-offers">
-            <label for="is_season" class="teal-color-text swich-button">
-                {% if user.is_season == "on" %}
-                <input type="checkbox" form="mainForm" id="is_season" name="is_season" checked />
-                {% else %}
-                <input type="checkbox" form="mainForm" name="is_season" />
-                {% endif %}
-                <span class="lever"></span>
-            </label>
-            <i class="fa-brands fa-envira teal-color-text"></i>
-        </div>
-    </div>
-</div>
+                <div class="input-field col s4">
+                    <div class="switch swich-offers">
+                        <label for="is_season" class="teal-color-text swich-button">
+                            {% if user.is_season == "on" %}
+                            <input type="checkbox" id="is_season" name="is_season" checked />
+                            {% else %}
+                            <input type="checkbox" id="is_season" name="is_season" />
+                            {% endif %}
+                            <span class="lever"></span>
+                        </label>
+                        <i class="fa-brands fa-envira teal-color-text"></i>
+                    </div>
+                </div>
+            </div>
 
-        <!-- class choice -->
-        <div class="input-field">
-            <select name="class_preference" id="class-preference">
-                {% for class in p_class %} {% if class == user.class_preference %}
-                <option value="{{ class }}" selected>{{ class }}</option>
-                {% else %}
-                <option value="{{ class }}" >{{ class }}</option>
-                {% endif %} {% endfor %}
-            </select>
-            <label>Chose class</label>
-        </div>
-        <!-- ittem choice -->
-        <div class="input-field">
-            <select name="item_preference"  id="item-preference">
-                <option value="" disabled selected>Choose your option</option>
-                {% for item in item_types %}
-                <option value="{{ item }}">{{ item }}</option>
-                {% endfor %}
-            </select>
-            <label>Chose class</label>
-        </div>
-
-        <!-- Affixes choice -->
+            <!-- class choice -->
             <div class="input-field">
-                <select multiple name="affix_preference" id="affix-preference">
+                <select name="class_preference" id="class-preference">
+                    {% for class in p_class %} {% if class == user.class_preference %}
+                    <option value="{{ class }}" selected>{{ class }}</option>
+                    {% else %}
+                    <option value="{{ class }}" >{{ class }}</option>
+                    {% endif %} {% endfor %}
                 </select>
-                <label>Chose up to 4 options</label>
+                <label>Chose class</label>
+            </div>
+            <!-- ittem choice -->
+            <div class="input-field">
+                <select name="item_preference"  id="item-preference">
+                    <option value="" disabled selected>Choose your option</option>
+                    {% for item in item_types %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+                <label>Chose item</label>
+            </div>
+
+            <!-- Affixes choice -->
+            <div class="input-field">
+                <select name="affix_preference" id="affix-preference" multiple>
+                </select>
+                <label>Chose up to 4 affixes</label>
+            </div>
+            <div>
+                <a href="{{ url_for('offers') }}" class="orange-color btn-small">Reset <i class="fa-solid fa-arrows-rotate"></i></a>
+                <button type="submit" class="btn-small teal-color btn-small">Apply Filters <i class="fa-solid fa-filter"></i></button>
             </div>
        </form>
     </div>

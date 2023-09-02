@@ -3,6 +3,7 @@ import json
 import datetime
 # sys used for calling print during the app runing
 import sys
+import pymongo
 #  print(variable, file=sys.stderr)
 from flask import (
     Flask, flash, render_template,
@@ -42,13 +43,59 @@ def offers():
     offers = list(mongo.db.offers.find())
 
     user = ""
-
     if "user" in session:
         user = mongo.db.users.find_one(
             {"username": session["user"]})
 
     check_notifications(user, False)
     return render_template("offers.html", offers=offers,
+                           user=user, p_class=p_class, item_types=item_types,
+                           current_datetime=current_datetime)
+
+
+@app.route("/filter", methods=["GET", "POST"])
+def filter():
+    offers = list(mongo.db.offers.find())
+
+    user = ""
+    if "user" in session:
+        user = mongo.db.users.find_one(
+            {"username": session["user"]})
+
+    check_notifications(user, False)
+
+    is_hardcore = "on" if request.form.get("is_hardcore") else "off"
+    is_season = "on" if request.form.get("is_season") else "off"
+    affix_preference = []
+    for item in request.form.getlist("affix_preference"):
+        affix_preference.append(item.lower())
+
+    search_paramaters = {
+        "class_preference": request.form.get("class_preference"),
+        "item_preference": request.form.get("item_preference"),
+        "affix_preference": affix_preference,
+        "is_hardcore": is_hardcore,
+        "is_season": is_season,
+    }
+
+    print(search_paramaters, file=sys.stderr)
+
+    search_query = {
+        "$and": [
+            {"class_data": search_paramaters["class_preference"]},
+            {"item_data": search_paramaters["item_preference"]},
+            {"affix_array": {"$in": search_paramaters["affix_preference"]}},
+            {"is_hardcore": search_paramaters["is_hardcore"]},
+            {"is_season": search_paramaters["is_season"]},
+        ]
+    }
+
+    results = list(mongo.db.offers.find(search_query))
+
+    print(search_query, file=sys.stderr)
+    # query = request.form.get("query")
+    # offers = list(mongo.db.tasks.find({"$text": {"$search": query}}))
+    return render_template("offers.html", offers=results,
                            user=user, p_class=p_class, item_types=item_types,
                            current_datetime=current_datetime)
 
