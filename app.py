@@ -42,8 +42,9 @@ def offers():
     offers = list(mongo.db.offers.find())
 
     if "user" in session:
-        user = mongo.db.users.find_one(
-            {"username": session["user"]})
+        if check:
+            user = mongo.db.users.find_one(
+                {"username": session["user"]})
 
     check_notifications(user, False)
     return render_template("offers.html", offers=offers,
