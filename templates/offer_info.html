@@ -108,26 +108,38 @@
   <div class="col s12 m6">
     <div class="card grey darken-3 text-shadow center-align">
         <div class="card-title white-text">
-           <p>Posted by: <span >
+            <div id="item-owner-title">
+             <p>Posted by: <span >
                 <a class="orange-color-text" href="{{ url_for('profile', username=offer.created_by) }}">{{ offer.created_by }}</a>
-                </span></p>
+                </span>
+                    {% if offer.created_by == session.user  %}
+                    <a class="purple-color-text right-align tooltipped dropdown-trigger" data-target='item-delete-dropdown' data-position="top" data-tooltip="Delete Item"><i
+                            class="fa-solid fa-trash"></i></a>
+                    {% endif %}
+                </p> 
+                
+                <ul id='item-delete-dropdown' class='dropdown-content'>
+                    <li><a href="{{ url_for('delete_offer', offer_id=offer._id) }}">Confirm</a></li>
+                </ul>
+
+                </div>
             <p>
-            {% set time_d = (current_datetime - offer.date).days %}
-            {% set time_m = ((current_datetime - offer.date).seconds / 60) | round(0, 'floor') | int %}
-            {% set time_h = ((current_datetime - offer.date).seconds / 3600) | round(0, 'floor') | int %}
-            {% if time_d == 1 %}
-            {{ time_d }} day ago </br>
-            {% elif time_d > 0 %}
-            {{ time_d }} days ago </br>
-            {% elif time_m == 1 %}
-            {{ time_m }} minute ago </br>
-            {% elif time_m < 59 %} 
-            {{ time_m }} minutes ago </br>
-            {% elif time_h == 1 %}
-            {{ time_h }} hour ago </br>
-            {% elif time_h < 59 %} 
-            {{ time_h }} hours ago </br>
-            {% endif %}
+                {% set time_d = (current_datetime - offer.date).days %}
+                {% set time_m = ((current_datetime - offer.date).seconds / 60) | round(0, 'floor') | int %}
+                {% set time_h = ((current_datetime - offer.date).seconds / 3600) | round(0, 'floor') | int %}
+                {% if time_d == 1 %}
+                {{ time_d }} day ago </br>
+                {% elif time_d > 0 %}
+                {{ time_d }} days ago </br>
+                {% elif time_m == 1 %}
+                {{ time_m }} minute ago </br>
+                {% elif time_m < 59 %} 
+                {{ time_m }} minutes ago </br>
+                {% elif time_h == 1 %}
+                {{ time_h }} hour ago </br>
+                {% elif time_h < 59 %} 
+                {{ time_h }} hours ago </br>
+                {% endif %}
             </p>
         </hr>
         </div>
@@ -211,10 +223,10 @@
 </div>
 
 <!-- Invisible form -->
-{% if offer.created_by == session.user  %}
 <form id="offer-form" method="POST" action="{{ url_for('offer_info', offer_id=offer._id) }}">
-
-        <!-- Contact id trigger -->
+    
+    <!-- Contact id trigger -->
+    {% if offer.created_by == session.user  %}
         <div>
             <input id="trade-user" name="user" type="hidden" readonly="true"/>
         </div>
@@ -225,13 +237,14 @@
             <input id="trade-by-owner" name="traded_by_owner" type="hidden" readonly="true"/>
         </div>
         <div>
-            <input id="trade-by-bidder" name="traded_by_bidder" type="hidden" readonly="true"/>
-        </div>
-        <div>
             <input id="trade-accepted" name="accepted" type="hidden" readonly="true"/>
         </div>
+    {% else %}
+        <div>
+            <input id="trade-by-bidder" name="traded_by_bidder" type="hidden" readonly="true"/>
+        </div>
+    {% endif %}    
 </form>
-{% endif %}
 
 <!-- Modal bid -->
 <div id="bid-acceptence" class="modal grey darken-3 white-text ">

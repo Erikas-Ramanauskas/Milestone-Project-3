@@ -363,8 +363,13 @@ def offer_info(offer_id):
                     "accepted": offer["trade"]["accepted"]
                 }
                 offer["trade"] = offer_accepted
-
-                mongo.db.offers.replace_one({"_id": ObjectId(offer_id)}, offer)
+                if offer_accepted["traded_by_owner"] == "true" and offer_accepted["traded_by_bidder"] == "true":
+                    mongo.db.offers.delete_one({"_id": ObjectId(offer_id)})
+                    flash("Item is fully traded and deleted from database")
+                    return redirect(url_for("offers"))
+                else:
+                    mongo.db.offers.replace_one(
+                        {"_id": ObjectId(offer_id)}, offer)
 
         else:
             flash("You must be logged in to place a bid.")
@@ -373,6 +378,13 @@ def offer_info(offer_id):
     check_notifications("", True)
     return render_template("offer_info.html", offer=offer,
                            current_datetime=current_datetime)
+
+
+@app.route("/delete_offer/<offer_id>")
+def delete_offer(offer_id):
+    mongo.db.offers.delete_one({"_id": ObjectId(offer_id)})
+    flash("Offer Successfully Deleted")
+    return redirect(url_for("offers"))
 
 
 @ app.route("/messages/<username>")

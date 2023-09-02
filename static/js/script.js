@@ -21,6 +21,8 @@ $(document).ready(function () {
     $('.sidenav').sidenav();
     // Initialise select
     $('select').formSelect();
+    // Dropdown
+    $('.dropdown-trigger').dropdown();
 });
 
 // Preloader fade out called together with json data load so the procentage change would not be vissable
