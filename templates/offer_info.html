@@ -68,7 +68,7 @@
                 <p class="bid-info teal-color-text">best bid by: <span><a class="gold-color-text" href="{{ url_for('profile', username=offer.bids[0].user) }}">{{ offer.bids[0].user }}</a></span></p>
                 <p class="bid-info white-text"> {{ offer.bids[0].offer_bid }} </p>
                 <a href="{{ url_for('offers') }}" class="btn-small purple-color text-shadow">Cancel <i class="fa-solid fa-xmark"></i></a>
-                <a href="#bid-acceptence" onclick="renderBidAcceptForm(this)" data-user="{{ offer.bids[0].user }}" data-bid="{{ offer.bids[0].offer_bid }}" data-owner="sale"
+                <a href="#bid-acceptence" onclick="renderBidAcceptForm(this)" data-user="{{ offer.bids[0].user }}" data-bid="{{ offer.bids[0].offer_bid }}" data-trade="sale"
                     class="btn-small green-color text-shadow bid-accept-button modal-trigger">Accept Offer <i class="fa-solid fa-handshake-simple"></i></a>
             </div>
         {% elif offer.created_by == session.user and offer.bids|length == 0 %}

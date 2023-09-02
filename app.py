@@ -140,7 +140,8 @@ def register():
             "class_preference": "None",
             "is_hardcore": "off",
             "is_season": "off",
-            "message_count": 0
+            "message_count": 0,
+            "trades_completed": 0
         }
 
         mongo.db.users.insert_one(register)
@@ -365,6 +366,21 @@ def offer_info(offer_id):
                 offer["trade"] = offer_accepted
                 if offer_accepted["traded_by_owner"] == "true" and offer_accepted["traded_by_bidder"] == "true":
                     mongo.db.offers.delete_one({"_id": ObjectId(offer_id)})
+
+                    # add trade score to users
+                    owner = mongo.db.users.find_one(
+                        {"username": session["user"]})
+                    bidder = mongo.db.users.find_one(
+                        {"username": offer_accepted["user"]})
+
+                    owner["trades_completed"] += 1
+                    bidder["trades_completed"] += 1
+
+                    mongo.db.users.replace_one(
+                        {"_id": ObjectId(owner["_id"])}, owner)
+                    mongo.db.users.replace_one(
+                        {"_id": ObjectId(bidder["_id"])}, bidder)
+
                     flash("Item is fully traded and deleted from database")
                     return redirect(url_for("offers"))
                 else:
