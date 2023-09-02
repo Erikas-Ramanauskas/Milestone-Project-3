@@ -56,7 +56,7 @@
             <select name="item_preference"  id="item-preference">
                 <option value="" disabled selected>Choose your option</option>
                 {% for item in item_types %}
-                <option value="{{ item }}" selected>{{ item }}</option>
+                <option value="{{ item }}">{{ item }}</option>
                 {% endfor %}
             </select>
             <label>Chose class</label>
@@ -64,13 +64,9 @@
 
         <!-- Affixes choice -->
             <div class="input-field">
-                <select name="affix_preference">
-                    <option value="" disabled selected>Choose your option</option>
-                    {% for item in item_types %}
-                    <option value="{{ item }}" selected>{{ item }}</option>
-                    {% endfor %}
+                <select multiple name="affix_preference" id="affix-preference">
                 </select>
-                <label>Chose up </label>
+                <label>Chose up to 4 options</label>
             </div>
        </form>
     </div>
