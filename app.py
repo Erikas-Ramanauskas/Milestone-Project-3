@@ -41,10 +41,11 @@ item_types = ["Helm", "Chest Armor", "Gloves", "Pants", "Boots", "Amulet",
 def offers():
     offers = list(mongo.db.offers.find())
 
+    user = ""
+
     if "user" in session:
-        if check:
-            user = mongo.db.users.find_one(
-                {"username": session["user"]})
+        user = mongo.db.users.find_one(
+            {"username": session["user"]})
 
     check_notifications(user, False)
     return render_template("offers.html", offers=offers,
