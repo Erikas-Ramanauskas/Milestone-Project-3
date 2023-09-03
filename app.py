@@ -194,21 +194,22 @@ def profile(username):
 
     offers = list(mongo.db.offers.find({"created_by": username}))
 
-    if session["user"] == username:
-        check_notifications(user, False)
-        return render_template("profile.html", user=user, offers=offers,
-                               current_datetime=current_datetime)
-    elif session["user"] and username != session["user"]:
-        # preventing sensible data passed to front end.
-        user2 = {
-            "username": user["username"],
-            "class_preference": user["class_preference"],
-            "is_hardcore": user["is_hardcore"],
-            "is_season": user["is_season"]
-        }
-        check_notifications(user, False)
-        return render_template("profile.html", user=user2, offers=offers,
-                               current_datetime=current_datetime)
+    if session["user"]:
+        if session["user"] == username:
+            check_notifications(user, False)
+            return render_template("profile.html", user=user, offers=offers,
+                                current_datetime=current_datetime)
+        else:
+            # preventing sensible data passed to front end.
+            user2 = {
+                "username": user["username"],
+                "class_preference": user["class_preference"],
+                "is_hardcore": user["is_hardcore"],
+                "is_season": user["is_season"]
+            }
+            check_notifications(user, False)
+            return render_template("profile.html", user=user2, offers=offers,
+                                current_datetime=current_datetime)
     else:
         return redirect(url_for("login"))
 
