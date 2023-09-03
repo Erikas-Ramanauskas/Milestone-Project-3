@@ -369,7 +369,7 @@ def offer_info(offer_id):
 
                     # add trade score to users
                     owner = mongo.db.users.find_one(
-                        {"username": session["user"]})
+                        {"username": offer["created_by"]})
                     bidder = mongo.db.users.find_one(
                         {"username": offer_accepted["user"]})
 

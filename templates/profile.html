@@ -38,6 +38,10 @@
         <i class="fa-brands fa-envira teal-color-text"></i>
         <p>Season: <span class="teal-color-text">{{ user.is_season }}</span></p>
       </div>
+    <div class="profile-layout">
+        <i class="fa-solid fa-star teal-color-text"></i>
+        <p>Trades completed: <span class="teal-color-text">{{ user.trades_completed }}</span></p>
+    </div>
     </div>
     {% if session.user == user.username %}
     <a

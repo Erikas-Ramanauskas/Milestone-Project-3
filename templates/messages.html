@@ -8,7 +8,9 @@
       <h4 class="center-align grey darken-3 purple-color-text">
         No conversations started
       </h4>
-      {% else %} {% for chat in chat_list %}
+      {% else %}
+      <!-- loop start -->
+      {% for chat in chat_list %}
       <!-- Time calculation -->
       {% set time_d = (current_datetime - chat.messages[-1].date).days %} {% set
       time_m = ((current_datetime - chat.messages[-1].date).seconds / 60) |
@@ -33,10 +35,7 @@
       chat.messages[-1].b_net_id %} {% set last_message =
       chat.messages[-1].b_net_id %} {% elif chat.messages[-1].offer_accepted %}
       {% set last_message = chat.messages[-1].offer_accepted.offer_name + "offer
-      accepted" %} {% else %} {% endif %}
-
-      <!-- loop start -->
-      {% if loop.index % 2 == 1 %}
+      accepted" %} {% else %} {% endif %} {% if loop.index % 2 == 1 %}
       <a
         class="row grey darken-2 message-line"
         href="{{url_for('message', reciever=user_name)}}"
@@ -49,6 +48,11 @@
             <span class="white-text">Recieved from </span>
             {% endif %}
             <span class="orange-color-text messages-user">{{ user_name }}</span>
+            {% if session.user == chat.user1 and chat.user1_unread > 0 %}
+            <span class="messages-circle"> {{ chat.user1_unread }}</span>
+            {% elif session.user == chat.user2 and chat.user2_unread > 0 %}
+            <span class="messages-circle"> {{ chat.user2_unread }}</span>
+            {% endif %}
           </p>
         </div>
         <div class="col s12 messages-message-container teal-color-text">
