@@ -198,7 +198,7 @@ def profile(username):
         if session["user"] == username:
             check_notifications(user, False)
             return render_template("profile.html", user=user, offers=offers,
-                                current_datetime=current_datetime)
+                                   current_datetime=current_datetime)
         else:
             # preventing sensible data passed to front end.
             user2 = {
@@ -209,7 +209,7 @@ def profile(username):
             }
             check_notifications(user, False)
             return render_template("profile.html", user=user2, offers=offers,
-                                current_datetime=current_datetime)
+                                   current_datetime=current_datetime)
     else:
         return redirect(url_for("login"))
 
