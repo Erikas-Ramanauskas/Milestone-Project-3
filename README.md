@@ -33,12 +33,8 @@ Diablo 4 trade is a website specificaly dedicated to a game "Diablo 4" relesed n
       - [Hosting](#hosting)
       - [Version Control](#version-control)
       - [Testing](#testing)
-    - [Frameworks and Programs Used](#frameworks-and-programs-used)
   - [Bugs and Solutions](#bugs-and-solutions)
-    - [Main chalange faced and decitions made](#main-chalange-faced-and-decitions-made)
-      - [Atempt no 1](#atempt-no-1)
-      - [Atempt no 2](#atempt-no-2)
-    - [Solved Bugs during developing](#solved-bugs-during-developing)
+    - [Solved bugs](#solved-bugs)
     - [Remaining Bugs](#remaining-bugs)
     - [Ideas for Future Developments](#ideas-for-future-developments)
   - [Application Ida and functionality](#application-ida-and-functionality)
@@ -170,7 +166,7 @@ The website main purpose is to trade digital in game items using in game current
 | 21 | Game type can be eddited hardcore/ season | 4 | 4 | 5 | ✅ |
 | 22 | Ability to add personal Battlenet id | 5 | 5 | 5 | ✅ |
 | 23 | Ability to add personal Discord id | 5 | 5 | 5 | ✅ |
-| 24 | Both ids only visable to to the owner | 4 | 4 | 5 | ✅ |
+| 24 | Both ids only visible to to the owner | 4 | 4 | 5 | ✅ |
 | 25 | User profile also displaying how many trades was made by user. | 5 | 5 | 4 | ✅ |
 | 26 | Visiting other people profile ""message"" button is vissable and functioning | 5 | 5 | 4 | ✅ |
 | 27 | User profile settings functions as helpers for filter options and item create options | 5 | 5 | 5 | ✅ |
@@ -225,7 +221,7 @@ The website main purpose is to trade digital in game items using in game current
 | 61 | messages button is not vissable | 5 | 5 | 5 | ✅ |
 | 62 | Create offer button links to log in page | 5 | 5 | 5 | ✅ |
 | 63 | Register button vissable | 5 | 5 | 5 | ✅ |
-| 64 | Log in button visable | 5 | 5 | 5 | ✅ |
+| 64 | Log in button visible | 5 | 5 | 5 | ✅ |
 | 65 | Clicking other user profile link leads to log in page | 5 | 5 | 5 | ✅ |
 | 66 | Clicking on bid button leads to log in page | 5 | 5 | 5 | ✅ |
 
@@ -250,24 +246,22 @@ The website main purpose is to trade digital in game items using in game current
 
 #### Libraries & Frameworks
 
-[Materialize](https://materializecss.com/navbar.html)
-[jQuery](https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white)
-[Font Awesome](https://img.shields.io/badge/Font%20Awesome%20-%23339AF0.svg?&style=for-the-badge&logo=Font%20Awesome&logoColor=FFFFFF)
-[Google Fonts](https://fonts.google.com/) fonts used to import main fonts for the page.
-[Favicon](https://favicon.io/favicon-converter/) was used to create favicon.
-[Flask](https://flask.palletsprojects.com/en/2.3.x/)
-[Jinja](https://jinja.palletsprojects.com/en/3.1.x/)
-
-
+- [Materialize](https://materializecss.com/navbar.html) Main design language used to design the website
+- [jQuery](https://jquery.com/) Mostly used to Enable Materialise components
+- [Font Awesome](https://fontawesome.com/icons) Lots and lots of icons used though out the app
+- [Google Fonts](https://fonts.google.com/) fonts used to import main fonts for the page.
+- [Favicon](https://favicon.io/favicon-converter/) was used to create favicon.
+- [Flask](https://flask.palletsprojects.com/en/2.3.x/) Flask is front end development tool for Phyton
+- [Jinja](https://jinja.palletsprojects.com/en/3.1.x/) Jinja is templating engine used together with flask
 
 #### Databases
 
-![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+- [MongoDB](https://cloud.mongodb.com/)
 
 #### Hosting
 
-![GitHub Pages](https://img.shields.io/static/v1?style=for-the-badge&message=GitHub+Pages&color=222222&logo=GitHub+Pages&logoColor=FFFFFF&label=)
-![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white) !
+- [GitHub Pages](https://github.com/)
+- [Heroku](https://id.heroku.com/)
 
 #### Version Control
 
@@ -279,205 +273,103 @@ The website main purpose is to trade digital in game items using in game current
 #### Testing
 
 - [Chrome DevTools](https://developer.chrome.com/docs/devtools/) was used to test the code and debug the code during the development process.
-
 - [W3C Markup](https://validator.w3.org/) Validation was used to test HTML code
 - [W3C CSS](https://jigsaw.w3.org/css-validator/) Validation Service was used to test CSS code
-
-### Frameworks and Programs Used
-
-
-* 
-  
-
-
-
-
-
 
 
 ## Bugs and Solutions
 
-### Main chalange faced and decitions made
+### Solved bugs
 
-Before going in to individual smaller bugs one issue and soliution requires its own separate topic: Drag and Drop **multiple** components.
+* Almoast every step of the way of the development i often run in to an issue where sesion.user was not found if tested with no user loged in. This happened due to many different functionalities implemented and for every one of them i had to implement checks. Most of them were either not alowing the page to be loaded and linked to log in page instead or link not even shown at all.
 
-*Note I had 2 attemps at solving the whole drag and drop functionality atempt no 1 was writen after I sorted it using mainly drag and drop event listeners for PC ounly, however when I started working on it again to set it up for touch functionality I reprogramed it to work with pointer event listeners instead that solved most if not all problems I had in first attempt*
+* During development of offer creation i have decided to use JSON file to store all the data however as i tested out by placing it in base folder it would not read even the functionality was correct. With a help of 2 tutors he moved file to separate folder and that solved an issue. However we were still left puzled why it was not working when it was placed in base folder. We triple checked the path to confirm it was correct. ![Json bug](./static/images/read_me/json-bug.png)
 
-#### Atempt no 1
+* Another mored dificult bug was solved with a help of tutor. I noticed that every time i fill any type of form on the website and same page is loaded. If i refresh it it automaticaly refils the form with same data. Tutor helped me finding this [Stack overflow Code](https://stackoverflow.com/questions/18725078/bypass-html-required-attribute-when-submitting)
+-  ![Immage](./static/images/read_me/form-resubmition.png)
 
-* Due to a nature of the game one of the requirements for the code is to create a shapes of multiple squares and have them interact with game board individualy.
-* While drag and drop functionality was new for me (not in the course) I reasearched few vidoes but the one that was my main source of information was by [Traversy Media](https://www.youtube.com/watch?v=C22hQKE_32c&t=360s) with added info from [MDN database](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API). I used this as my louchpad of drag and drop "playground" which after few trial and error was simple enough for single element.
-* How ever problems started when I tried to do 2 things: Drag more than one element and scale element I am dragging.
-* [Drag and Drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API) has its onwn listener functions quite similar to mouse events and one of events drag over was my hope to be a triger for each of the shapes I am draging, however there was no posibility of draging multiple sibling elements.
-* One of the ways I tried was using *dispatchEvent()* function but it completley crashed browser due to events boucing between siblings.
-* Another idea sugested by a friend to attach the shapes to a mouse cursor using: *position:absolute* and width height properties. However at that moment I relised it is not needed, as it alow user to be flexible and click anywere he wants on the shape without having pices to snap around.
-* Another issue was to do with practicaly all *mouse* events not trigering during the drag and right after dragdrop. To my understadning all of mouse events are transfered to drag functions. I had to adopt a mix of both for the final result.
-* My soliution was to capture mouse position when it is clicked on one of the shapes. In turn I captured a parent div > and taken its children > recorded all X and Y cordinates and calculated center of each shape boxes. This way using *dragover* listener that gave me current mouse position, I was able to calculate all active boxes of the shape while draging their parent.
-* Additionaly I captured all game board dropboxes coordinates at the start of drag of all 4 of their edges and using simple conditional testing I was able to check when ever draggable box center enters the squares, and used same principal of functionality to place them in while I did not directly appended the children as in the video (that would coused parent div to go inside of one of boxes only)
+* Within offers and profile page each card was different size due to content within each card were different. Upon mentors sugestion to make them all to be set size I figured that I can run JS function that finds the tallest card and automaticaly adjust all other ones to be same lentght.
 
-* Lastly the issue I had that once something is beign dragged it CAN NOT be modified via css.
-* This was important for me to do as my game board is 9x9 squares and on the side I wanted to fit 3 or even 4 game shapes that could be as big as 4x4. Taking that together it is 12 or even 16 squares each in the same space as game board *check early wireframes*. this means I had to make them smaller than game board sqaures and scale them up as the player pick them up. *That is how original game I got an idea from works*
-* I have been searching multiple ways to achieve this, via *scale*, changing width and height, transforming, creating element bigger and fitting in the smaller box yet the design of draggable "shadow element" did not change.
-* On top of it any element that is parent of draggable element transfers background color to dragable element and no traditional css rule has changed that, causing the same "grandparent" colour to stay on invisible *inactive* squares and edges were border radius was present. The only element background color was not takign was "body".
-* Since I spend a large portion of time on these 2 problems and one of them was solved I decided to change a desing of the game and create shapes of the same size as the game board by fitting less of them or rearanging the layout as well as adding no backgroudn to parent divs.
-* this is something I would like to revisit in a future and build up my orriginal vision.
-
-#### Atempt no 2
-
-* Once I returned to drag and drop functionality weeks later to make it responsive on touch screens as well I researched videos about events that works with touch screens and stuck on [Web Dev Simplified](https://www.youtube.com/watch?v=MhUCYR9Tb9c) as my main reference. However drag events were still not working with touch.
-
-* I discovered [this video](https://www.youtube.com/watch?v=GU3lQTbwUZc&t=275s). The main idea was to atach anything I am tryign to drag to a mouse after the click with *position:absolute and left+right*. Same idea I have goten from friend Olegas (who is js/react developer) however I dismised it early on before. I used this idea this time to try to make pointer events being main caller for both touch and mouse events. And managed to figure out 90% of code idea my self.
-
-* The Brekathough hapened when I found this [article](https://javascript.info/mouse-drag-and-drop) That essentialy contained everything I have figured out up to that point and more to solve this puzzle. The final piece missing was this code that I took from article:
-
-````
- ball.ondragstart = function() {
- return false;
-};
-````
-
-* All of previous problems were solved essentialy with pointer video and this article makign game function on both touch and mouse events. As well as no longer bound to drag events allowing me to edit css if I wish so and removing weird bug that would not record shape centers and cousing shape to disapear uncontrolable.
-
-* if I have to work with drag and drop or I recomend anyone to do it [Web Dev Simplified](https://www.youtube.com/watch?v=MhUCYR9Tb9c) and [article](https://javascript.info/mouse-drag-and-drop) is ideal guide for this type of purpose.
-
-### Solved Bugs during developing
-
-* There were a bug that coused the bigger shapes of 4 width or height to split up and take over 5 leaving 1 as a gap. this is due to js maths and resizing and causing the drop area being bigger than a shapes squares. When retrieving data of shapes X and Y I added to the top and left 1% (multiplied by 1.01) as well as divided right and bottom edges by the same. This seems to solve the problem, yet the player will have to more accurate on droping shapes than innitialy.
-
-* Several resizing issues were detected when changing direction in the phone mode, and especialy when resizing sreen size while testing in responsive mode. Main issue was that shapes and buttons mostly relied on game board dimentions. During resize event listener the order of functions were not in order and changing them around *gameBoardAndScreenDimentions();* first and *setShapesContainerSize();* after seem to solve the problem
-
-* Initialy I had event listeners added to a dragEnd listener *if* section which checks if shape was droped in the game board thus creating new shape and at the end adding new event listeners. However there is an existing bug that sometimes the droped shape does not apear on the game board and new shape is created insted but no event listeners are added to new shape making the shape unusable for the remaining of the game. Instead I created spearated function and called after *if* statement and to reset all event listeners every time drop down is perfomed. **Solved with atempt no 2 of drag and drop**
-
-* Home page design was relatively smooth apart a few lineup problems that were solved using bootrstap classes and mainly sticking with mb-5 and row/col classes. However one isue that at the 2 examples of combination the text was wraping diferenly since one had a longer text. This automaticaly pushed one of pictures lower than the previous one at certain sceen breakpoints. Simple soliution I found is to place invisible span text at 1400 px when the breaking of the text start so it would treat it as extra word and snap aditional rows together at the same breakpoints. How ever I would love to find out if the is simple css soliution to conect 2 elements and comand them to be same size.
-
-* Within game screen window I have added 2 buttons for rotation and used Font awesome icons. However a regular use of them complicated a size of them and on diffenrent screens they did not responded how I wanted. There were to many situations I had to work with to make them right. I decided to try out svg file instead but FA icons requires premium account. Eventualy I meved on to creating my own icons using simle google drawings that I am well familliar with and downloaded them as as svg file and used a code from it alowing me to customize them and add in property that worked for all screen sizes
-
-* Navigation bar responsivnes using botstrap nav-bar to be open when on smaller devices and not being able to close, I spend some time tryign to figured out why it was hapening untill I simpley deleted and started over from 0 with navigation bar when I realised I linked botstrap twice. Both of starting from scratch and deleting extra link solved an issues.
-
-* navigation bar bootstrap class sticky was not working either how I wanted so I used a JS code i knww from Udemy course.
-
-* **Moved from remainign bugs** There is a rare occouring bug that when the shape is droped in the game field sometimes it does not regiter but a new shape is created instead anyway. It hapens rarely and I am not sure why it hapens or how to create the bug manualy or how to solve it at the moment. **Solved with drag and drop atempt no 2**
+- One small isue was that when filling in the form for registrations and profile edit there was a requirements for a specific amount fo characters but if user input does not fit the message given did not define requirements. I find out from Mentor i can do this using "title" atribute. [link](https://www.tutorialspoint.com/form-required-attribute-with-a-custom-validation-message-in-html5#:~:text=We%20can%20also%20use%20JavaScript,message%20for%20the%20input%20field)
 
 ### Remaining Bugs
 
-* Sometimes when draging one shape a second active game shape moves in to a place of active shape but moves right back once first shape is droped. This does not actualy effect the game play just a visual clutter
+* Within filter functionality hardcore swich press area is different than visualy seen.
+  
+* During the creation of new item the items are not adjusted acording to the class. This allows users to create unrealistic items. Example: chrosbow or want would never drop for Barbarian or Druid.
 
-* If screen size is changed after dragin a shape and placing it back the shape retains dimentions of original screen size. This is not a problem in most cases apart in practice it could be a problem with galaxy fold if player does this and opens or closes the phone.
+### Ideas and plans for improvement
 
-* Testing on phone model One Plus it seems the overflow-x: hidden; does not work and the screen can be dragged left and right a bit
+* Adding request page were user can create request for an items.
+* Adding more filter options for Suffixes and affixes range
+* Separating item acceptence messages from messages and creating notification page for trades
+* implementing functionality that once a player shares his Batlenet id and Discord it could be visible for user it was shared with
+* Implementing Statistic page that tracks latest trades and the prices
+* Open additional options for item creation to allow lower level items to be added.
+* Include page for tutorial on how to use the website
 
-### Ideas for Future Developments
+## Application Idea and functionality
 
-* Future developments to improve on the existing game:
-  * Return to original idea of having 3 shapes for the game as additional future. Expanding on this idea there could be an option to customise players gameplay with multiple shapes up to 4
-  * Animation affects for placing shapes and destroying shapes
-  * Reward system unlocking different "Skins" for the game board and background for example when player reaches certain amount of points, makes large combo of 6 or more, Gets destruction streak and many more could be added. Skins essentialy changes a colours of game board and game pieces.
-  * Reward player with additional sounds to replace originals.
-  * Highscores screen were you can see other players top 10 or even top 100 and compete every week.
-  * Multiple functionalities changign the game play
-    * Fliping shapes in mirror insted of rotating
-    * Rewarding players for makign a streak instead of combination
-    * Randomly deleting squares and creating other onces
-    * Creatign random squares that rewards extra points or rotation points
-    * Creatign random squares that blocks a destruction for x amount of moves
-    * Creating new random shape set after shape is droped.
-    * Giving a timer for the game and rewarding extra time every time destruction is done (like chess blitz)
-    * Making player versus player game
-  * All of ideas above could be combined in to a random ruleset given for players every week encouraging them to fight for best scores every week and creatign more replayibility.
+### Reasons for chosing such an aplication
 
-## Application Ida and functionality
+- Reason for chosing such an aplication as my 3rd project was mostly a complexity. I enjoy complex and dificult task requiering a lot of logic to acomplish and trying to up all pieces to fit together. Considering not only the fact that jquery database of item affixes will be complicated to navigate, i had a chance to use JS skills to manipulate it. As well as creating custom messaging system with diferent type of messages being included. 
 
-### Game board dimentions
+- I have checked python socked live chat for messaging app implementation. but i chose to create my own for 2 reasons: I wanted to create my own raw python code and logic of it working. As well as complete live chat is not realy neceserely as most of people playing dont usualy are online all the time.
 
-* Since the game board is always square I had to account for a space from top and bottom for meniu buttons, score as well as shapes. I wanted to ensure that mobile users are able to play game either verticaly and horizontaly unlike the game I got the idea from. main function looks for the min between landscape and portrait and determines wich way the board and everything else needs to lay out.
+### General choices for application
 
-* Because the board is 9 squares I added 1/2 square distance as a boarder around making everythign else some sort of division by 10 and multiplication by X depending how I wanted everything to be layered.
+- The aplications is designed around the [Diablo 4](https://diablo4.blizzard.com/en-us/) game designed by [Blizzard](https://www.blizzard.com/en-us/). The puspose of the aplication is to trade items between the players.
 
-* One note on this that I would like to improve the code and instead create variables in javascript and do all the math instead on CSS. However this would require some time to investigate and figure out for me.
+- Within the game there are several different items that could be traded and some that can not. The main and only item that player comunity focuses on trading is highest level "Ancestral" Rare items. Due to complexity of itemisation i chose to exclude lower level items to save time on development. 
 
-* Game board squared for later use are called in columns rows and square classes durign redering with some math. This helps later to find wich columns rows or squares are fully filled.
+- I also chose to exclude tutorial page for how to use aplication. From my personal expierence and similar sites made for similar games by the time player gets used to the and chis character arives to the stage that he no loger rapidly recieves upgrades that is when he starts requiring site like this and by this time player is well familiar with the in game item system. In most cases RPG style game players never even trade items and play all the time self found. Yet usualy when they start looking for better items they are well aware of classses, item types, suffixes and affixes.
 
-* Additionaly resize event listener changes the game board depening on the screen size as well as record all open game dropbox squares for later when pointerMove and pointerUp functions are called. This is to ensure fresh data is kept if window changed dimentions
+-This is also a reason why i opted out without footer as the site is more of trade aplication than anything and for such a simplistic one i chose to leave it out. It can definetly be added in a future when much more functionality would be added.
 
-### Shape creation
+- Lastly my choice for chosing mongoDb as main database for my project was mainly due to ability to pair up key-value pairs within the object. From my project 2 I was well familiar how to manipulate larger Json data type databases so mongoDB has quite a same syntax wich i enjoy quite a lot.
 
-* In order to create shapes I wanted first of all a tool to create them. I used my skills in google sheets to create [this](https://docs.google.com/spreadsheets/d/1rQbG19eHYj0ltU_YNrQAcVxWLgIqnsbVytKtXd3tatI/edit) spreadhseet that alows me to easily create shapes object with true/false values. It essentialy detects how far the shape goes (always starting shape from top left corner) and determines if it is 1x1, 2x2, 3x3, or 4x4 square. This is important to keep in the squares always as other functions manipulate it easier.
+### For anyone who is not familiar with the game
 
-* Once I got an array ready it is all about manipulating and selectg them. randomInt(min,max) function alowed me to get random number betwen 2 given digits. Using this I chose random number betwen 0-1000. I assing each shape dificulity a procentage in thousands Starting with Easy(910), medium(60) and hard(30). Then chose random number. If it rolls anywere between 0-910 it is easy shape, then if it rolls more than 910, else if statement then looks if it is not bigger than easy+medium (970) resulting in medium shape, then last else automaticaly allings with hard. Lastly since each shape dificulity contains ten I go with randomInt(0-9) and get random shape from list of 10.
+- Each item that could be traded comes with either offensive, defensive numbers or simply none. For example all armor pieces will be with defensive number, All weapons with offensive, All jewelery and rings will no have either.
+  
+- Additionaly most (not all) will come with some sort of suffix. Suffixes are sort of secondary atributes for items. Most of items will have 1 atribute that always be on particular item type. Others (Example: boots) will have multiple choices. 
 
-* Then it comes given shape manipulation. There are 2 things. Miroring the shape, esentialy fliping verticaly and rotation. 2 functions created to handle that as per my plan I made in quick google drawing and simply rearanging the the order of the shape array. As for rotationg shapes the function does it clockwise but if done 3 times it is a same if done anticlockwise
+- Lastly every item will always have 4 random(nonrepeting) Affixes. This is the main requirements the players will be looking for. Most importanly At some stage of the game players will start looking for right combination of affixes, then simply keep upgrading to higher numbers while maintaining same combinations. In other cases they will look for 4/6 different affixes to fit their needs
 
- ![Mirror rearangment](./assets/readme-images/Shapes%20mirroring%20arrangement.webp)
- ![Rotation](./assets/readme-images/Shapes-rotation-arrangement.webp)
+- Afixes comes random on the item however there is a system in game to change 1 out of 4 affix to another random one. Thsi is why i chose to develop Filter with an oportunity to chose how many affixes need to match the search. User can chose 6 different ones but chose to match on 3/6 and the 4th to change. By manipulating filter like this player can either widen or narow down the search once the offer list becomes to big to manualy look for item.
 
-* Finaly the array is rendered and added shape-window element and given a class of draggable * shape width that are prepared with different measurments to ensure shape always stays in the center.
+### Idividual page functionalities
 
-* For a new shapes to apear the functionality is implemented that the % of the easy/medium/hard shapes would be adjusted every turn. To ensure that it does nto get very dificult right away from my math knoweladge I knew if I make formula with power of **0<x<1** it will create [diminishing return](https://docs.google.com/spreadsheets/d/1i6MG8unq6J_bRvPEdR8JG7CDxI9pEpCv1-BizUnFuhA/edit#gid=0) starting with fast increcement and slowly adding less and less to a % of medium and hard shapes. It took a bit of gameplay between my friends to tune the nubers down but it can be easily adjusted again. I also added turn treshold to start trigering this formula in action to delay dificulity from the start and allowing player for window of oportunity at the beginign to build up some combos.
+- The main page that is loaded is always offers page that shows all avialable offers. It also provides filter option that is automaticaly loaded from personal profile settings. Once filter optiosn are applied items are filtered and only the ones acording to filter is showed.
 
-### Drag and drop
+- Both main offers page and profile page contain the lists of offers that contain main information about item, when it is created the price and who created offer. The name of creator is also a link to personal profile of creator.
 
-* I mostly explained the isues and idea of drag and drop within bug section. However notibly 3 functions of pointerDown / ponterMove / pointerUp works along side each other to practicaly set everything off in the game that hapens.
+- Profile page is sligly different when viewed by the owner and visitor. Owner has ability to modify their profile and see their own ID's while the visitor is able to push the button leading to direct message to visited profile.
 
-* pointerDown runs functions that once clicked on the shape it records active shapes centers in to object, as well as ads new static dimentions instead of % (this creates bug mentioned earlier) to the shape and finaly alowing the shape to be draged.
+- For an idividual item page (offer_info) a visitor has a chance to make their own bid with a minimum bid of 100k+ extra than previous bid or the minimum bid set by the creator of offer. The creator of the offer has an apearing button next to each bid alowing them to accept any of the bid made or he has a choice of pressing main bid button that accepts the highes/latest bid. Additionaly the "Bin" icon and fuctionality fo offer deletion is added for owner of the offer
+  
+- The bids accepted additionaly sends automatic message to the bidder that the bid was accepted, at which price and item link. 
 
-* pointerMove mostly works with checking shapesBoxesCoordinates versus dropBoxesCenters to find an equal match and once all squares find its partner the highlight class is given to mark dropable locations for the shapes and deleted every time pointer move event is called again so it ensures that highlight class is not left over. (As I wrote this I think this could be a good idea for painting program or game that you draw or contol with mouse movement)
+- The message list "messages" page list all conversations and ques them from latest ones to the oldest ones prety much representing familiar format for any user to recognize in any social media accounts. In fact Social media chating "feel" i was going for when designing messaging system. How Ever i decided not to use profile picture due to shortage of time. Additionaly message page is made to be full screen so it fits any sizes and always feel like regular messanger or instagram chat.
 
-* Drag Center Concept
-* ![Drag centers concept](./assets/images/dragable-squares-location-concept.png)
+- The interaction between offer creation, messages, bids, acceptences of offers and trades as well id sharing is mostly done via javascript manipulation of Invisible forms that are withing dom tree but made to be invisible for the user. Every time user presses the button that would triger JS function which would in turm modify dom elements that belong to form with a certain information depending on the scenario and also triger Modals to show up or button "disabled" turned off that woudl in turn triger form submit.
 
-* Additionaly highlightTiles() checks if player has matching squares of 9 or more and highlights in red that the shapes could be destroyed.
+- These form submition then would travel to back end Phyton function that would in turn modify databases acording to every scenario. 
+  
+- For example: Bid form would create uniqe dictionary and append it to offer.bids list
+- Message form first would "create / check for" unique id of both sesion.user and recipient finding wich one is higher value and placing it first and this way keeping it from dublication, then also would create separate dictonary and appending in to messages list
+- Some would change already existing values like 2 users agreeing that they have traded in game so the app automaticaly deletes an item and adds +1 to both trade scores.
 
-* pointerUp is were the magic happens. Most of functionality is run right after player lifts mouse/finger and there are 2 ways: either drop shape in right place or not. It runs the same function as pointerMove checkign for avialabe squares
+- All in all a lot of JS code was done from my already good expierence from previosu projects. As for phyton, a lot of logic is elementary the same to javascript with different syntax. Most of the code were based on the same ideas as code institute training on mongoDB task manager project. how Ever there were a few slightly new concepts i had to explore.
 
-* In case the shape is droped in the wrong place the shape simply returns back and nothing hapens. However if the shape is droped in the game board multiple things hapens:
+### Phyton and Jinja Chalanges:
 
-* The game creates new shape insted using the proces I described before
-* The game checks if the shape is creating a 9 or more group using same highlightTiles() function and trigers destruction of the shapes (Esentialy changes classes)
-* The game also check for end game takeing both shapes array, creatign matrix out of it. Deleting uneceseraly rows and colums and then runign every posibility agaisnt game board via trigerGameOverCheck() function. This also includes creating aditional matrixes for each varition of ucrrent shapes in case the player has turns left essentialy detecting when player has no more moves.
+- [Datetime](https://docs.python.org/3/library/datetime.html) A bit of experimentation done with this to figure out best way to record the time and turn it in to readible format. This is were i discovered "set" function on Jinja [StackOverflow](https://stackoverflow.com/questions/3727045/set-variable-in-jinja)
 
-* In all of above procces 2 audios played, one for placing the shape and one for destroying squares.
+- Having app to print during app runing: When testing certain functionalities and runing in to form error it was very hard to find error when i had no data showing up. regular print was not working for this so when i looked soliution i found [this](https://stackoverflow.com/questions/32550487/how-to-print-from-flask-app-route-to-python-console) Essentialy all was needed is "import [sys](https://docs.python.org/3/library/sys.html)" with different print function. I left sysntax in the coment for easy eccses when i need it.
 
-* Additionaly droped shapes also runs multiple functions calulationg points for current and top scores as well adding rotation points if player deserved them.
-
-### Local storage
-
-* I wanted to ensure that the player is able to leave and return to the game when ever pleses and not forced to play entire game as high level and patience players may take much longer time. In order to do this I used local storage to be activated every time the shape is droped.
-
-* Local storage serves 2 purpose: load up and replace empty board on page load, and fill shapes and points when the wensite is loaded again as well as load up high score in the hiscore window.
-
-### Failure
-
-* I may call it this way but we all know that learning something is never a failure.
-
-* During a call with mentor Gareth I mentioned the idea that I wanted highscores for players to see, he gave me an idea to use google sheets API to set it up as database to record top 10 or more players in every category. However I failed to make Google Sheets API work for me. I dont believe it was programing issue but more of seting up and account so google would alow me to upload data. Something in the settings that I did not fully understand from their documentation caused API inacsessible. Since is spend to much time on it already I decided to drop that feature until further I learn backend and server managment.
-
-## Deployment & Local Development
-
-### Deployment
-
-* The project was deployed to GitHub Pages using the following steps:
-
-1. Login or signup to GitHub and locate the GitHub Repository [GitHub Repository](https://github.com/Erikas-Ramanauskas/Milestone-Project-3).
-2. On the repository page, navigate to Settings and click on it.
-3. Within the Settings page, under Source choose Branch: main, then /root and click Save.
-4. After about a minute, the site is published.
-
-### Local Development
-
-* How to Fork
-To fork the repository, use the following steps:
-
-1. Login or signup to Github and locate the repository.
-2. Click the Fork button in the top right corner
-
-### Making Local Clone
-
-1. Login or signup to GitHub and locate the GitHub Repository [GitHub Repository](https://github.com/Erikas-Ramanauskas/Milestone-Project-3).
-2. Under the repository name, click "clone" or "download".
-3. To clone the repository using HTTPS, under "Clone with HTTPS", copy the link.
-4. Open the terminal in your preferred code editor and change the current working directory to the location you want to use for the cloned directory.
-5. Type git clone, and then paste the URL you copied in Step 3.
-6. Press Enter. Your clone will be created.
+- [W3Schools mongoDB](https://www.w3schools.com/mongodb/index.php) was a good tool to learn a bit of query manipulation as well [Videos](https://www.youtube.com/watch?v=fPrd-JWol1M&t=463s) to make filter options to work as i intend to.
+  
 
 ## Credits
 
@@ -487,11 +379,7 @@ To fork the repository, use the following steps:
 
 ### Codes
 
-* Credit to [Jonas Schmedtmann](https://www.udemy.com/user/jonasschmedtmann/) udemy Course that I learned midjority of javascript before starting Code institute course. Notable code taken apart general lessons I learned:
-
-* randomInt() function
-* Entire index.js file, creating apearing sections on scroll as well as sticky navigation bar
-* Local stotage functionality
+* Credit to [Jonas Schmedtmann](https://www.udemy.com/user/jonasschmedtmann/) udemy Course that I learned midjority of javascript before starting Code institute course. Crash course build my JS confidence It helped me a lot in a previous project and current project a lot.
 
 * Credit and thanks to numerous tutorials on YouTube by seasoned developers.
   * Thanks to [Web Dev Simplified](https://www.youtube.com/@WebDevSimplified) for a number of code lessons in various topics;
@@ -499,9 +387,6 @@ To fork the repository, use the following steps:
   
 ## Acknowledgements
 
-[Tripledot Studios](https://apps.apple.com/us/developer/tripledot-studios/id1191319103) game: [Woodoku](https://apps.apple.com/us/app/woodoku-wood-block-puzzles/id1496354836) is were I pucked up idea and general rule set for this game.
-
-Added my own twist to game rules and dificulity levels
 
 ## Copyrights
 

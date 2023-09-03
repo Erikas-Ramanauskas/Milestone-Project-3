@@ -1,5 +1,4 @@
 import os
-import json
 import datetime
 # sys used for calling print during the app runing
 import sys
