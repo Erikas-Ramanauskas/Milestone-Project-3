@@ -25,7 +25,15 @@ Diablo 4 trade is a website specificaly dedicated to a game "Diablo 4" relesed n
   - [Features](#features)
   - [Technologies Used](#technologies-used)
     - [Languages Used](#languages-used)
-    - [Frameworks, Libraries and Programmes Used](#frameworks-libraries-and-programmes-used)
+      - [Designs \& Wireframes](#designs--wireframes)
+      - [Additional helpers](#additional-helpers)
+      - [Programming Languages](#programming-languages)
+      - [Libraries \& Frameworks](#libraries--frameworks)
+      - [Databases](#databases)
+      - [Hosting](#hosting)
+      - [Version Control](#version-control)
+      - [Testing](#testing)
+    - [Frameworks and Programs Used](#frameworks-and-programs-used)
   - [Bugs and Solutions](#bugs-and-solutions)
     - [Main chalange faced and decitions made](#main-chalange-faced-and-decitions-made)
       - [Atempt no 1](#atempt-no-1)
@@ -133,97 +141,159 @@ The website main purpose is to trade digital in game items using in game current
 | :---: | :--- | :---: | :---: | :---: | :---: |
 | | Navigation | | | | |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Main page | 5 | 5 | 5 | ✅ |
-| 2 | Game page | 5 | 5 | 5 | ✅ |
-| 3 | Highscore page | 5 | 5 | 5 | ✅ |
-| 4 | ""Play!"" button changing to ""Start new game!"" | 5 | 5 | 3 | ❌ |
-| 5 | Game dificulities opens up as you press ""Play!"" or ""Start new game!"" | 5 | 3 | 4 | ✅ |
-| 6 | Within profile page giving player a choice of the tiles style | 4 | 3 | 3 | ❌ |
+| 1 | Offer page | 5 | 5 | 5 | ✅ |
+| 2 | Request page | 3 | 3 | 3 | ❌ |
+| 3 | Create offer page | 5 | 5 | 5 | ✅ |
+| 4 | Messages page | 5 | 5 | 4 | ✅ |
+| 5 | Individual message page | 5 | 3 | 4 | ✅ |
+| 6 | Profile page | 4 | 3 | 3 | ✅ |
+| 7 | Item page | 5 | 5 | 5 | ✅ |
+| 8 | Log in page | 5 | 5 | 5 | ✅ |
+| 9 | Register page | 5 | 5 | 5 | ✅ |
+| 10 | Messages link displays unread message number | 4 | 4 | 5 | ✅ |
+| 11 | Scrolling on messages display pop up with latest messages | 3 | 4 | 4 | ❌ |
 | -- | --- | --- | --- | --- | --- |
-| | Visuals | | | | |
+| | Offers page feautures | | | | |
 | --- | --- | --- | --- | --- | --- |
-| 7 | Game boad layout changing depending on height and width and determening wich one is bigger. | 5 | 5 | 5 | ✅ |
-| 8 | Diferent styles for the tiles and the board | 4 | 3 | 3 | ✅ |
-| 9 | Animations on destroying the tiles | 5 | 4 | 4 | ❌ |
-| 10 | Animations on the score count once points achieved | 5 | 3 | 3 | ❌ |
-| 11 | Flashier animation when combo points achieved | 5 | 3 | 3 | ❌ |
-| 12 | Home page and hoghscores components apearing on scroll | 5 | 3 | 4 | ✅ |
+| 12 | All offers loaded on page load | 5 | 5 | 5 | ✅ |
+| 13 | Filter functionality to narrow down the list of offers | 5 | 5 | 5 | ✅ |
+| 14 | Ability to go in to individual item profile | 5 | 5 | 5 | ✅ |
+| 15 | Ability to go to other users profile | 5 | 5 | 5 | ✅ |
+| 16 | Statistics of last trades on the side | 3 | 3 | 3 | ✅ |
+| 17 | Filter functionality auto setup acording to user profile. | 5 | | | ✅ |
 | -- | --- | --- | --- | --- | --- |
-| | Game feautures | | | | |
+| | Profile page and Profile Edit | | | | |
 | --- | --- | --- | --- | --- | --- |
-| 13 | Easy dificulity - ability to flip the shapes, chance to get extra shapes, guided highlight for match | 5 | 4 | 5 | ✅ |
-| 14 | Medium dificulity- Same as easy but no ability to flip or extra shapes | 5 | 4 | 5 | ❌ |
-| 15 | Hard dificulity- Same as mediuim but timed and no highlights | 5 | 4 | 5 | ❌ |
-| 16 | Insane dificulity- same as hard, but with added 25% of filled tiles becomes invisiable. | 5 | 3 | 4 | ❌ |
-| 17 | Point count 1x points for single break of 9 | 5 | 5 | 5 | ❌ |
-| 18 | Point count for combo of more than 9 tiles, every extra combo adds 0.5x, Example destroying 2 row or collumn will multiply points by 1.5x. For 3 combo 2x | 5 | 5 | 4 | ❌ |
-| 19 | Additional point multiplier Easy 1x, Medium 1.5x Hard 2x, Insane 3x | 5 | 4 | 4 | ❌ |
-| 20 | ""Game over"" message | 5 | 5 | 5 | ✅ |
-| 21 | Automatic detection of game over | 5 | 5 | 5 | ✅ |
-| 22 | Ability to flip tiles | 5 | 4 | 4 | ✅ |
-| 23 | Upon reaching certain score Unlocking ""Insane"" dificulity | 3 | 3 | 3 | ❌ |
+| 18 | Ability to see personal and other people profile | 5 | 5 | 5 | ✅ |
+| 19 | Personal profile has ability to be eddited | 5 | 5 | 5 | ✅ |
+| 20 | Class can be eddited | 4 | 4 | 5 | ✅ |
+| 21 | Game type can be eddited hardcore/ season | 4 | 4 | 5 | ✅ |
+| 22 | Ability to add personal Battlenet id | 5 | 5 | 5 | ✅ |
+| 23 | Ability to add personal Discord id | 5 | 5 | 5 | ✅ |
+| 24 | Both ids only visable to to the owner | 4 | 4 | 5 | ✅ |
+| 25 | User profile also displaying how many trades was made by user. | 5 | 5 | 4 | ✅ |
+| 26 | Visiting other people profile ""message"" button is vissable and functioning | 5 | 5 | 4 | ✅ |
+| 27 | User profile settings functions as helpers for filter options and item create options | 5 | 5 | 5 | ✅ |
 | -- | --- | --- | --- | --- | --- |
-| | Redesigned Game feutures | | | | |
+| | Offer creation page functionality | | | | |
 | --- | --- | --- | --- | --- | --- |
-| 24 | Shape turns have limited uses | 5 | 5 | 5 | ✅ |
-| 25 | Shape turns are rewarded for combinations | 5 | 5 | 5 | ✅ |
-| 26 | Each dificulity has less starting turn points | 5 | 5 | 5 | ✅ |
-| 27 | Each dificulity requires more combination points to reward | 5 | 5 | 5 | ✅ |
-| 28 | Reward multiplier 50% for combinations for all dificulities | 5 | 5 | 5 | ✅ |
-| 29 | Highlight of tiles when maching tiles found during drag | 5 | 5 | 5 | ✅ |
-| 30 | Highlight of tiles when 9 matching tiles are found | 5 | 5 | 5 | ✅ |
-| 31 | Additional 20% points for medium dificulity | 5 | 5 | 5 | ✅ |
-| 32 | Additional 40% points for hard dificulity | 5 | 5 | 5 | ✅ |
+| 28 | Creation of item starting with class and game type buttons prefiled from profile | 5 | 5 | 5 | ✅ |
+| 29 | Once item is selected Suffixes and Affixes butons are generated | 5 | 5 | 5 | ✅ |
+| 30 | Once Affix buttons are seleceted (up to 4) the range is selected. | 5 | 5 | 5 | ✅ |
+| 31 | If more than 4 affixes seleceted the 5th one will indicate that choice is unavialable | 3 | 4 | 5 | ✅ |
+| 32 | The price button is starting at 100k and able to increse by 100k or 1m | 5 | 5 | 5 | ✅ |
+| 33 | Add item buton is disabled untill 4 affixes are selected | 5 | 5 | 5 | ✅ |
+| 34 | Suffix affixes autoselects the first one and if more options avialable user can change. | 5 | 5 | 5 | ✅ |
+| 35 | If different item is selected the affixes that matches stays and others changes | 5 | 5 | 5 | ✅ |
 | -- | --- | --- | --- | --- | --- |
-| | Highscores | | | | |
+| | Individual offer page | | | | |
 | --- | --- | --- | --- | --- | --- |
-| 33 | Player name that player can change for them self | 4 | 3 | 4 | ❌ |
-| 34 | Top highscore overal showing highest score game type and score | 5 | 5 | 5 | ✅ |
-| 35 | Top highscore weekley | 4 | 5 | 5 | ✅ |
-| 36 | Top streek | 4 | 3 | 4 | ❌ |
-| 37 | Tiles destroyed | 4 | 3 | 4 | ❌ |
-| 38 | Individual top score for Easy game | 5 | 4 | 5 | ✅ |
-| 39 | Individual top score for Medium game | 5 | 4 | 5 | ✅ |
-| 40 | Individual top score for Hard game | 5 | 4 | 5 | ✅ |
-| 41 | Individual top score for insane game | 5 | 4 | 2 | ❌ |
-| 42 | Ability to share game results on social media | 5 | 3 | 2 | ❌ |
-| 43 | Ability to see other top highscores between other players | 5 | 3 | 2 | ❌ |
-| 44 | Ability to see top highscores between game modes | 5 | 3 | 2 | ❌ |
-| 45 | Ability to see top highscores between top and week charts | 5 | 3 | 2 | ❌ |
+| 36 | Offer page displaying offer details | 5 | 5 | 5 | ✅ |
+| 37 | Page also displayes initial price and by who item is created | 5 | 5 | 5 | ✅ |
+| 38 | For the owner of offer ""no bids made"" message displayed if bids are not made yet | 5 | 5 | 5 | ✅ |
+| 39 | If bids are made ""accept offer buttons apears"" | 5 | 5 | 5 | ✅ |
+| 40 | Owner also has delete button with confirmation for offer | 5 | 5 | 5 | ✅ |
+| 41 | Owner after accepting bid, has button to accept trade | 5 | 5 | 5 | ✅ |
+| 42 | Offer page displaying every bid by other users and when it was made | 5 | 5 | 5 | ✅ |
+| 43 | For visitor bid functionality is vissable and functioning | 5 | 5 | 5 | ✅ |
+| 44 | For visitor if their offer is accepted by the owner instead of bid, accept trade button is shown | 5 | 5 | 5 | ✅ |
 | -- | --- | --- | --- | --- | --- |
-| | Home page and tutorial | | | | |
+| | Messages page | | | | |
 | --- | --- | --- | --- | --- | --- |
-| 46 | Video showcasing the gameplay | 4 | 3 | 4 | ❌ |
-| 47 | Introduction to a game and points reward | 5 | 5 | 5 | ✅ |
-| 48 | Explanation of individual level dificulities | 5 | 5 | 5 | ✅ |
-| 49 | Footer with links to creator social media. | 5 | 5 | 5 | ✅ |
+| 45 | Messages list is layed out vertical format | 5 | 5 | 5 | ✅ |
+| 46 | Every even message is different background color from odd messages | 5 | 5 | 5 | ✅ |
+| 47 | Visual indication wich messages have not been read by the user | 5 | 5 | 5 | ✅ |
+| 48 | Message info displayes username, time, and message it self | 5 | 5 | 5 | ✅ |
+| 49 | Last message displayed and cut off it it does not fit in the screen | 5 | 5 | 5 | ✅ |
+| 50 | If offer is accepted custom message is displayed | 5 | 5 | 5 | ✅ |
+| -- | --- | --- | --- | --- | --- |
+| | individual message page | | | | |
+| --- | --- | --- | --- | --- | --- |
+| 51 | All past messages vissable with the newest one being at the bottom. | 5 | 5 | 5 | ✅ |
+| 52 | Main message screen is scrolled individualy | 5 | 5 | 5 | ✅ |
+| 53 | Message send fuctionality added at the bottom | 5 | 5 | 5 | ✅ |
+| 54 | Recieved messages showed on left in different color | 5 | 5 | 5 | ✅ |
+| 55 | Sent messages displayed on right in different color | 5 | 5 | 5 | ✅ |
+| 56 | Share id's button with modal confirmation | 5 | 5 | 5 | ✅ |
+| 57 | Share id's button automaticaly sending message with personal id's | 5 | 5 | 5 | ✅ |
+| 58 | Id's messages looks sliglty different | 5 | 5 | 5 | ✅ |
+| 59 | When offer accepted, unique message is sent with item link and price accepted. | 5 | 5 | 5 | ✅ |
+| -- | --- | --- | --- | --- | --- |
+| | No loged in user restrictions | | | | |
+| --- | --- | --- | --- | --- | --- |
+| 60 | Profile button is not vissable | 5 | 5 | 5 | ✅ |
+| 61 | messages button is not vissable | 5 | 5 | 5 | ✅ |
+| 62 | Create offer button links to log in page | 5 | 5 | 5 | ✅ |
+| 63 | Register button vissable | 5 | 5 | 5 | ✅ |
+| 64 | Log in button visable | 5 | 5 | 5 | ✅ |
+| 65 | Clicking other user profile link leads to log in page | 5 | 5 | 5 | ✅ |
+| 66 | Clicking on bid button leads to log in page | 5 | 5 | 5 | ✅ |
 
 ## Technologies Used
 
 ### Languages Used
 
-* HTML5
-* CSS
-* JavaScript
+#### Designs & Wireframes
 
-### Frameworks, Libraries and Programmes Used
+- [Figma](https://www.figma.com/) was used to create wireframes
 
-- [Google Fonts](https://fonts.google.com/) fonts used to import main fonts for the page.
-* [Online-Convert](https://image.online-convert.com/) was used to convert the png images to webp.
-* [BGjar](https://bgjar.com/curve-line) - For background generation.
-* [Git](https://git-scm.com/) was used for version control.
-* [Visual studio code](https://code.visualstudio.com/) was using most of the time when internet was not avialble.
-* [GitPod](https://gitpod.io/) was used as online IDE for GitHub and the terminal was used to add and commit to Git and push to GitHub.
-* [GitHub](https://github.com/) was and is being used as repository of the project source code and for deploying the site/ application.
-* [Prined version](https://websitesetup.org/javascript-cheat-sheet/) of JS cheatsheet was used when internet was not avialable.
-* [Favicon](https://favicon.io/favicon-converter/) was used to create favicon.
-* [Figma](https://www.figma.com/) was used to create wireframes
-* [Chrome DevTools](https://developer.chrome.com/docs/devtools/) was used to test the code and debug the code during the development process.
-* [W3C Markup](https://validator.w3.org/) Validation was used to test HTML code
-* [W3C CSS](https://jigsaw.w3.org/css-validator/) Validation Service was used to test CSS code
-* [Jest](https://jestjs.io/) was used to test JavaScript code
+#### Additional helpers
 
-* [Google sheets](https://drive.google.com/drive/u/0/folders/1_VxQCii04fFd1Zq0wxsbFM4VuxG_2guz) were used to create a small interactivle interface in order to create shapes for the game and turn them in to JavaScript Object for simple copy paste. It allowed me to experiment with diferent shapes without spending time manualy typing the code. [link](https://docs.google.com/spreadsheets/d/1rQbG19eHYj0ltU_YNrQAcVxWLgIqnsbVytKtXd3tatI/edit)
+- [Google sheets](https://drive.google.com/drive/folders/1OLCTh5KtMTvXfx9U45FlNVfcStfZ6Db5) 2 sheets have been used.one to gather and rework database of item affixes [link](https://docs.google.com/spreadsheets/d/13bXVxjCteAYxh9K5A2vyceVEUQsKByxaTxm2bozIFCs/edit?usp=drive_web&ouid=118192088859168429060)  and other parameters and another for quicker testing and feutures coding [link](https://docs.google.com/spreadsheets/d/1in7fgqgPXNS0XWtpCu7ox2mpkWDGmuAPJVuSlucCqfk/edit#gid=0)
+
+#### Programming Languages
+
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+
+#### Libraries & Frameworks
+
+[Materialize](https://materializecss.com/navbar.html)
+[jQuery](https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white)
+[Font Awesome](https://img.shields.io/badge/Font%20Awesome%20-%23339AF0.svg?&style=for-the-badge&logo=Font%20Awesome&logoColor=FFFFFF)
+[Google Fonts](https://fonts.google.com/) fonts used to import main fonts for the page.
+[Favicon](https://favicon.io/favicon-converter/) was used to create favicon.
+[Flask](https://flask.palletsprojects.com/en/2.3.x/)
+[Jinja](https://jinja.palletsprojects.com/en/3.1.x/)
+
+
+
+#### Databases
+
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+
+#### Hosting
+
+![GitHub Pages](https://img.shields.io/static/v1?style=for-the-badge&message=GitHub+Pages&color=222222&logo=GitHub+Pages&logoColor=FFFFFF&label=)
+![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white) !
+
+#### Version Control
+
+[Git](https://git-scm.com/) was used for version control.
+[Visual studio code](https://code.visualstudio.com/) Used for several fucntion testing
+[CodeAnywere](https://codeanywhere.com/) was used as online IDE for GitHub and the terminal was used to add and commit to Git and push to GitHub. 
+[GitHub](https://github.com/) was and is being used as repository of the project source code and for deploying the site/ application.
+
+#### Testing
+
+- [Chrome DevTools](https://developer.chrome.com/docs/devtools/) was used to test the code and debug the code during the development process.
+
+- [W3C Markup](https://validator.w3.org/) Validation was used to test HTML code
+- [W3C CSS](https://jigsaw.w3.org/css-validator/) Validation Service was used to test CSS code
+
+### Frameworks and Programs Used
+
+
+* 
+  
+
+
+
+
+
+
 
 ## Bugs and Solutions
 
