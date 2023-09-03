@@ -34,8 +34,8 @@
       set last_message = chat.messages[-1].discord_id %} {% elif
       chat.messages[-1].b_net_id %} {% set last_message =
       chat.messages[-1].b_net_id %} {% elif chat.messages[-1].offer_accepted %}
-      {% set last_message = chat.messages[-1].offer_accepted.offer_name + "offer
-      accepted" %} {% else %} {% endif %} {% if loop.index % 2 == 1 %}
+      {% set last_message = chat.messages[-1].offer_accepted.offer_name + "
+      offer accepted" %} {% else %} {% endif %} {% if loop.index % 2 == 1 %}
       <a
         class="row grey darken-2 message-line"
         href="{{url_for('message', reciever=user_name)}}"

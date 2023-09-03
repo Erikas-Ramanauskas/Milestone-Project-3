@@ -42,6 +42,7 @@ item_types = ["Helm", "Chest Armor", "Gloves", "Pants", "Boots", "Amulet",
 @app.route("/offers")
 def offers():
     offers = list(mongo.db.offers.find())
+    reversed_offers = offers[::-1]
 
     user = ""
     if "user" in session:
@@ -49,7 +50,7 @@ def offers():
             {"username": session["user"]})
 
     check_notifications(user, False)
-    return render_template("offers.html", offers=offers,
+    return render_template("offers.html", offers=reversed_offers,
                            user=user, p_class=p_class, item_types=item_types,
                            current_datetime=current_datetime)
 
@@ -101,7 +102,7 @@ def filter():
         ]
     }
 
-    results = list(mongo.db.offers.find(search_query))
+    results = list(mongo.db.offers.find(search_query))[::-1]
 
     return render_template("offers.html", offers=results,
                            user=user, p_class=p_class, item_types=item_types,
