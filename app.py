@@ -232,7 +232,8 @@ def edit_profile(username):
             "class_preference": request.form.get("class_preference"),
             "is_hardcore": is_hardcore,
             "is_season": is_season,
-            "message_count": user["message_count"]
+            "message_count": user["message_count"],
+            "trades_completed": user["trades_completed"]
         }
         mongo.db.users.replace_one({"_id": ObjectId(user["_id"])}, submit)
         user2 = mongo.db.users.find_one({"_id": ObjectId(user["_id"])})
