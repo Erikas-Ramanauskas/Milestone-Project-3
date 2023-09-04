@@ -14,9 +14,9 @@
                         <i class="fa-solid fa-skull teal-color-text"></i>
                         <label for="is_hardcore" class="teal-color-text swich-button">
                             {% if user.is_hardcore == "on" %}
-                            <input type="checkbox" id="is_hardcore" name="is_hardcore" checked  aria-label="toogle hardcore"/>
+                            <input type="checkbox" id="is_hardcore" name="is_hardcore" checked  aria-describedby="toogle hardcore"/>
                             {% else %}
-                            <input type="checkbox" id="is_hardcore" name="is_hardcore"  aria-label="toogle hardcore"/>
+                            <input type="checkbox" id="is_hardcore" name="is_hardcore" aria-describedby="toogle hardcore"/>
                             {% endif %}
                             <span class="lever"></span>
                         </label>
@@ -29,9 +29,9 @@
                     <div class="switch swich-offers">
                         <label for="is_season" class="teal-color-text swich-button">
                             {% if user.is_season == "on" %}
-                            <input type="checkbox" id="is_season" name="is_season" checked aria-label="toogle season" />
+                            <input type="checkbox" id="is_season" name="is_season" checked aria-describedby="toogle season" />
                             {% else %}
-                            <input type="checkbox" id="is_season" name="is_season" aria-label="toogle season" />
+                            <input type="checkbox" id="is_season" name="is_season" aria-describedby="toogle season" />
                             {% endif %}
                             <span class="lever"></span>
                         </label>
@@ -53,7 +53,7 @@
             </div>
             <!-- item choice -->
             <div class="input-field">
-                <select name="item_preference"  id="item-preference"  aria-label="Select item">
+                <select name="item_preference"  id="item-preference"  aria-describedby="Select item">
                     <option value="" disabled selected>Choose your option</option>
                     {% for item in item_types %}
                     <option value="{{ item }}">{{ item }}</option>
@@ -66,12 +66,12 @@
 
             <!-- Affix range -->
             <div class="input-field" class="range-field">
-                <input type="range" id="affix-range" name="affix_range" min="1" max="4" value="4"  aria-label="Affix ammount" />
+                <input type="range" id="affix-range" name="affix_range" min="1" max="4" value="4"  aria-describedby="Affix ammount" />
             </div>
 
             <!-- Affixes choice -->
             <div class="input-field">
-                <select name="affix_preference" id="affix-preference" multiple  aria-label="Select multiple affixes">
+                <select name="affix_preference" id="affix-preference" multiple aria-describedby="Select multiple affixes">
                 </select>
                 <label>Chose up to affixes</label>
             </div>
