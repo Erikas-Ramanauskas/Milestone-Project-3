@@ -123,7 +123,7 @@ textarea {
     text-align: center;
 }
 
-#nav-message {
+.nav-message {
     display: flex;
     justify-content: start;
     align-items: center;
@@ -233,8 +233,8 @@ output {
 }
 
 .loader img {
-    width: 256px;
-    height: 34px;
+    width: 128px;
+    height: 17px;
 }
 
 .loader-hidden {

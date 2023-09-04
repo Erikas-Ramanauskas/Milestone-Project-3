@@ -73,6 +73,11 @@
             <span class="white-text">Recieved from </span>
             {% endif %}
             <span class="orange-color-text messages-user">{{ user_name }}</span>
+            {% if session.user == chat.user1 and chat.user1_unread > 0 %}
+            <span class="messages-circle"> {{ chat.user1_unread }}</span>
+            {% elif session.user == chat.user2 and chat.user2_unread > 0 %}
+            <span class="messages-circle"> {{ chat.user2_unread }}</span>
+            {% endif %}
           </p>
         </div>
         <div class="col s12 messages-message-container teal-color-text">

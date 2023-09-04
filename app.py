@@ -137,7 +137,7 @@ def register():
             "password": hashed_password,
             "b_net_id": "",
             "discord_id": "",
-            "class_preference": "None",
+            "class_preference": "All Classes",
             "is_hardcore": "off",
             "is_season": "off",
             "message_count": 0,
@@ -207,7 +207,7 @@ def profile(username):
                 "is_hardcore": user["is_hardcore"],
                 "is_season": user["is_season"]
             }
-            check_notifications(user, False)
+            check_notifications("", True)
             return render_template("profile.html", user=user2, offers=offers,
                                    current_datetime=current_datetime)
     else:

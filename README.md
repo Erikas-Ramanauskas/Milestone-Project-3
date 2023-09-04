@@ -290,7 +290,9 @@ The website main purpose is to trade digital in game items using in game current
 
 * Within offers and profile page each card was different size due to content within each card were different. Upon mentors sugestion to make them all to be set size I figured that I can run JS function that finds the tallest card and automaticaly adjust all other ones to be same lentght.
 
-- One small isue was that when filling in the form for registrations and profile edit there was a requirements for a specific amount fo characters but if user input does not fit the message given did not define requirements. I find out from Mentor i can do this using "title" atribute. [link](https://www.tutorialspoint.com/form-required-attribute-with-a-custom-validation-message-in-html5#:~:text=We%20can%20also%20use%20JavaScript,message%20for%20the%20input%20field)
+* One small isue was that when filling in the form for registrations and profile edit there was a requirements for a specific amount fo characters but if user input does not fit the message given did not define requirements. I find out from Mentor i can do this using "title" atribute. [link](https://www.tutorialspoint.com/form-required-attribute-with-a-custom-validation-message-in-html5#:~:text=We%20can%20also%20use%20JavaScript,message%20for%20the%20input%20field)
+
+* One bug was noticed during testing that when profile was eddited trad_count was not included withing the function thus deleting it from users profile. I had quite a few of these cases were i would add new key but it would later deleted due to eddit of database.
 
 ### Remaining Bugs
 
@@ -372,6 +374,8 @@ The website main purpose is to trade digital in game items using in game current
   
 
 ## Credits
+
+
 
 ### Mentor
 

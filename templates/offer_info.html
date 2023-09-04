@@ -88,7 +88,7 @@
                         <input id="offer-bid" name="offer_bid" value="{{ offer.offer_price }}" type="text" readOnly="true" class="teal-color-text" />
                         {% else %}
                         {% set offer2= offer.bids[0].offer_bid %}
-                        <input id="offer-bid" name="offer_bid" value="{{ offer2 }}" type="text" readOnly="true"
+                        <input id="offer-bid" name="offer_bid" value="{{ offer2 }}" type="text" readOnly="true" aria-label="Bid ammount"
                             class="teal-color-text" />
                         {% endif %}
                         <i class="fa-solid fa-forward-step teal-color-text bid-button" onclick="changeValue(100000, true)"></i>

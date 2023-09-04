@@ -54,7 +54,7 @@
         {% if user.is_season == "on" %}
         <input type="checkbox" form="mainForm" id="is_season" name="is_season" checked />
         {% else %}
-        <input type="checkbox" form="mainForm" name="is_season" />
+        <input type="checkbox" form="mainForm" id="is_season" name="is_season" />
         {% endif %}
         <span class="lever"></span>
         Season
@@ -120,7 +120,7 @@
             <i class="fa-solid fa-backward-fast teal-color-text bid-button" onclick="changeValue(1000000, false)"></i>
             <i class="fa-solid fa-backward-step teal-color-text bid-button" onclick="changeValue(100000, false)"></i>
             <input id="offer-bid" form="mainForm" name="offer_price" value="100,000" type="text" readOnly="true"
-                class="teal-color-text" />
+                class="teal-color-text" aria-label="Item bid"/>
             <i class="fa-solid fa-forward-step teal-color-text bid-button" onclick="changeValue(100000, true)"></i>
             <i class="fa-solid fa-forward-fast teal-color-text bid-button" onclick="changeValue(1000000, true)"></i>
         </div>

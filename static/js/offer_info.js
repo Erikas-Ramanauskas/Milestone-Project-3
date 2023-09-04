@@ -35,21 +35,26 @@ function changeValue(value, change) {
 
 // bids accept button modification
 const bidTable = document.getElementById('offer-bid-table');
-const bidRow = bidTable.getElementsByClassName('offer-bid-row');
+let bidRow;
 
+if (bidTable) {
+    bidRow = bidTable.getElementsByClassName('offer-bid-row');
 
-for (let i = 0; i < bidRow.length; i++) {
-    const row = bidRow[i];
-    const bidButton = row.getElementsByClassName('bid-accept-button')[0];
+    for (let i = 0; i < bidRow.length; i++) {
+        const row = bidRow[i];
+        const bidButton = row.getElementsByClassName('bid-accept-button')[0];
 
-    row.addEventListener('mouseenter', () => {
-        bidButton.classList.remove('accept-hidden');
-    });
+        row.addEventListener('mouseenter', () => {
+            bidButton.classList.remove('accept-hidden');
+        });
 
-    row.addEventListener('mouseleave', () => {
-        bidButton.classList.add('accept-hidden');
-    });
+        row.addEventListener('mouseleave', () => {
+            bidButton.classList.add('accept-hidden');
+        });
+    }
 }
+
+
 
 // function adjust invisible form that trigers offer acceptence by owner of offer
 function renderBidAcceptForm(button) {

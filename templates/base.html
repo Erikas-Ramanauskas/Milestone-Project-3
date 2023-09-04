@@ -3,11 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="title" content="Diablo 4 market" />
+    <meta
+      name="description"
+      content="Discover the ultimate Diablo 4 item trading hub! Explore a vast collection of rare and powerful items, connect with fellow adventurers, and embark on epic journeys. Buy, sell, and trade your way to greatness on our secure platform. Join the Diablo 4 item trading community today and unleash the power of your character!"
+    />
 
-    <link rel="apple-touch-icon" sizes="180x180" href="static/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="static/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="static/images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="static/images/favicon/site.webmanifest">
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="static/images/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="static/images/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="static/images/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="static/images/favicon/site.webmanifest" />
 
     <!-- Font awesome Link -->
     <link
@@ -46,7 +65,7 @@
             ><img src="../static/images/logo.png" alt="logo"
           /></a>
           <a href="#" data-target="mobile-demo" class="sidenav-trigger right"
-            ><i class="fas fa-bars"></i
+            ><i class="fas fa-bars" aria-label="Toggle navigation"></i
           ></a>
           <ul class="right hide-on-med-and-down">
             <li><a href="{{ url_for('offers') }}">Offers</a></li>
@@ -54,16 +73,14 @@
             {% if session.user %}
             <li>
               <a
-                id="nav-message"
+                class="nav-message"
                 href="{{ url_for('messages', username=session['user']) }}"
               >
                 {% if session.messages > 0 %}
                 <span class="message-circle"> {{ session.messages }}</span>
                 <span class="purple-color-text">Messages</span>
-                {% else %}
-                Messages
-                 {% endif %}
-                </a>
+                {% else %} Messages {% endif %}
+              </a>
             </li>
             <li>
               <a href="{{ url_for('profile', username=session['user']) }}"
@@ -99,16 +116,18 @@
         <li><a href="{{ url_for('offers') }}">Offers</a></li>
         <li><a href="{{ url_for('add_offer') }}">Create Offer</a></li>
         {% if session.user %}
-    <li>
-        <a id="nav-message" href="{{ url_for('messages', username=session['user']) }}">
+        <li>
+          <a
+            class="nav-message"
+            href="{{ url_for('messages', username=session['user']) }}"
+          >
             {% if session.messages > 0 %}
             <span class="message-circle"> {{ session.messages }}</span>
             <span class="purple-color-text">Messages</span>
-            {% else %}
-            Messages
-            {% endif %}
-        </a>
-    </li>
+            {% else %} Messages {% endif %}
+          </a>
+        </li>
+        <li>
           <a href="{{ url_for('profile', username=session['user']) }}"
             >Profile</a
           >
