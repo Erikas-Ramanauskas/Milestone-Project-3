@@ -41,21 +41,21 @@ JSHint was used to test JavaScript code quality.
 
 ### Lighthouse Test Results
 
-* [Mobile - offer page]()
-* [Mobile - create offer page]()
-- [Mobile - profile page]()  
-- [Mobile - profile_edit page]()  
-* [Mobile - messages page]()
-* [Mobile - message page]()
-* [Mobile - offer info page]()  
+* ![Mobile - offer page](./static/images/Lighthouse/m-home-offers.png)
+* ![Mobile - create offer page](./static/images/Lighthouse/m-add-offer.png)
+* ![Mobile - profile page](./static/images/Lighthouse/m-profile.png)  
+* ![Mobile - profile_edit page](./static/images/Lighthouse/m-profile-edit.png)  
+* ![Mobile - messages page](./static/images/Lighthouse/m-messages.png)
+* ![Mobile - message page](./static/images/Lighthouse/m-message.png)
+* ![Mobile - offer info page](./static/images/Lighthouse/m-offer-info.png)  
   
-* [Desktop - offer page]()
-* [Desktop - create offer page]()
-* [Desktop - profile page]()  
-* [Desktop - profile_edit page]()  
-* [Desktop - messages page]()
-* [Desktop - message page]()
-* [Desktop - offer info page]()  
+* ![Desktop - offer page](./static/images/Lighthouse/home-offers.png)
+* ![Desktop - create offer page](./static/images/Lighthouse/add-offer.png)
+* ![Desktop - profile page](./static/images/Lighthouse/profile.png)  
+* ![Desktop - profile_edit page](./static/images/Lighthouse/profile-edit.png)  
+* ![Desktop - messages page](./static/images/Lighthouse/messages.png)
+* ![Desktop - message page](./static/images/Lighthouse/message.png)
+* ![Desktop - offer info page](./static/images/Lighthouse/offer_info.png)  
 
 
 ## MANUAL TESTING
