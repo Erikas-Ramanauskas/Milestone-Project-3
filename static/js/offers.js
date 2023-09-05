@@ -21,53 +21,57 @@ function renderNewAffixes() {
     const classValue = document.getElementById("class-preference").value.toLowerCase().replace(" ", "_");
     const itemValue = document.getElementById("item-preference").value.toLowerCase().replace(" ", "_");
 
-    newItemData = itemData[itemValue];
+    if (itemValue && classValue) {
 
-    let newChoiceAffixes;
+        newItemData = itemData[itemValue];
 
-    // determines if user selected all classes so the individual classes affixes would not be included
-    if (classValue != "all_classes") {
-        newChoiceAffixes = [
-            ...newItemData.affixes.all_classes,
-            ...newItemData.affixes[classValue],
-        ];
-    } else {
-        newChoiceAffixes = newItemData.affixes.all_classes;
+        let newChoiceAffixes;
+
+        // determines if user selected all classes so the individual classes affixes would not be included
+        if (classValue != "all_classes") {
+            newChoiceAffixes = [
+                ...newItemData.affixes.all_classes,
+                ...newItemData.affixes[classValue],
+            ];
+        } else {
+            newChoiceAffixes = newItemData.affixes.all_classes;
+        }
+
+        rearrangedAffixes = newChoiceAffixes.sort((a, b) => {
+            if (a.affix < b.affix) return -1;
+            if (a.affix > b.affix) return 1;
+            return 0;
+
+        });
+
+
+        const affixPreference = document.getElementById("affix-preference");
+
+        // Clear any existing options in the select element
+        affixPreference.innerHTML = "";
+
+        // Create a default "Choose your option" option
+        const defaultOption = document.createElement("option");
+        defaultOption.id = "selected-affix-option";
+        defaultOption.value = "";
+        defaultOption.text = "Choose your option";
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        affixPreference.appendChild(defaultOption);
+
+        // Loop through the array and create options
+        for (const item of newChoiceAffixes) {
+
+            const option = document.createElement("option");
+            option.value = item.affix;
+            option.text = item.affix;
+            affixPreference.appendChild(option);
+        }
+
+        // calling materialise initiation
+        const elems = document.getElementById('affix-preference');
+        M.FormSelect.init(elems, { isMultiple: true });
     }
-
-    rearrangedAffixes = newChoiceAffixes.sort((a, b) => {
-        if (a.affix < b.affix) return -1;
-        if (a.affix > b.affix) return 1;
-        return 0;
-    });
-
-
-    const affixPreference = document.getElementById("affix-preference");
-
-    // Clear any existing options in the select element
-    affixPreference.innerHTML = "";
-
-    // Create a default "Choose your option" option
-    const defaultOption = document.createElement("option");
-    defaultOption.id = "selected-affix-option";
-    defaultOption.value = "";
-    defaultOption.text = "Choose your option";
-    defaultOption.disabled = true;
-    defaultOption.selected = true;
-    affixPreference.appendChild(defaultOption);
-
-    // Loop through the array and create options
-    for (const item of newChoiceAffixes) {
-
-        const option = document.createElement("option");
-        option.value = item.affix;
-        option.text = item.affix;
-        affixPreference.appendChild(option);
-    }
-
-    // calling materialise initiation
-    const elems = document.getElementById('affix-preference');
-    M.FormSelect.init(elems, { isMultiple: true });
 }
 
 

@@ -75,6 +75,10 @@ def filter():
 
     affix_range = int(request.form.get("affix_range"))
 
+    # check if range is higher than selected affixl list to prevent bug.
+    if affix_range > len(affix_preference):
+        affix_range = len(affix_preference)
+
     # Creating unique combinations
     affix_combinations = list(
         itertools.combinations(affix_preference, affix_range))
