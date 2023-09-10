@@ -1,6 +1,6 @@
-# Tedoku -  Testing Documentation
+# Diablo 4 Trading -  Testing Documentation
 
-![Screenshot of Tedoku on multiple device](./static/images/read_me/responsive.png)
+![Screenshot of Diablo 4 Trading on multiple device](./static/images/read_me/responsive.png)
 
 Visit the deployed site: [View the live project here](https://milestone-project-3-89cfc062fae7.herokuapp.com/)
 
@@ -8,7 +8,7 @@ Visit the deployed site: [View the live project here](https://milestone-project-
 
 ## CONTENTS
 
-- [Tedoku -  Testing Documentation](#tedoku----testing-documentation)
+- [Diablo 4 Trading -  Testing Documentation](#Diablo 4 Trading----testing-documentation)
   - [CONTENTS](#contents)
   - [Testing](#testing)
   - [AUTOMATED TESTING](#automated-testing)
@@ -31,34 +31,65 @@ Each page has been inspected using google chrome developer tools and lighthouse 
 ### Validation Results
 
 * The W3C Markup Validator and the W3C CSS Validator were used to test and validate every all three pages of
-the Tedoku interactive project to ensure that there were no syntax errors in the code. Chrome's
+the Diablo 4 Trading interactive project to ensure that there were no syntax errors in the code. Chrome's
 Lighthouse DevTool was also used to test for Performance, Accessibility, Best Practices and SEO.
 JSHint was used to test JavaScript code quality.
 
 * The main info on html Validator thowing info messages on *Trailing slash on void elements* due to /> close tag being added automaticaly by *prettier* and manualy removing it will be added next time the file is saved.
 
-
-
 ### Lighthouse Test Results
 
+- Mobile - offer page
 * ![Mobile - offer page](./static/images/Lighthouse/m-home-offers.png)
+* Mobile - create offer page
 * ![Mobile - create offer page](./static/images/Lighthouse/m-add-offer.png)
+* Mobile - profile page
 * ![Mobile - profile page](./static/images/Lighthouse/m-profile.png)  
+* Mobile - profile_edit page
 * ![Mobile - profile_edit page](./static/images/Lighthouse/m-profile-edit.png)  
+* Mobile - messages page
 * ![Mobile - messages page](./static/images/Lighthouse/m-messages.png)
+* Mobile - message page
 * ![Mobile - message page](./static/images/Lighthouse/m-message.png)
+* Mobile - offer info page
 * ![Mobile - offer info page](./static/images/Lighthouse/m-offer-info.png)  
   
+* Desktop - offer page
 * ![Desktop - offer page](./static/images/Lighthouse/home-offers.png)
+* Desktop - create offer page
 * ![Desktop - create offer page](./static/images/Lighthouse/add-offer.png)
+* Desktop - profile page
 * ![Desktop - profile page](./static/images/Lighthouse/profile.png)  
-* ![Desktop - profile_edit page](./static/images/Lighthouse/profile-edit.png)  
+* Desktop - profile_edit page
+* ![Desktop - profile_edit page](./static/images/Lighthouse/profile-edit.png) 
+*  Desktop - messages page
 * ![Desktop - messages page](./static/images/Lighthouse/messages.png)
+* Desktop - message page
 * ![Desktop - message page](./static/images/Lighthouse/message.png)
+* Desktop - offer info page
 * ![Desktop - offer info page](./static/images/Lighthouse/offer_info.png)  
 
 
 ## MANUAL TESTING
+
+### Full Testing by developer
+
+Full testing was performed on the following devices:
+
+* Laptop:
+  * Windows 11 2021 15 inch screen
+    * Google Chrome
+    * Safari
+    * Firefox
+    * Opera
+    * OperaGX
+  
+* Mobile Devices:
+  * iPhone 12 pro.
+  * iPhone 14 pro.
+    * Safari
+
+### Website interaction testing
 
 | # | Feature | Expected Outcome | Testing Performed | Pass/Fail |
 | :---: | :--- | :---: | :---: | :---: |
@@ -155,26 +186,6 @@ selected different items | ✅ |
 | --- | --- | --- | --- | --- |
 | 62 | Within offers, offer_info and profile page, item affixes are cissable with ""%"" if the affix is based on procentage | All affix changed to % if required. | Created item specificaly with % affixes and with static ones. | ✅ |
 | 63 | Preloader disapiers after page is loaded | Preloader disapers | Load any page | ✅ |
-
-
-### Full Testing by developer
-
-Full testing was performed on the following devices:
-
-* Laptop:
-  * Windows 11 2021 15 inch screen
-    * Google Chrome
-    * Safari
-    * Firefox
-    * Opera
-    * OperaGX
-  
-* Mobile Devices:
-  * iPhone 12 pro.
-  * iPhone 14 pro.
-    * Safari
-
-### Website interaction testing
 
 
 ## 3rd party testing during development

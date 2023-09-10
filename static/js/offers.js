@@ -9,8 +9,6 @@ fetch("/static/json/item_data.json")
 
 // filter form  modifications
 
-const filterForm = document.getElementById(`filter-form`);
-
 const classPreference = document.getElementById("class-preference");
 const itemPreference = document.getElementById("item-preference");
 
@@ -23,7 +21,7 @@ function renderNewAffixes() {
 
     if (itemValue && classValue) {
 
-        newItemData = itemData[itemValue];
+        const newItemData = itemData[itemValue];
 
         let newChoiceAffixes;
 

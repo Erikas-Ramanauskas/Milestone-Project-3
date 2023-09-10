@@ -52,10 +52,10 @@ function startListeners(buttons) {
 function createButtonsFromArray() {
     const affixes = document.getElementById("affixes");
 
-    lowerChosenItem = chosenItem.toLowerCase().replace(" ", "_");
-    lowerChosenClass = chosenClass.toLowerCase().replace(" ", "_");
+    const lowerChosenItem = chosenItem.toLowerCase().replace(" ", "_");
+    const lowerChosenClass = chosenClass.toLowerCase().replace(" ", "_");
 
-    newItemData = itemData[lowerChosenItem];
+    const newItemData = itemData[lowerChosenItem];
 
     creatSuffixesButtons(newItemData);
 

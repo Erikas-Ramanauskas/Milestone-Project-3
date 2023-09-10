@@ -177,9 +177,9 @@
                             {% if offer.created_by == session.user %}
                             <th>
                                 <a href="#bid-acceptence" onclick="renderBidAcceptForm(this)"  data-user="{{ bid.user }}"
-                                    data-bid="{{ bid.offer_bid }}"
+                                    data-bid="{{ bid.offer_bid }}" data-trade="sale"
                                     class="btn-small purple-color bid-accept-button accept-hidden modal-trigger">
-                                    <i class="fa-solid fa-handshake-simple"></i></button>
+                                    <i class="fa-solid fa-handshake-simple"></i></a>
                             </th>
                             {% endif %}
                         {% else %}
@@ -207,7 +207,7 @@
                         </th>
                         {% if offer.created_by == session.user %}
                         <th>
-                            <a href="#bid-acceptence" onclick="renderBidAcceptForm(this)"  data-user="{{ bid.user }}" data-bid="{{ bid.offer_bid }}"  class="btn-small teal-color bid-accept-button accept-hidden modal-trigger">
+                            <a href="#bid-acceptence" onclick="renderBidAcceptForm(this)"  data-user="{{ bid.user }}" data-bid="{{ bid.offer_bid }}" data-trade="sale"  class="btn-small teal-color bid-accept-button accept-hidden modal-trigger">
                                 <i class="fa-solid fa-handshake-simple"></i></a>
                         </th>
                         <!-- type="submit" form="offer-form" -->

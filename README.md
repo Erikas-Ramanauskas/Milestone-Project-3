@@ -36,17 +36,13 @@ Diablo 4 trade is a website specificaly dedicated to a game "Diablo 4" relesed n
   - [Bugs and Solutions](#bugs-and-solutions)
     - [Solved bugs](#solved-bugs)
     - [Remaining Bugs](#remaining-bugs)
-    - [Ideas for Future Developments](#ideas-for-future-developments)
-  - [Application Ida and functionality](#application-ida-and-functionality)
-    - [Game board dimentions](#game-board-dimentions)
-    - [Shape creation](#shape-creation)
-    - [Drag and drop](#drag-and-drop)
-    - [Local storage](#local-storage)
-    - [Failure](#failure)
-  - [Deployment \& Local Development](#deployment--local-development)
-    - [Deployment](#deployment)
-    - [Local Development](#local-development)
-    - [Making Local Clone](#making-local-clone)
+    - [Ideas and plans for improvement](#ideas-and-plans-for-improvement)
+  - [Application Idea and functionality](#application-idea-and-functionality)
+    - [Reasons for chosing such an aplication](#reasons-for-chosing-such-an-aplication)
+    - [General choices for application](#general-choices-for-application)
+    - [For anyone who is not familiar with the game](#for-anyone-who-is-not-familiar-with-the-game)
+    - [Idividual page functionalities](#idividual-page-functionalities)
+    - [Phyton and Jinja Chalanges:](#phyton-and-jinja-chalanges)
   - [Credits](#credits)
     - [Mentor](#mentor)
     - [Codes](#codes)
@@ -109,27 +105,19 @@ The website main purpose is to trade digital in game items using in game current
 ## Wireframes
 
 * Desktop home page
-* ![Home page / offers (desktop)](./assets/readme-images/wireframes/home-page.webp)
+* ![Home page / offers (desktop)](./static/images/read_me/home-page.png)
 * Mobile home page
-* ![Home page / offers (mobile)](./assets/readme-images/wireframes/home-page-phone.webp)
+* ![Home page / offers (mobile)](./static/images/read_me/home-page-mobile.png)
 * Create offer page
-* ![Create offer page (desktop)](./assets/readme-images/wireframes/profile.webp)
-* Mobile Create offer page
-- ![Create offer page (mobile)](./assets/readme-images/wireframes/base-board.webp)
+- ![Create offer page (desktop)](./static/images/read_me/offer-creation.png)
 * Messages page
-- ![Messages page (desktop)](./assets/readme-images/wireframes/gameplay.webp)
-- Mobile Messages page
-- ![Mobile Messages page](./assets/readme-images/wireframes/base-board.webp)
+- ![Messages page (desktop)](./static/images/read_me/messages.png)
 * Message page
-* ![Message page](./assets/readme-images/wireframes/game-components.webp)
-- Mobile Message page
-- ![Mobile Message page](./assets/readme-images/wireframes/button-layout.webp)
+* ![Message page](./static/images/read_me/message.png)
 * Profile page
-- ![Profile page](./assets/readme-images/wireframes/phone-landscape.webp)
-* Register page
-- ![Register page](./assets/readme-images/wireframes/phone-portrait.webp)
+- ![Profile page](./static/images/read_me/profile.png)
 * Log in page
-* ![Log in page](./assets/readme-images/wireframes/phone-portrait.webp)
+- ![Log in page](./static/images/read_me/log-in-page.png)
 
 ## Features
 
@@ -324,25 +312,27 @@ The website main purpose is to trade digital in game items using in game current
 
 - Within the game there are several different items that could be traded and some that can not. The main and only item that player comunity focuses on trading is highest level "Ancestral" Rare items. Due to complexity of itemisation i chose to exclude lower level items to save time on development. 
 
-- I also chose to exclude tutorial page for how to use aplication. From my personal expierence and similar sites made for similar games by the time player gets used to the and chis character arives to the stage that he no loger rapidly recieves upgrades that is when he starts requiring site like this and by this time player is well familiar with the in game item system. In most cases RPG style game players never even trade items and play all the time self found. Yet usualy when they start looking for better items they are well aware of classses, item types, suffixes and affixes.
+- I also chose to exclude tutorial page for how to use aplication. From my personal expierence and similar sites made for similar games by the time player gets used to the game and character arives to the stage that he no loger rapidly recieves upgrades that is when he starts requiring site like this. And by this time player is well familiar with the in game item system. In most cases RPG style game players never even trade items and play all the time self found. Yet usualy when they start looking for better items they are well aware of classses, item types, suffixes and affixes.
 
--This is also a reason why i opted out without footer as the site is more of trade aplication than anything and for such a simplistic one i chose to leave it out. It can definetly be added in a future when much more functionality would be added.
+-This is also a reason why i opted out without footer as the site is more of trade aplication than anything and for such a simplistic one i chose to leave it out it also helps to keep pages like massage at 100% screen size turnign the chat look more like messanger or instagram chat on the phone app. It can definetly be added in a future when much more functionality would be added.
 
-- Lastly my choice for chosing mongoDb as main database for my project was mainly due to ability to pair up key-value pairs within the object. From my project 2 I was well familiar how to manipulate larger Json data type databases so mongoDB has quite a same syntax wich i enjoy quite a lot.
+- Lastly my choice for chosing mongoDb as main database for my project was mainly due to ability to pair up key-value pairs within the object. From my project 2 I was well familiar how to manipulate larger Json data type databases so mongoDB has quite a same syntax witch i enjoy quite a lot.
 
 ### For anyone who is not familiar with the game
 
 - Each item that could be traded comes with either offensive, defensive numbers or simply none. For example all armor pieces will be with defensive number, All weapons with offensive, All jewelery and rings will no have either.
   
-- Additionaly most (not all) will come with some sort of suffix. Suffixes are sort of secondary atributes for items. Most of items will have 1 atribute that always be on particular item type. Others (Example: boots) will have multiple choices. 
+- Additionaly most (not all) will come with some sort of suffix. Suffixes are sort of secondary atributes for items. Most of items will have 1 atribute that always be on particular item type. Others (Example: boots) will have multiple choices.
 
-- Lastly every item will always have 4 random(nonrepeting) Affixes. This is the main requirements the players will be looking for. Most importanly At some stage of the game players will start looking for right combination of affixes, then simply keep upgrading to higher numbers while maintaining same combinations. In other cases they will look for 4/6 different affixes to fit their needs
+- Lastly every item will always have 4 random(nonrepeting) Affixes. This is the main requirements the players will be looking for. Most importanly At some stage of the game players will start looking for right combination of affixes, then simply keep upgrading to higher numbers while maintaining same combinations. In other cases they will look for 4/6 different affixes to fit their needs balancing required 4 between items. 
 
 - Afixes comes random on the item however there is a system in game to change 1 out of 4 affix to another random one. Thsi is why i chose to develop Filter with an oportunity to chose how many affixes need to match the search. User can chose 6 different ones but chose to match on 3/6 and the 4th to change. By manipulating filter like this player can either widen or narow down the search once the offer list becomes to big to manualy look for item.
 
 ### Idividual page functionalities
 
-- The main page that is loaded is always offers page that shows all avialable offers. It also provides filter option that is automaticaly loaded from personal profile settings. Once filter optiosn are applied items are filtered and only the ones acording to filter is showed.
+- The main page that is loaded is always offers page that shows all avialable offers. It also provides filter option that is automaticaly loaded from personal profile settings. Once filter options are applied items are filtered and only the ones acording to filter is showed.
+
+- I wanted to make sure to include filtering option that alows to search for more affixes than maximum 4 but in case player is a bit flexible for affixes. The phyton formula creates all variable combinations and find items maching acoding to it. For example user can set 3 affixes to mach out of 5 and so on.
 
 - Both main offers page and profile page contain the lists of offers that contain main information about item, when it is created the price and who created offer. The name of creator is also a link to personal profile of creator.
 
@@ -353,10 +343,11 @@ The website main purpose is to trade digital in game items using in game current
 - The bids accepted additionaly sends automatic message to the bidder that the bid was accepted, at which price and item link. 
 
 - The message list "messages" page list all conversations and ques them from latest ones to the oldest ones prety much representing familiar format for any user to recognize in any social media accounts. In fact Social media chating "feel" i was going for when designing messaging system. How Ever i decided not to use profile picture due to shortage of time. Additionaly message page is made to be full screen so it fits any sizes and always feel like regular messanger or instagram chat.
+- ![Messages list](./static/images/messages-numbers.png)
 
-- The interaction between offer creation, messages, bids, acceptences of offers and trades as well id sharing is mostly done via javascript manipulation of Invisible forms that are withing dom tree but made to be invisible for the user. Every time user presses the button that would triger JS function which would in turm modify dom elements that belong to form with a certain information depending on the scenario and also triger Modals to show up or button "disabled" turned off that woudl in turn triger form submit.
+- The interaction between offer creation, messages, bids, acceptences of offers and trades as well id sharing is mostly done via javascript manipulation of Invisible forms that are withing DOM tree but made to be invisible for the user. Every time user presses the button that would triger JS function which would in turm modify dom elements that belong to form with a certain information depending on the scenario and also triger Modals to show up or button "disabled" turned off that would in turn triger form submit.
 
-- These form submition then would travel to back end Phyton function that would in turn modify databases acording to every scenario. 
+- These form submition then would travel to back end Phyton function that would in turn modify databases acording to every scenario.
   
 - For example: Bid form would create uniqe dictionary and append it to offer.bids list
 - Message form first would "create / check for" unique id of both sesion.user and recipient finding wich one is higher value and placing it first and this way keeping it from dublication, then also would create separate dictonary and appending in to messages list
@@ -375,8 +366,6 @@ The website main purpose is to trade digital in game items using in game current
 
 ## Credits
 
-
-
 ### Mentor
 
 * Gareth was fenomenal in helping and advicing on my creativity plan and gave helpfull tips and inspiration with this project. Masive thank-you to him
@@ -389,8 +378,6 @@ The website main purpose is to trade digital in game items using in game current
   * Thanks to [Web Dev Simplified](https://www.youtube.com/@WebDevSimplified) for a number of code lessons in various topics;
   * Thanks to [Kevin Powell](https://www.youtube.com/@KevinPowell) for a number of code lessons in various nainly CSS designs that I learned for this and previous project;
   
-## Acknowledgements
-
 
 ## Copyrights
 

@@ -322,6 +322,9 @@ def add_offer():
 def offer_info(offer_id):
     offer = mongo.db.offers.find_one({"_id": ObjectId(offer_id)})
 
+    if offer is None:
+        return redirect(url_for("offer_dont_exist"))
+
     if request.method == "POST":
         if "user" in session:
             if request.form.get("offer_bid"):
@@ -400,6 +403,11 @@ def offer_info(offer_id):
     check_notifications("", True)
     return render_template("offer_info.html", offer=offer,
                            current_datetime=current_datetime)
+
+
+@app.route("/offer_dont_exist")
+def offer_dont_exist():
+    return render_template("offer_dont_exist.html")
 
 
 @app.route("/delete_offer/<offer_id>")
