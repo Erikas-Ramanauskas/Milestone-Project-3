@@ -1,29 +1,30 @@
 // materialise enablers
-$(document).ready(function () {
-    // mobile side nav activation
-    $(".sidenav").sidenav();
-    //Navigation Dropdown activation
-    $(".dropdown-trigger").dropdown();
-    // form check
-    $("input#input_text, textarea#textarea2").characterCounter();
-    // Tooltip activation
-    $('.tooltipped').tooltip(
-        {
-            enterDelay: 500,
-            exitDelay: 100
-        }
-    );
-    // Modal activation
-    $('.modal').modal();
-    // Collapsable enabler
-    $('.collapsible').collapsible();
-    // side nav initialisation
-    $('.sidenav').sidenav();
-    // Initialise select
-    $('select').formSelect();
-    // Dropdown
-    $('.dropdown-trigger').dropdown();
-});
+
+// $(document).ready(function () {
+//     // mobile side nav activation
+//     $(".sidenav").sidenav();
+//     //Navigation Dropdown activation
+//     $(".dropdown-trigger").dropdown();
+//     // form check
+//     $("input#input_text, textarea#textarea2").characterCounter();
+//     // Tooltip activation
+//     $('.tooltipped').tooltip(
+//         {
+//             enterDelay: 500,
+//             exitDelay: 100
+//         }
+//     );
+//     // Modal activation
+//     $('.modal').modal();
+//     // Collapsable enabler
+//     $('.collapsible').collapsible();
+//     // side nav initialisation
+//     $('.sidenav').sidenav();
+//     // Initialise select
+//     $('select').formSelect();
+//     // Dropdown
+//     $('.dropdown-trigger').dropdown();
+// });
 
 // Preloader fade out called together with json data load so the procentage change would not be vissable
 const loader = document.querySelector(".loader");
@@ -34,17 +35,17 @@ let affixPerc;
 
 // takes json data
 // also since it takes the most time also works as dom content fuction for the other actions
-fetch("/static/json/affix.json")
-    .then((response) => response.json())
-    .then((json) => {
-        affixPerc = json;
-        // its important procentage symbols to be added before loader disapears
-        addPercentageSymbols();
-        // equalising the all cards to tallest.
-        setEqualCardHeight();
-        loader.classList.add("loader-hidden");
-        chatWindowFocus();
-    });
+// fetch("/static/json/affix.json")
+//     .then((response) => response.json())
+//     .then((json) => {
+//         affixPerc = json;
+//         // its important procentage symbols to be added before loader disapears
+//         addPercentageSymbols();
+//         // equalising the all cards to tallest.
+//         setEqualCardHeight();
+//         loader.classList.add("loader-hidden");
+//         chatWindowFocus();
+//     });
 
 
 // confirms if affix taken is procentage or not
@@ -112,5 +113,16 @@ function setEqualCardHeight() {
         cards[i].style.height = `${maxHeight}px`;
     }
 }
+
+
+// __mocks__/jquery.js
+const jQuery = jest.fn((selector) => {
+    return {
+        on: jest.fn(),
+        // add any other methods you want to mock here
+    };
+});
+
+module.exports = findPercentageForAffix;
 
 
