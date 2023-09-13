@@ -167,12 +167,13 @@ textarea {
     color: var(--purple-color) !important;
 }
 
-/* Bid settings */
-output {
-    margin-block-start: 1em;
-    margin-block-end: 1em;
+#armor-damage-child {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.5rem;
 }
 
+/* Bid settings */
 #offer-bid {
     width: 40%;
     text-align: center;

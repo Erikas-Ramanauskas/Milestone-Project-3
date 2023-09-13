@@ -234,19 +234,22 @@ function armorAndDamage(newItemData) {
         mainDIV.id = "armor-damage";
 
         const topDIV = document.createElement("div");
-        topDIV.classList.add("row", "space-between", "col", "s12");
+        topDIV.id = "armor-damage-child";
 
         const elementP = document.createElement("p");
         elementP.classList.add("range-field", "input-field", "col", "s12");
+
+        const text = document.createElement("p");
+        text.innerText = details.text;
+        text.classList.add("teal-color-text");
+
 
         const elementI = document.createElement("i");
         elementI.classList.add(
             "fa-solid",
             details.type,
-            "prefix",
             "teal-text",
             "text-accent-3",
-            "col", "s9"
         );
 
         const span = document.createElement("span");
@@ -262,7 +265,7 @@ function armorAndDamage(newItemData) {
 
         const output = document.createElement("output");
         output.setAttribute("for", details.id);
-        output.classList.add("teal-text", "text-accent-3", "col", "s3");
+        output.classList.add("teal-color-text");
         output.value = details.max / 2;
 
         input.addEventListener("input", (e) => {
@@ -270,6 +273,7 @@ function armorAndDamage(newItemData) {
         });
 
         topDIV.appendChild(elementI);
+        topDIV.appendChild(text);
         elementP.appendChild(input);
         topDIV.appendChild(output);
         mainDIV.appendChild(topDIV);
